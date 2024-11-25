@@ -1,0 +1,7 @@
+/.idea/
+/dependencies/
+/include/
+/cmake-build-*/
+/build/
+**/*.exe
+/.clang-format

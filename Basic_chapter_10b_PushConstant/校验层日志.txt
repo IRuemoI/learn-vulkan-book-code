@@ -1,0 +1,52 @@
+VUID-vkCmdPipelineBarrier-pImageMemoryBarriers-02820(ERROR / SPEC): msgNum: -1349691875 - Validation Error: [ VUID-vkCmd
+PipelineBarrier-pImageMemoryBarriers-02820 ] Object 0: handle = 0x1e219edadc0, type = VK_OBJECT_TYPE_COMMAND_BUFFER; | M
+essageID = 0xaf8d561d | vkCmdPipelineBarrier(): pImageMemoryBarriers[0].dstAccessMask (VK_ACCESS_DEPTH_STENCIL_ATTACHMEN
+T_READ_BIT) is not supported by stage mask (VK_PIPELINE_STAGE_TOP_OF_PIPE_BIT). The Vulkan spec states: For any element
+of pImageMemoryBarriers, if its srcQueueFamilyIndex and dstQueueFamilyIndex members are equal, or if its dstQueueFamilyI
+ndex is the queue family index that was used to create the command pool that commandBuffer was allocated from, then its
+dstAccessMask member must only contain access flags that are supported by one or more of the pipeline stages in dstStage
+Mask, as specified in the table of supported access types (https://vulkan.lunarg.com/doc/view/1.3.290.0/windows/1.3-exte
+nsions/vkspec.html#VUID-vkCmdPipelineBarrier-pImageMemoryBarriers-02820)
+    Objects: 1
+        [0] 0x1e219edadc0, type: 6, name: NULL
+VUID-VkPipelineRasterizationStateCreateInfo-depthClampEnable-00782(ERROR / SPEC): msgNum: -316906200 - Validation Error:
+ [ VUID-VkPipelineRasterizationStateCreateInfo-depthClampEnable-00782 ] | MessageID = 0xed1c6528 | vkCreateGraphicsPipel
+ines(): pCreateInfos[0].pRasterizationState->depthClampEnable is VK_TRUE, but the depthClamp feature was not enabled. Th
+e Vulkan spec states: If the depthClamp feature is not enabled, depthClampEnable must be VK_FALSE (https://vulkan.lunarg
+.com/doc/view/1.3.290.0/windows/1.3-extensions/vkspec.html#VUID-VkPipelineRasterizationStateCreateInfo-depthClampEnable-
+00782)
+    Objects: 0
+VUID-vkCmdDraw-maintenance4-08602(ERROR / SPEC): msgNum: -1442636015 - Validation Error: [ VUID-vkCmdDraw-maintenance4-0
+8602 ] Object 0: handle = 0x1e219f90fe0, type = VK_OBJECT_TYPE_COMMAND_BUFFER; Object 1: handle = 0x27d60e0000000019, ty
+pe = VK_OBJECT_TYPE_PIPELINE_LAYOUT; Object 2: handle = 0xcb1c7c000000001b, type = VK_OBJECT_TYPE_PIPELINE; | MessageID
+= 0xaa031f11 | vkCmdDraw():  Shader in VK_SHADER_STAGE_FRAGMENT_BIT uses push-constant statically but vkCmdPushConstants
+ was not called yet for pipeline layout VkPipelineLayout 0x27d60e0000000019[]. The Vulkan spec states: If the maintenanc
+e4 feature is not enabled, then for each push constant that is statically used by a bound shader, a push constant value
+must have been set for the same pipeline bind point, with a VkPipelineLayout that is compatible for push constants, with
+ the VkPipelineLayout used to create the current VkPipeline or the VkDescriptorSetLayout and VkPushConstantRange arrays
+used to create the current VkShaderEXT , as described in Pipeline Layout Compatibility (https://vulkan.lunarg.com/doc/vi
+ew/1.3.290.0/windows/1.3-extensions/vkspec.html#VUID-vkCmdDraw-maintenance4-08602)
+    Objects: 3
+        [0] 0x1e219f90fe0, type: 6, name: NULL
+        [1] 0x27d60e0000000019, type: 17, name: NULL
+        [2] 0xcb1c7c000000001b, type: 19, name: NULL
+VUID-vkCmdDraw-maintenance4-08602(ERROR / SPEC): msgNum: -1442636015 - Validation Error: [ VUID-vkCmdDraw-maintenance4-0
+8602 ] Object 0: handle = 0x1e219f98150, type = VK_OBJECT_TYPE_COMMAND_BUFFER; Object 1: handle = 0x27d60e0000000019, ty
+pe = VK_OBJECT_TYPE_PIPELINE_LAYOUT; Object 2: handle = 0xcb1c7c000000001b, type = VK_OBJECT_TYPE_PIPELINE; | MessageID
+= 0xaa031f11 | vkCmdDraw():  Shader in VK_SHADER_STAGE_FRAGMENT_BIT uses push-constant statically but vkCmdPushConstants
+ was not called yet for pipeline layout VkPipelineLayout 0x27d60e0000000019[]. The Vulkan spec states: If the maintenanc
+e4 feature is not enabled, then for each push constant that is statically used by a bound shader, a push constant value
+must have been set for the same pipeline bind point, with a VkPipelineLayout that is compatible for push constants, with
+ the VkPipelineLayout used to create the current VkPipeline or the VkDescriptorSetLayout and VkPushConstantRange arrays
+used to create the current VkShaderEXT , as described in Pipeline Layout Compatibility (https://vulkan.lunarg.com/doc/vi
+ew/1.3.290.0/windows/1.3-extensions/vkspec.html#VUID-vkCmdDraw-maintenance4-08602)
+    Objects: 3
+        [0] 0x1e219f98150, type: 6, name: NULL
+        [1] 0x27d60e0000000019, type: 17, name: NULL
+        [2] 0xcb1c7c000000001b, type: 19, name: NULL
+VUID-vkDestroySemaphore-semaphore-05149(ERROR / SPEC): msgNum: -1813885519 - Validation Error: [ VUID-vkDestroySemaphore
+-semaphore-05149 ] | MessageID = 0x93e24db1 | vkDestroySemaphore(): semaphore can't be called on VkSemaphore 0xfab64d000
+0000002[] that is currently in use by VkSemaphore 0xfab64d0000000002[]. The Vulkan spec states: All submitted batches th
+at refer to semaphore must have completed execution (https://vulkan.lunarg.com/doc/view/1.3.290.0/windows/1.3-extensions
+/vkspec.html#VUID-vkDestroySemaphore-semaphore-05149)
+    Objects: 0

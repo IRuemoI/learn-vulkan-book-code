@@ -1,0 +1,9 @@
+UNASSIGNED-CoreValidation-DrawState-InvalidImageLayout(ERROR / SPEC): msgNum: 1303270965 - Validation Error: [ UNASSIGNE
+D-CoreValidation-DrawState-InvalidImageLayout ] Object 0: handle = 0x1a141fd2f90, type = VK_OBJECT_TYPE_COMMAND_BUFFER;
+Object 1: handle = 0xd175b40000000013, type = VK_OBJECT_TYPE_IMAGE; | MessageID = 0x4dae5635 | vkQueueSubmit(): pSubmits
+[0].pCommandBuffers[0] command buffer VkCommandBuffer 0x1a141fd2f90[] expects VkImage 0xd175b40000000013[] (subresource:
+ aspectMask 0x1 array layer 0, mip level 0) to be in layout VK_IMAGE_LAYOUT_GENERAL--instead, current layout is VK_IMAGE
+_LAYOUT_PREINITIALIZED.
+    Objects: 2
+        [0] 0x1a141fd2f90, type: 6, name: NULL
+        [1] 0xd175b40000000013, type: 10, name: NULL

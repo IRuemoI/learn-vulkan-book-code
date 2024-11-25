@@ -1,0 +1,161 @@
+以下是内容不重复的文件名：
+1802_pm.obj
+1505_chair.obj
+1310_shu0.obj
+1705_qt100.obj
+1311_flower.obj
+1310_chuang.obj
+1505_flag.obj
+1311_tong.obj
+1601_left_leg_bottom.obj
+1104_laoying01.obj
+1705_zdt.obj
+1405_ch1.obj
+1214_people.obj
+1405_pm.obj
+0801_pm.obj
+1408_guanyin10.obj
+1506_airship.obj
+1404_ver.obj
+1505_floor.obj
+1806_konglong.obj
+1402_pm.obj
+1708_plane03.obj
+0801_qt.obj
+1501_tree.obj
+1704_pm.obj
+1107_zd.obj
+1601_body.obj
+1506_base.obj
+1601_right_foot.obj
+1601_right_leg_bottom.obj
+1707_poolnew.obj
+1601_left_foot.obj
+1311_woodpile.obj
+1601_left_top.obj
+1003_zhuotui.obj
+1508_cft.obj
+1003_chuang.obj
+1601_floor.obj
+1311_skybox.obj
+1708_plane04.obj
+1507_dog.obj
+1702_stone2.obj
+0909_plane.obj
+1504_mountainPart.obj
+1503_wall.obj
+1505_desk.obj
+1402_yh.obj
+1405_ptch.obj
+1310_shu1.obj
+1601_left_leg_top.obj
+1806_test.obj
+1806_ball.obj
+1505_pillarY.obj
+1802_cft.obj
+1401_car.obj
+1803_SpaceStationL.obj
+1406_pm.obj
+1601_head.obj
+1305_rect.obj
+1402_ch.obj
+1310_mirror.obj
+1106_head.obj
+1505_balckboard.obj
+1310_yizi0.obj
+1505_doorframe.obj
+1505_pillarW.obj
+1801_qt.obj
+1401_tree.obj
+1104_laoying02.obj
+1601_right_bottom.obj
+1505_whiteboard.obj
+1802_qt.obj
+1001_qt.obj
+1708_plane02.obj
+1311_qiao.obj
+1601_right_leg_top.obj
+1505_galsshandle.obj
+1802_yh.obj
+1702_qiu.obj
+1503_people.obj
+1104_laoying03.obj
+0701_ch.obj
+1003_zhuomian.obj
+1505_glasscover.obj
+1408_pingtai.obj
+0909_ball.obj
+1310_deng.obj
+1302_ball.obj
+0801_cft.obj
+0801_ch.obj
+1503_floor.obj
+0911_screw.obj
+1311_tree.obj
+1405_ch2.obj
+1001_yh.obj
+1708_plane01.obj
+1601_right_top.obj
+1702_stone3.obj
+1408_carBody.obj
+0704_ch_t.obj
+1311_house.obj
+1001_cft.obj
+1505_glass.obj
+1214_brazier.obj
+1001_plane.obj
+1310_skybox.obj
+1802_ch.obj
+1702_stone.obj
+1402_qt.obj
+1311_mushroom.obj
+1505_window.obj
+1408_carWheel.obj
+1505_platform.obj
+1311_fb.obj
+1705_qt.obj
+1306_konglong.obj
+1212_ch.obj
+1601_left_bottom.obj
+1803_SpaceStation.obj
+1402_cft.obj
+1301_ch_t.obj
+1501_tree01.obj
+1505_roof.obj
+1505_wall.obj
+1001_ch.obj
+1505_door.obj
+1311_table.obj
+0706_ch.obj
+0801_yh.obj
+
+与1601_left_leg_bottom.obj文件内容相同的有： 1602_left_leg_bottom.obj
+与0801_pm.obj文件内容相同的有： 1003_pm.obj
+与1404_ver.obj文件内容相同的有： 1406_ver.obj
+与1402_pm.obj文件内容相同的有： 1404_pm.obj
+与0801_qt.obj文件内容相同的有： 0912_qt.obj
+与1601_body.obj文件内容相同的有： 1602_body.obj
+与1601_right_foot.obj文件内容相同的有： 1602_right_foot.obj
+与1601_right_leg_bottom.obj文件内容相同的有： 1602_right_leg_bottom.obj
+与1601_left_foot.obj文件内容相同的有： 1602_left_foot.obj
+与1601_left_top.obj文件内容相同的有： 1602_left_top.obj
+与1601_floor.obj文件内容相同的有： 1602_floor.obj
+与1702_stone2.obj文件内容相同的有： 1703_stone2.obj
+与1601_left_leg_top.obj文件内容相同的有： 1602_left_leg_top.obj
+与1401_car.obj文件内容相同的有： 1403_car.obj 1407_car.obj 1408_car.obj 1710_car.obj
+与1406_pm.obj文件内容相同的有： 1507_pm.obj
+与1601_head.obj文件内容相同的有： 1602_head.obj
+与1401_tree.obj文件内容相同的有： 1403_tree.obj 1407_tree.obj 1710_tree.obj
+与1601_right_bottom.obj文件内容相同的有： 1602_right_bottom.obj
+与1601_right_leg_top.obj文件内容相同的有： 1602_right_leg_top.obj
+与1702_qiu.obj文件内容相同的有： 1703_qiu.obj
+与1503_people.obj文件内容相同的有： 1704_people.obj
+与0801_ch.obj文件内容相同的有： 0912_ch.obj
+与1601_right_top.obj文件内容相同的有： 1602_right_top.obj
+与1702_stone3.obj文件内容相同的有： 1703_stone3.obj
+与0704_ch_t.obj文件内容相同的有： 1003_ch_t.obj 1004_ch.obj 1209_ch_t.obj 1212_ch_t.obj 1508_ch_t.obj 1702_ch_t.obj 1703_ch_t.obj 1708_ch_t.obj
+与1001_plane.obj文件内容相同的有： 1403_pm.obj 1407_pm.obj 1710_pm.obj
+与1310_skybox.obj文件内容相同的有： 1408_skybox.obj
+与1702_stone.obj文件内容相同的有： 1703_stone.obj
+与1601_left_bottom.obj文件内容相同的有： 1602_left_bottom.obj
+与1301_ch_t.obj文件内容相同的有： 1307_ch_t.obj 1401_ch_t.obj 1403_ch_t.obj 1407_ch_t.obj 1710_ch_t.obj

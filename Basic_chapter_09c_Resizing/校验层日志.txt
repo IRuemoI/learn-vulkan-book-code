@@ -1,0 +1,68 @@
+VUID-vkCmdPipelineBarrier-pImageMemoryBarriers-02820(ERROR / SPEC): msgNum: -1349691875 - Validation Error: [ VUID-vkCmd
+PipelineBarrier-pImageMemoryBarriers-02820 ] Object 0: handle = 0x1e5cc2f4520, type = VK_OBJECT_TYPE_COMMAND_BUFFER; | M
+essageID = 0xaf8d561d | vkCmdPipelineBarrier(): pImageMemoryBarriers[0].dstAccessMask (VK_ACCESS_DEPTH_STENCIL_ATTACHMEN
+T_READ_BIT) is not supported by stage mask (VK_PIPELINE_STAGE_TOP_OF_PIPE_BIT). The Vulkan spec states: For any element
+of pImageMemoryBarriers, if its srcQueueFamilyIndex and dstQueueFamilyIndex members are equal, or if its dstQueueFamilyI
+ndex is the queue family index that was used to create the command pool that commandBuffer was allocated from, then its
+dstAccessMask member must only contain access flags that are supported by one or more of the pipeline stages in dstStage
+Mask, as specified in the table of supported access types (https://vulkan.lunarg.com/doc/view/1.3.290.0/windows/1.3-exte
+nsions/vkspec.html#VUID-vkCmdPipelineBarrier-pImageMemoryBarriers-02820)
+    Objects: 1
+        [0] 0x1e5cc2f4520, type: 6, name: NULL
+VUID-VkPipelineRasterizationStateCreateInfo-depthClampEnable-00782(ERROR / SPEC): msgNum: -316906200 - Validation Error:
+ [ VUID-VkPipelineRasterizationStateCreateInfo-depthClampEnable-00782 ] | MessageID = 0xed1c6528 | vkCreateGraphicsPipel
+ines(): pCreateInfos[0].pRasterizationState->depthClampEnable is VK_TRUE, but the depthClamp feature was not enabled. Th
+e Vulkan spec states: If the depthClamp feature is not enabled, depthClampEnable must be VK_FALSE (https://vulkan.lunarg
+.com/doc/view/1.3.290.0/windows/1.3-extensions/vkspec.html#VUID-VkPipelineRasterizationStateCreateInfo-depthClampEnable-
+00782)
+    Objects: 0
+VUID-vkCmdPipelineBarrier-pImageMemoryBarriers-02820(ERROR / SPEC): msgNum: -1349691875 - Validation Error: [ VUID-vkCmd
+PipelineBarrier-pImageMemoryBarriers-02820 ] Object 0: handle = 0x1e5cc2eee70, type = VK_OBJECT_TYPE_COMMAND_BUFFER; | M
+essageID = 0xaf8d561d | vkCmdPipelineBarrier(): pImageMemoryBarriers[0].dstAccessMask (VK_ACCESS_DEPTH_STENCIL_ATTACHMEN
+T_READ_BIT) is not supported by stage mask (VK_PIPELINE_STAGE_TOP_OF_PIPE_BIT). The Vulkan spec states: For any element
+of pImageMemoryBarriers, if its srcQueueFamilyIndex and dstQueueFamilyIndex members are equal, or if its dstQueueFamilyI
+ndex is the queue family index that was used to create the command pool that commandBuffer was allocated from, then its
+dstAccessMask member must only contain access flags that are supported by one or more of the pipeline stages in dstStage
+Mask, as specified in the table of supported access types (https://vulkan.lunarg.com/doc/view/1.3.290.0/windows/1.3-exte
+nsions/vkspec.html#VUID-vkCmdPipelineBarrier-pImageMemoryBarriers-02820)
+    Objects: 1
+        [0] 0x1e5cc2eee70, type: 6, name: NULL
+VUID-vkCmdPipelineBarrier-pImageMemoryBarriers-02820(ERROR / SPEC): msgNum: -1349691875 - Validation Error: [ VUID-vkCmd
+PipelineBarrier-pImageMemoryBarriers-02820 ] Object 0: handle = 0x1e5cc149990, type = VK_OBJECT_TYPE_COMMAND_BUFFER; | M
+essageID = 0xaf8d561d | vkCmdPipelineBarrier(): pImageMemoryBarriers[0].dstAccessMask (VK_ACCESS_DEPTH_STENCIL_ATTACHMEN
+T_READ_BIT) is not supported by stage mask (VK_PIPELINE_STAGE_TOP_OF_PIPE_BIT). The Vulkan spec states: For any element
+of pImageMemoryBarriers, if its srcQueueFamilyIndex and dstQueueFamilyIndex members are equal, or if its dstQueueFamilyI
+ndex is the queue family index that was used to create the command pool that commandBuffer was allocated from, then its
+dstAccessMask member must only contain access flags that are supported by one or more of the pipeline stages in dstStage
+Mask, as specified in the table of supported access types (https://vulkan.lunarg.com/doc/view/1.3.290.0/windows/1.3-exte
+nsions/vkspec.html#VUID-vkCmdPipelineBarrier-pImageMemoryBarriers-02820)
+    Objects: 1
+        [0] 0x1e5cc149990, type: 6, name: NULL
+VUID-vkCmdPipelineBarrier-pImageMemoryBarriers-02820(ERROR / SPEC): msgNum: -1349691875 - Validation Error: [ VUID-vkCmd
+PipelineBarrier-pImageMemoryBarriers-02820 ] Object 0: handle = 0x1e5cc14e9e0, type = VK_OBJECT_TYPE_COMMAND_BUFFER; | M
+essageID = 0xaf8d561d | vkCmdPipelineBarrier(): pImageMemoryBarriers[0].dstAccessMask (VK_ACCESS_DEPTH_STENCIL_ATTACHMEN
+T_READ_BIT) is not supported by stage mask (VK_PIPELINE_STAGE_TOP_OF_PIPE_BIT). The Vulkan spec states: For any element
+of pImageMemoryBarriers, if its srcQueueFamilyIndex and dstQueueFamilyIndex members are equal, or if its dstQueueFamilyI
+ndex is the queue family index that was used to create the command pool that commandBuffer was allocated from, then its
+dstAccessMask member must only contain access flags that are supported by one or more of the pipeline stages in dstStage
+Mask, as specified in the table of supported access types (https://vulkan.lunarg.com/doc/view/1.3.290.0/windows/1.3-exte
+nsions/vkspec.html#VUID-vkCmdPipelineBarrier-pImageMemoryBarriers-02820)
+    Objects: 1
+        [0] 0x1e5cc14e9e0, type: 6, name: NULL
+VUID-vkCmdPipelineBarrier-pImageMemoryBarriers-02820(ERROR / SPEC): msgNum: -1349691875 - Validation Error: [ VUID-vkCmd
+PipelineBarrier-pImageMemoryBarriers-02820 ] Object 0: handle = 0x1e5cc3fc550, type = VK_OBJECT_TYPE_COMMAND_BUFFER; | M
+essageID = 0xaf8d561d | vkCmdPipelineBarrier(): pImageMemoryBarriers[0].dstAccessMask (VK_ACCESS_DEPTH_STENCIL_ATTACHMEN
+T_READ_BIT) is not supported by stage mask (VK_PIPELINE_STAGE_TOP_OF_PIPE_BIT). The Vulkan spec states: For any element
+of pImageMemoryBarriers, if its srcQueueFamilyIndex and dstQueueFamilyIndex members are equal, or if its dstQueueFamilyI
+ndex is the queue family index that was used to create the command pool that commandBuffer was allocated from, then its
+dstAccessMask member must only contain access flags that are supported by one or more of the pipeline stages in dstStage
+Mask, as specified in the table of supported access types (https://vulkan.lunarg.com/doc/view/1.3.290.0/windows/1.3-exte
+nsions/vkspec.html#VUID-vkCmdPipelineBarrier-pImageMemoryBarriers-02820)
+    Objects: 1
+        [0] 0x1e5cc3fc550, type: 6, name: NULL
+VUID-vkDestroySemaphore-semaphore-05149(ERROR / SPEC): msgNum: -1813885519 - Validation Error: [ VUID-vkDestroySemaphore
+-semaphore-05149 ] | MessageID = 0x93e24db1 | vkDestroySemaphore(): semaphore can't be called on VkSemaphore 0xfab64d000
+0000002[] that is currently in use by VkSemaphore 0xfab64d0000000002[]. The Vulkan spec states: All submitted batches th
+at refer to semaphore must have completed execution (https://vulkan.lunarg.com/doc/view/1.3.290.0/windows/1.3-extensions
+/vkspec.html#VUID-vkDestroySemaphore-semaphore-05149)
+    Objects: 0

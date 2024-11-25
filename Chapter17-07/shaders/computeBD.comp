@@ -1,0 +1,102 @@
+#version 450
+#extension GL_ARB_separate_shader_objects : enable
+#extension GL_ARB_shading_language_420pack : enable
+
+
+
+
+struct myVert
+{
+   vec4 a;
+   vec4 b;
+};
+
+
+layout( std140, binding=0 ) buffer dataFrom
+{
+   myVert vertsFrom[ ];
+};
+
+
+layout( std140, binding=1 ) writeonly buffer dataTo
+{
+   myVert vertsTo[ ];
+};
+
+
+layout( local_size_x = 1, local_size_y = 1, local_size_z = 1 ) in;
+
+
+
+
+layout (std140,set = 0, binding = 2) uniform bufferVals {
+    vec4 a;
+    vec4 b;
+    vec4 c;
+    vec4 d;
+} myBufferVals;
+
+
+float calHdr
+(
+	vec2 bx,
+	float bc,
+	float zf,
+	float qsj,
+	vec2 ddxz
+)
+{
+    
+    float dis=distance(ddxz,bx);
+    
+    float angleSpan=dis*2.0*3.1415926/bc;
+    
+    float hrd=sin(angleSpan+qsj)*zf;
+    
+    return hrd;
+}
+
+void main() {
+    
+    uint indexTemp=gl_NumWorkGroups.x*gl_WorkGroupID.y+gl_WorkGroupID.x;
+
+    
+    
+    vec3 positionTemp=vertsFrom[indexTemp].a.xyz;
+    
+    vec2 texCoorTemp=vec2(vertsFrom[indexTemp].a.w,vertsFrom[indexTemp].b.x);
+    
+    vec3 normalTemp=vertsFrom[indexTemp].b.yzw;
+    
+
+    
+    vec2 bx1=myBufferVals.a.xy;
+    float bc1=myBufferVals.a.z;
+    float zf1=myBufferVals.a.w;  
+    float qsj1=myBufferVals.b.x; 
+
+    vec2 bx2=myBufferVals.b.yz;
+    float bc2=myBufferVals.b.w;
+    float zf2=myBufferVals.c.x;  
+    float qsj2=myBufferVals.c.y; 
+
+    vec2 bx3=myBufferVals.c.zw; 
+    float bc3=myBufferVals.d.x;
+    float zf3=myBufferVals.d.y;  
+    float qsj3=myBufferVals.d.z; 
+    
+
+    
+    positionTemp.y=calHdr(bx1,bc1,zf1,qsj1,positionTemp.xz)+
+                                     calHdr(bx2,bc2,zf2,qsj2,positionTemp.xz)+
+                                     calHdr(bx3,bc3,zf3,qsj3,positionTemp.xz);
+    
+    
+    vertsTo[indexTemp].a.xyz=positionTemp;
+    
+    vertsTo[indexTemp].a.w=texCoorTemp.s;
+    vertsTo[indexTemp].b.x=texCoorTemp.t;
+    
+    vertsTo[indexTemp].b.yzw=normalTemp.xyz;
+    
+}

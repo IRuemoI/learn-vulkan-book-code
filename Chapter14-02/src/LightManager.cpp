@@ -1,0 +1,45 @@
+#include "LightManager.h"
+#include "HelpFunction.h"
+#include "VulkanDemoApp.h"
+#include <cmath>
+float LightManager::lx = 0;
+float LightManager::ly = 0;
+float LightManager::lz = 0;
+float LightManager::lightAmbientR = 0;
+float LightManager::lightAmbientG = 0;
+float LightManager::lightAmbientB = 0;
+float LightManager::lightAmbientA = 0;
+float LightManager::lightDiffuseR = 0;
+float LightManager::lightDiffuseG = 0;
+float LightManager::lightDiffuseB = 0;
+float LightManager::lightDiffuseA = 0;
+float LightManager::lightSpecularR = 0;
+float LightManager::lightSpecularG = 0;
+float LightManager::lightSpecularB = 0;
+float LightManager::lightSpecularA = 0;
+float lightDis = 100;
+void LightManager::setLightPosition() {
+    double angradElevation = toRadians(VulkanDemoApp::lightElevation);
+    double angradAzimuth = toRadians((float) VulkanDemoApp::lightAzimuth);
+    lx = (float) (-lightDis * cos(angradElevation) * sin(angradAzimuth));
+    ly = (float) (+lightDis * sin(angradElevation));
+    lz = (float) (-lightDis * cos(angradElevation) * cos(angradAzimuth));
+}
+void LightManager::setLightAmbient(float lightAmbientRIn, float lightAmbientGIn, float lightAmbientBIn, float lightAmbientAIn) {
+    lightAmbientR = lightAmbientRIn;
+    lightAmbientG = lightAmbientGIn;
+    lightAmbientB = lightAmbientBIn;
+    lightAmbientA = lightAmbientAIn;
+}
+void LightManager::setLightDiffuse(float lightDiffuseRIn, float lightDiffuseGIn, float lightDiffuseBIn, float lightDiffuseAIn) {
+    lightDiffuseR = lightDiffuseRIn;
+    lightDiffuseG = lightDiffuseGIn;
+    lightDiffuseB = lightDiffuseBIn;
+    lightDiffuseA = lightDiffuseAIn;
+}
+void LightManager::setLightSpecular(float lightSpecularRIn, float lightSpecularGIn, float lightSpecularBIn, float lightSpecularAIn) {
+    lightSpecularR = lightSpecularRIn;
+    lightSpecularG = lightSpecularGIn;
+    lightSpecularB = lightSpecularBIn;
+    lightSpecularA = lightSpecularAIn;
+}
