@@ -27,11 +27,11 @@ public:
     VkInstance instance;// Vulkan实例
     uint32_t gpuCount;// 物理设备数量
     std::vector<VkPhysicalDevice> gpus;// 物理设备列表
-    uint32_t queueFamilyCount;// 物理设备对应的队列家族数量
-    std::vector<VkQueueFamilyProperties> queueFamilyProps;// 物理设备对应的队列家族属性列表
-    uint32_t queueGraphicsFamilyIndex;// 支持图形工作的队列家族索引
-    VkQueue queueGraphics;// 支持图形工作的队列
-    uint32_t queuePresentFamilyIndex;// 支持显示工作的队列家族索引
+    uint32_t queueFamilyCount;// 物理设备对应的队列族数量
+    std::vector<VkQueueFamilyProperties> queueFamilyProps;// 物理设备对应的队列族属性列表
+    uint32_t queueGraphicsFamilyIndex;// 支持图形作业的队列族索引
+    VkQueue queueGraphics;// 支持图形作业的队列
+    uint32_t queuePresentFamilyIndex;// 支持呈现作业的队列族索引
     std::vector<const char *> deviceExtensionNames;// 所需的设备扩展名称列表
     VkDevice device;// 逻辑设备
     VkCommandPool cmdPool;// 命令池
@@ -42,8 +42,8 @@ public:
     VkSurfaceKHR surface;// KHR表面
     std::vector<VkFormat> formats;// KHR表面支持的格式
     VkSurfaceCapabilitiesKHR surfCapabilities;// 表面的能力
-    uint32_t presentModeCount;// 显示模式数量
-    std::vector<VkPresentModeKHR> presentModes;// 显示模式列表
+    uint32_t presentModeCount;// 呈现模式数量
+    std::vector<VkPresentModeKHR> presentModes;// 呈现模式列表
     VkExtent2D swapchainExtent;// 交换链尺寸
     VkSwapchainKHR swapChain;// 交换链
 
@@ -90,14 +90,14 @@ public:
     void createVulkanSwapChain();// 初始化交换链
     void createVulkanDepthBuffer();// 创建深度缓冲相关
     void createRenderPass();// 创建渲染通道
-    void initQueue();// 获取设备中支持图形工作的队列
+    void initQueue();// 获取设备中支持图形作业的队列
     void createFrameBuffer();// 创建帧缓冲
     void initTextures();
     void createDrawableObject();// 创建绘制用物体
     void drawObject();// 执行场景中的物体绘制
     void initPipeline();// 初始化管线
     void createFence();// 创建栅栏
-    void initPresentInfo();// 初始化显示信息
+    void initPresentInfo();// 初始化呈现信息
     static void initMatrix();// 初始化矩阵
     void flushUniformBuffer();// 将一致变量数据送入缓冲
     void flushTexToDesSet() const;// 将纹理等数据与描述集关联

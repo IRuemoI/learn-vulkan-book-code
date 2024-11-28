@@ -20,7 +20,7 @@ LPDIRECTSOUND8 g_pDsd = nullptr;//dsound
 CWaveFile *g_pWaveFile = nullptr;
 
 BOOL InitDirectSound(HWND hWnd, std::string string) {
-    //下面初始化DirectSound工作。
+    //下面初始化DirectSound作业。
     HRESULT hr;
     if (FAILED(hr = DirectSoundCreate8(nullptr, &g_pDsd, nullptr)))
         return FALSE;

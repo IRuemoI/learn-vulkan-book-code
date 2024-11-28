@@ -10,8 +10,8 @@ void setImageLayout(VkCommandBuffer cmd, VkImage image, VkImageAspectFlags aspec
     image_memory_barrier.dstAccessMask = 0;//目标访问掩码
     image_memory_barrier.oldLayout = old_image_layout;//旧布局（屏障前）
     image_memory_barrier.newLayout = new_image_layout;//新布局（屏障后）
-    image_memory_barrier.srcQueueFamilyIndex = VK_QUEUE_FAMILY_IGNORED;//源队列家族索引
-    image_memory_barrier.dstQueueFamilyIndex = VK_QUEUE_FAMILY_IGNORED;//目标队列家族索引
+    image_memory_barrier.srcQueueFamilyIndex = VK_QUEUE_FAMILY_IGNORED;//源队列族索引
+    image_memory_barrier.dstQueueFamilyIndex = VK_QUEUE_FAMILY_IGNORED;//目标队列族索引
     image_memory_barrier.image = image;//对应的图像
     image_memory_barrier.subresourceRange.aspectMask = aspectMask;//使用方面
     image_memory_barrier.subresourceRange.baseMipLevel = 0;//基础mipmap级别
@@ -93,8 +93,8 @@ void TextureManager::init_SPEC_2D_Textures(const std::string &texName, VkDevice 
         buf_info.pNext = nullptr;//自定义数据的指针
         buf_info.usage = VK_BUFFER_USAGE_TRANSFER_SRC_BIT;//缓冲的用途为传输源
         buf_info.size = ctdo->dataByteCount;//数据总字节数
-        buf_info.queueFamilyIndexCount = 0;//队列家族数量
-        buf_info.pQueueFamilyIndices = nullptr;//队列家族索引列表
+        buf_info.queueFamilyIndexCount = 0;//队列族数量
+        buf_info.pQueueFamilyIndices = nullptr;//队列族索引列表
         buf_info.sharingMode = VK_SHARING_MODE_EXCLUSIVE;//共享模式
         buf_info.flags = 0;//标志
         VkResult result = vkCreateBuffer(device, &buf_info, nullptr, &tempBuf);//创建缓冲
@@ -143,8 +143,8 @@ void TextureManager::init_SPEC_2D_Textures(const std::string &texName, VkDevice 
         image_create_info.initialLayout = VK_IMAGE_LAYOUT_UNDEFINED;//初始布局
         image_create_info.usage = VK_IMAGE_USAGE_SAMPLED_BIT |//图像用途
                                   VK_IMAGE_USAGE_TRANSFER_DST_BIT;
-        image_create_info.queueFamilyIndexCount = 0;//队列家族数量
-        image_create_info.pQueueFamilyIndices = nullptr;//队列家族索引列表
+        image_create_info.queueFamilyIndexCount = 0;//队列族数量
+        image_create_info.pQueueFamilyIndices = nullptr;//队列族索引列表
         image_create_info.sharingMode = VK_SHARING_MODE_EXCLUSIVE;//共享模式
         image_create_info.flags = 0;//标志
         VkImage textureImage;//纹理对应的图像
@@ -228,8 +228,8 @@ void TextureManager::init_SPEC_2D_Textures(const std::string &texName, VkDevice 
         image_create_info.tiling = VK_IMAGE_TILING_LINEAR;//采用线性瓦片组织方式
         image_create_info.initialLayout = VK_IMAGE_LAYOUT_PREINITIALIZED;//初始布局
         image_create_info.usage = VK_IMAGE_USAGE_SAMPLED_BIT;//图像用途
-        image_create_info.queueFamilyIndexCount = 0;//队列家族数量
-        image_create_info.pQueueFamilyIndices = nullptr;//队列家族索引列表
+        image_create_info.queueFamilyIndexCount = 0;//队列族数量
+        image_create_info.pQueueFamilyIndices = nullptr;//队列族索引列表
         image_create_info.sharingMode = VK_SHARING_MODE_EXCLUSIVE;//共享模式
         image_create_info.flags = 0;//标志
         VkImage textureImage;//纹理对应的图像

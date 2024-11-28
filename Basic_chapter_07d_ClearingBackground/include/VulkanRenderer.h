@@ -8,7 +8,7 @@
 
 // Vulkan Renderer是自定义类，它不是Vulkan特定的类
 // 它可以作为一个窗口呈现管理器
-// 它管理显示窗口和绘图界面
+// 它管理呈现窗口和绘图界面
 class VulkanRenderer {
 public:
     VulkanRenderer(VulkanApplication *app, VulkanDevice *deviceObject);

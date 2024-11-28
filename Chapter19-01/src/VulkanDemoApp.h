@@ -26,15 +26,15 @@ public:
     uint32_t gpuCount;
     //物理设备列表
     std::vector<VkPhysicalDevice> gpus;
-    //物理设备对应的队列家族数量
+    //物理设备对应的队列族数量
     uint32_t queueFamilyCount;
-    //物理设备对应的队列家族列表
+    //物理设备对应的队列族列表
     std::vector<VkQueueFamilyProperties> queueFamilyProps;
-    //支持GRAPHICS工作的一个队列家族的索引
+    //支持GRAPHICS作业的一个队列族的索引
     uint32_t queueGraphicsFamilyIndex;
     //支持Graphics的队列
     VkQueue queueGraphics;
-    //支持显示工作工作的一个队列家族的索引
+    //支持呈现作业作业的一个队列族的索引
     uint32_t queuePresentFamilyIndex;
     //逻辑设备所需的扩展
     std::vector<const char *> deviceExtensionNames;
@@ -57,9 +57,9 @@ public:
     std::vector<VkFormat> formats;
     //surface的能力
     VkSurfaceCapabilitiesKHR surfCapabilities;
-    //显示模式数量
+    //呈现模式数量
     uint32_t presentModeCount;
-    //显示模式列表
+    //呈现模式列表
     std::vector<VkPresentModeKHR> presentModes;
     //swapchain尺寸
     VkExtent2D swapchainExtent;

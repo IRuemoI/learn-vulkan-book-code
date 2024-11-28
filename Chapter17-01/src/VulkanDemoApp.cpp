@@ -45,7 +45,7 @@ void VulkanDemoApp::initVulkan() {
     enumerateVulkanPhysicalDevices();// 获取物理设备列表
     createVulkanDevices();// 创建逻辑设备
     createVulkanCommandBuffer();// 创建命令缓冲
-    initQueue();// 获取设备中支持图形工作的队列
+    initQueue();// 获取设备中支持图形作业的队列
     createVulkanSwapChain();// 初始化交换链
     createVulkanDepthBuffer();// 创建深度缓冲
     createRenderPass();// 创建渲染通道
@@ -217,20 +217,20 @@ void VulkanDemoApp::enumerateVulkanPhysicalDevices() {
 
 // 创建逻辑设备的方法
 void VulkanDemoApp::createVulkanDevices() {
-    vkGetPhysicalDeviceQueueFamilyProperties(gpus[USED_GPU_INDEX], &queueFamilyCount, nullptr);// 获取物理设备0中队列家族的数量
+    vkGetPhysicalDeviceQueueFamilyProperties(gpus[USED_GPU_INDEX], &queueFamilyCount, nullptr);// 获取物理设备0中队列族的数量
     VkPhysicalDeviceProperties device_properties;
     vkGetPhysicalDeviceProperties(gpus[USED_GPU_INDEX], &device_properties);// 获取物理设备0的属性
-    printf("[Vulkan硬件设备\"%s\"支持的队列家族数量为%d]\n", device_properties.deviceName, queueFamilyCount);
-    queueFamilyProps.resize(queueFamilyCount);// 随队列家族数量改变vector长度
-    vkGetPhysicalDeviceQueueFamilyProperties(gpus[USED_GPU_INDEX], &queueFamilyCount, queueFamilyProps.data());// 填充物理设备0队列家族属性列表
-    printf("[成功获取Vulkan硬件设备支持的队列家族属性列表]\n");
+    printf("[Vulkan硬件设备\"%s\"支持的队列族数量为%d]\n", device_properties.deviceName, queueFamilyCount);
+    queueFamilyProps.resize(queueFamilyCount);// 随队列族数量改变vector长度
+    vkGetPhysicalDeviceQueueFamilyProperties(gpus[USED_GPU_INDEX], &queueFamilyCount, queueFamilyProps.data());// 填充物理设备0队列族属性列表
+    printf("[成功获取Vulkan硬件设备支持的队列族属性列表]\n");
 
     VkDeviceQueueCreateInfo queueInfo = {};// 构建设备队列创建信息结构体实例
-    for (unsigned int i = 0; i < queueFamilyCount; i++) {// 遍历所有队列家族
-        if (queueFamilyProps[i].queueFlags & VK_QUEUE_GRAPHICS_BIT) {// 若当前队列家族支持图形工作
-            queueInfo.queueFamilyIndex = i;// 绑定此队列家族索引
-            queueGraphicsFamilyIndex = i;// 记录支持图形工作的队列家族索引
-            printf("[支持GRAPHICS工作的一个队列家族的索引为%d]\n", i);
+    for (unsigned int i = 0; i < queueFamilyCount; i++) {// 遍历所有队列族
+        if (queueFamilyProps[i].queueFlags & VK_QUEUE_GRAPHICS_BIT) {// 若当前队列族支持图形作业
+            queueInfo.queueFamilyIndex = i;// 绑定此队列族索引
+            queueGraphicsFamilyIndex = i;// 记录支持图形作业的队列族索引
+            printf("[支持GRAPHICS作业的一个队列族的索引为%d]\n", i);
             printf("[此家族中的实际队列数量是%d]\n", queueFamilyProps[i].queueCount);
             break;
         }
@@ -241,7 +241,7 @@ void VulkanDemoApp::createVulkanDevices() {
     queueInfo.pNext = nullptr;// 自定义数据的指针
     queueInfo.queueCount = 1;// 指定队列数量
     queueInfo.pQueuePriorities = queue_priorities;// 给出每个队列的优先级
-    queueInfo.queueFamilyIndex = queueGraphicsFamilyIndex;// 绑定队列家族索引
+    queueInfo.queueFamilyIndex = queueGraphicsFamilyIndex;// 绑定队列族索引
     deviceExtensionNames.push_back(VK_KHR_SWAPCHAIN_EXTENSION_NAME);// 设置所需扩展
 
     VkDeviceCreateInfo deviceInfo = {};// 构建逻辑设备创建信息结构体实例
@@ -270,7 +270,7 @@ void VulkanDemoApp::createVulkanCommandBuffer() {
     VkCommandPoolCreateInfo cmd_pool_info = {};// 构建命令池创建信息结构体实例
     cmd_pool_info.sType = VK_STRUCTURE_TYPE_COMMAND_POOL_CREATE_INFO;// 给定结构体类型
     cmd_pool_info.pNext = nullptr;// 自定义数据的指针
-    cmd_pool_info.queueFamilyIndex = queueGraphicsFamilyIndex;// 绑定所需队列家族索引
+    cmd_pool_info.queueFamilyIndex = queueGraphicsFamilyIndex;// 绑定所需队列族索引
     cmd_pool_info.flags = VK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT;// 执行控制标志
     VkResult result = vkCreateCommandPool(device, &cmd_pool_info, nullptr, &cmdPool);// 创建命令池
     assert(result == VK_SUCCESS);// 检查命令池创建是否成功
@@ -321,52 +321,52 @@ void VulkanDemoApp::createVulkanSwapChain() {
     VkResult result = glfwCreateWindowSurface(instance, window, nullptr, &surface);
     assert(result == VK_SUCCESS);
 
-    // 遍历设备对应的队列家族列表
+    // 遍历设备对应的队列族列表
     auto *pSupportsPresent = (VkBool32 *) malloc(queueFamilyCount * sizeof(VkBool32));
     for (uint32_t i = 0; i < queueFamilyCount; i++) {
         vkGetPhysicalDeviceSurfaceSupportKHR(gpus[USED_GPU_INDEX], i, surface, &pSupportsPresent[i]);
-        printf("队列家族索引=%d %s显示\n", i, (pSupportsPresent[i] == 1 ? "支持" : "不支持"));
+        printf("队列族索引=%d %s呈现\n", i, (pSupportsPresent[i] == 1 ? "支持" : "不支持"));
     }
 
-    queueGraphicsFamilyIndex = UINT32_MAX;// 支持图形工作的队列家族索引
-    queuePresentFamilyIndex = UINT32_MAX;// 支持显示(呈现)工作的队列家族索引
-    for (uint32_t i = 0; i < queueFamilyCount; ++i)// 遍历设备对应的队列家族列表
+    queueGraphicsFamilyIndex = UINT32_MAX;// 支持图形作业的队列族索引
+    queuePresentFamilyIndex = UINT32_MAX;// 支持呈现(呈现)作业的队列族索引
+    for (uint32_t i = 0; i < queueFamilyCount; ++i)// 遍历设备对应的队列族列表
     {
-        // 如果当前遍历到的队列家族支持Graphics（图形）工作
-        if ((queueFamilyProps[i].queueFlags & VK_QUEUE_GRAPHICS_BIT) != 0)// 若此队列家族支持图形工作
+        // 如果当前遍历到的队列族支持Graphics（图形）作业
+        if ((queueFamilyProps[i].queueFlags & VK_QUEUE_GRAPHICS_BIT) != 0)// 若此队列族支持图形作业
         {
-            // 记录支持Graphics（图形）工作的队列家族索引
+            // 记录支持Graphics（图形）作业的队列族索引
             if (queueGraphicsFamilyIndex == UINT32_MAX)
                 queueGraphicsFamilyIndex = i;
-            // 如果当前遍历到的队列家族支持Present（显示工作）工作
-            if (pSupportsPresent[i] == VK_TRUE)// 如果当前队列家族支持显示工作
+            // 如果当前遍历到的队列族支持Present（呈现）作业
+            if (pSupportsPresent[i] == VK_TRUE)// 如果当前队列族支持呈现作业
             {
-                queueGraphicsFamilyIndex = i;// 记录此队列家族索引为支持图形工作的
-                queuePresentFamilyIndex = i;// 记录此队列家族索引为支持显示工作的
-                printf("队列家族索引=%d同时支持Graphics（图形）和Present（显示）工作\n", i);
+                queueGraphicsFamilyIndex = i;// 记录此队列族索引为支持图形作业的
+                queuePresentFamilyIndex = i;// 记录此队列族索引为支持呈现作业的
+                printf("队列族索引=%d同时支持Graphics（图形）和Present（呈现）作业\n", i);
                 break;
             }
         }
     }
 
-    if (queuePresentFamilyIndex == UINT32_MAX)// 若没有找到同时支持两项工作的队列家族
+    if (queuePresentFamilyIndex == UINT32_MAX)// 若没有找到同时支持两项作业的队列族
     {
-        for (size_t i = 0; i < queueFamilyCount; ++i)// 遍历设备对应的队列家族列表
+        for (size_t i = 0; i < queueFamilyCount; ++i)// 遍历设备对应的队列族列表
         {
-            if (pSupportsPresent[i] == VK_TRUE)// 判断是否支持显示工作
+            if (pSupportsPresent[i] == VK_TRUE)// 判断是否支持呈现作业
             {
-                queuePresentFamilyIndex = i;// 记录此队列家族索引为支持显示工作的
+                queuePresentFamilyIndex = i;// 记录此队列族索引为支持呈现作业的
                 break;
             }
         }
     }
-    free(pSupportsPresent);// 释放存储是否支持呈现工作的布尔值列表
+    free(pSupportsPresent);// 释放存储是否支持呈现作业的布尔值列表
 
-    // 没有找到支持Graphics（图形）或Present（显示）工作的队列家族
-    // 没有找到支持图形或显示工作的队列家族
+    // 没有找到支持Graphics（图形）或Present（呈现）作业的队列族
+    // 没有找到支持图形或呈现作业的队列族
     if (queueGraphicsFamilyIndex == UINT32_MAX || queuePresentFamilyIndex == UINT32_MAX) {
-        printf("没有找到支持Graphics（图形）或Present（显示）工作的队列家族\n");
-        assert(false);// 若没有支持图形或显示操作的队列家族则程序终止
+        printf("没有找到支持Graphics（图形）或Present（呈现）作业的队列族\n");
+        assert(false);// 若没有支持图形或呈现操作的队列族则程序终止
     }
 
     uint32_t formatCount;// 支持的格式数量
@@ -389,21 +389,21 @@ void VulkanDemoApp::createVulkanSwapChain() {
     result = vkGetPhysicalDeviceSurfaceCapabilitiesKHR(gpus[USED_GPU_INDEX], surface, &surfCapabilities);
     assert(result == VK_SUCCESS);
 
-    // 获取支持的显示模式数量
+    // 获取支持的呈现模式数量
     result = vkGetPhysicalDeviceSurfacePresentModesKHR(gpus[USED_GPU_INDEX], surface, &presentModeCount, nullptr);
     assert(result == VK_SUCCESS);
-    printf("显示模式数量为%d\n", presentModeCount);
+    printf("呈现模式数量为%d\n", presentModeCount);
 
     // 调整对应Vector尺寸
     presentModes.resize(presentModeCount);
-    // 获取支持的显示模式列表
+    // 获取支持的呈现模式列表
     result = vkGetPhysicalDeviceSurfacePresentModesKHR(gpus[USED_GPU_INDEX], surface, &presentModeCount, presentModes.data());
     for (unsigned int i = 0; i < presentModeCount; i++) {
-        printf("显示模式[%d]编号为%d\n", i, presentModes[i]);
+        printf("呈现模式[%d]编号为%d\n", i, presentModes[i]);
     }
 
-    VkPresentModeKHR swapchainPresentMode = VK_PRESENT_MODE_FIFO_KHR;// 确定交换链显示模式
-    for (size_t i = 0; i < presentModeCount; i++)// 遍历显示模式列表
+    VkPresentModeKHR swapchainPresentMode = VK_PRESENT_MODE_FIFO_KHR;// 确定交换链呈现模式
+    for (size_t i = 0; i < presentModeCount; i++)// 遍历呈现模式列表
     {
         // 如果也支持VK_PRESENT_MODE_MAILBOX_KHR模式，由于其效率高，便选用
         if (presentModes[i] == VK_PRESENT_MODE_MAILBOX_KHR) {
@@ -438,7 +438,7 @@ void VulkanDemoApp::createVulkanSwapChain() {
     } else {
         // 若表面有确定尺寸
         swapchainExtent = surfCapabilities.currentExtent;
-        printf("使用获取的surface能力中的 宽度 %d 高度 %d\n", swapchainExtent.width, swapchainExtent.height);
+        printf("使用获取到的窗口表面能力中的 宽度 %d 高度 %d\n", swapchainExtent.width, swapchainExtent.height);
     }
 
     screenWidth = swapchainExtent.width;// 记录实际采用的宽度
@@ -473,21 +473,21 @@ void VulkanDemoApp::createVulkanSwapChain() {
     swapchain_ci.preTransform = preTransform;// 指定变换标志
     swapchain_ci.compositeAlpha = VK_COMPOSITE_ALPHA_OPAQUE_BIT_KHR;// 混合Alpha值
     swapchain_ci.imageArrayLayers = 1;// 图像数组层数
-    swapchain_ci.presentMode = swapchainPresentMode;// 交换链的显示模式
+    swapchain_ci.presentMode = swapchainPresentMode;// 交换链的呈现模式
     swapchain_ci.oldSwapchain = VK_NULL_HANDLE;// 前导交换链
     swapchain_ci.clipped = true;// 开启剪裁
     swapchain_ci.imageColorSpace = VK_COLORSPACE_SRGB_NONLINEAR_KHR;// 色彩空间
     swapchain_ci.imageUsage = VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT;// 图像用途
     swapchain_ci.imageSharingMode = VK_SHARING_MODE_EXCLUSIVE;// 图像共享模式
-    swapchain_ci.queueFamilyIndexCount = 0;// 队列家族数量
-    swapchain_ci.pQueueFamilyIndices = nullptr;// 队列家族索引列表
+    swapchain_ci.queueFamilyIndexCount = 0;// 队列族数量
+    swapchain_ci.pQueueFamilyIndices = nullptr;// 队列族索引列表
 
-    if (queueGraphicsFamilyIndex != queuePresentFamilyIndex)// 若支持图形和显示工作的队列家族不相同
+    if (queueGraphicsFamilyIndex != queuePresentFamilyIndex)// 若支持图形和呈现作业的队列族不相同
     {
         swapchain_ci.imageSharingMode = VK_SHARING_MODE_CONCURRENT;
-        swapchain_ci.queueFamilyIndexCount = 2;// 交换链所需的队列家族索引数量为2
+        swapchain_ci.queueFamilyIndexCount = 2;// 交换链所需的队列族索引数量为2
         uint32_t queueFamilyIndices[2] = {queueGraphicsFamilyIndex, queuePresentFamilyIndex};
-        swapchain_ci.pQueueFamilyIndices = queueFamilyIndices;// 交换链所需的队列家族索引列表
+        swapchain_ci.pQueueFamilyIndices = queueFamilyIndices;// 交换链所需的队列族索引列表
     }
 
     result = vkCreateSwapchainKHR(device, &swapchain_ci, nullptr,
@@ -530,10 +530,10 @@ void VulkanDemoApp::destroyVulkanSwapChain()// 销毁交换链相关的方法
 {
     for (uint32_t i = 0; i < swapchainImageCount; i++) {
         vkDestroyImageView(device, swapchainImageViews[i], nullptr);
-        printf("[销毁SwapChain ImageView %d 成功]\n", i);
+        printf("[销毁交换链图像视图[%d]成功]\n", i);
     }
     vkDestroySwapchainKHR(device, swapChain, nullptr);
-    printf("销毁SwapChain成功!\n");
+    printf("销毁交换链成功!\n");
 }
 
 // 创建深度缓冲相关
@@ -563,8 +563,8 @@ void VulkanDemoApp::createVulkanDepthBuffer() {
     image_info.samples = VK_SAMPLE_COUNT_1_BIT;// 采样模式
     image_info.initialLayout = VK_IMAGE_LAYOUT_UNDEFINED;// 初始布局
     image_info.usage = VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT;// 图像用途
-    image_info.queueFamilyIndexCount = 0;// 队列家族数量
-    image_info.pQueueFamilyIndices = nullptr;// 队列家族索引列表
+    image_info.queueFamilyIndexCount = 0;// 队列族数量
+    image_info.pQueueFamilyIndices = nullptr;// 队列族索引列表
     image_info.sharingMode = VK_SHARING_MODE_EXCLUSIVE;// 共享模式
     image_info.flags = 0;// 标志
 
@@ -706,7 +706,7 @@ void VulkanDemoApp::destroyRenderPass() const {
     vkDestroySemaphore(device, imageAcquiredSemaphore, nullptr);
 }
 
-// 获取设备中支持图形工作的队列
+// 获取设备中支持图形作业的队列
 void VulkanDemoApp::initQueue() {
     // 获取指定家族中索引为0的队列
     vkGetDeviceQueue(device, queueGraphicsFamilyIndex, 0, &queueGraphics);

@@ -233,7 +233,7 @@ void VulkanSwapChain::managePresentMode() {
         }
     }
 
-    // 确定要在交换链中使用的VkImage的数量（除了正在显示和排队等待显示的图像外，我们希望一次只拥有一个图像）
+    // 确定要在交换链中使用的VkImage的数量（除了正在呈现和排队等待呈现的图像外，我们希望一次只拥有一个图像）
     scPrivateVars.desiredNumberOfSwapChainImages = scPrivateVars.surfCapabilities.minImageCount + 1;
     if ((scPrivateVars.surfCapabilities.maxImageCount > 0) &&
         (scPrivateVars.desiredNumberOfSwapChainImages > scPrivateVars.surfCapabilities.maxImageCount)) {

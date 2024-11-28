@@ -60,6 +60,6 @@
 
 ## 后记
 
-1. 关于glslang的一点小牢骚：为了让书中使用glslang将glsl编译成spir-v的代码可用。使用SDK中的头和库文件编译后一直显示找不到符号，折腾了三四天翻了几十篇博客才搞定依赖并解决glsl编译成spirV代码
+1. 关于glslang的一点小牢骚：为了让书中使用glslang将glsl编译成spir-v的代码可用。使用SDK中的头和库文件编译后一直报错找不到符号，折腾了三四天翻了几十篇博客才搞定依赖并解决glsl编译成spirV代码
 2. 报错`0xC0000374`:堆栈溢出（Stack Overflow）,可能是ObjObject::~ObjObject()中的`delete vdata;`而不是`delete[] vdata;`造成的
    ![德莉莎](./Assets/德莉莎.jpg)

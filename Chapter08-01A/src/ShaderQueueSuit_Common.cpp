@@ -17,8 +17,8 @@ void ShaderQueueSuit_Common::createUniformBuffer(VkDevice &device, VkPhysicalDev
     buf_info.pNext = nullptr;                             // 自定义数据的指针
     buf_info.usage = VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT;  // 缓冲的用途
     buf_info.size = bufferByteCount;                      // 缓冲总字节数
-    buf_info.queueFamilyIndexCount = 0;                   // 队列家族数量
-    buf_info.pQueueFamilyIndices = nullptr;               // 队列家族索引列表
+    buf_info.queueFamilyIndexCount = 0;                   // 队列族数量
+    buf_info.pQueueFamilyIndices = nullptr;               // 队列族索引列表
     buf_info.sharingMode = VK_SHARING_MODE_EXCLUSIVE;     // 共享模式
     buf_info.flags = 0;                                   // 标志
 

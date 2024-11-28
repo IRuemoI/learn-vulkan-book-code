@@ -13,8 +13,8 @@ DrawableObjectCommonLight::DrawableObjectCommonLight(float *vdataIn, int dataByt
     buf_info.pNext = nullptr;// 自定义数据的指针
     buf_info.usage = VK_BUFFER_USAGE_VERTEX_BUFFER_BIT;// 缓冲的用途为顶点数据
     buf_info.size = dataByteCount;// 设置数据总字节数
-    buf_info.queueFamilyIndexCount = 0;// 队列家族数量
-    buf_info.pQueueFamilyIndices = nullptr;// 队列家族索引列表
+    buf_info.queueFamilyIndexCount = 0;// 队列族数量
+    buf_info.pQueueFamilyIndices = nullptr;// 队列族索引列表
     buf_info.sharingMode = VK_SHARING_MODE_EXCLUSIVE;// 共享模式
     buf_info.flags = 0;// 标志
 

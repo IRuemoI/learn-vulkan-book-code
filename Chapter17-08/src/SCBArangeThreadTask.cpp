@@ -9,7 +9,7 @@ SCBArangeThreadTask::SCBArangeThreadTask(uint32_t queueGraphicsFamilyIndex, VkDe
     VkCommandPoolCreateInfo cmd_pool_info = {};//构建命令池创建信息结构体实例
     cmd_pool_info.sType = VK_STRUCTURE_TYPE_COMMAND_POOL_CREATE_INFO;
     cmd_pool_info.pNext = nullptr;//自定义数据的指针
-    cmd_pool_info.queueFamilyIndex = queueGraphicsFamilyIndex;//绑定队列家族索引
+    cmd_pool_info.queueFamilyIndex = queueGraphicsFamilyIndex;//绑定队列族索引
     cmd_pool_info.flags = VK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT;
     VkResult result = vkCreateCommandPool(*device, &cmd_pool_info, nullptr, &cmdPool);
     assert(result == VK_SUCCESS);//检查命令池是否创建成功
