@@ -490,8 +490,7 @@ void VulkanDemoApp::createVulkanSwapChain() {
         swapchain_ci.pQueueFamilyIndices = queueFamilyIndices;// 交换链所需的队列族索引列表
     }
 
-    result = vkCreateSwapchainKHR(device, &swapchain_ci, nullptr,
-                                  &swapChain);// 创建交换链
+    result = vkCreateSwapchainKHR(device, &swapchain_ci, nullptr, &swapChain);// 创建交换链
     assert(result == VK_SUCCESS);// 检查交换链是否创建成功
 
     // 获取交换链中的图像数量
@@ -598,8 +597,7 @@ void VulkanDemoApp::createVulkanDepthBuffer() {
     vkGetImageMemoryRequirements(device, depthImage, &mem_reqs);
     mem_alloc.allocationSize = mem_reqs.size;// 获取所需内存字节数
     VkFlags requirements_mask = 0;// 需要的内存类型掩码
-    bool flag = memoryTypeFromProperties(memoryProperties, mem_reqs.memoryTypeBits, requirements_mask,
-                                         &mem_alloc.memoryTypeIndex);// 获取所需内存类型索引
+    bool flag = memoryTypeFromProperties(memoryProperties, mem_reqs.memoryTypeBits, requirements_mask, &mem_alloc.memoryTypeIndex);// 获取所需内存类型索引
     assert(flag);// 检查获取是否成功
     printf("确定内存类型成功 类型索引为%d\n", mem_alloc.memoryTypeIndex);
     result = vkAllocateMemory(device, &mem_alloc, nullptr, &memDepth);// 分配内存

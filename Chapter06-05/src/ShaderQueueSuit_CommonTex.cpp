@@ -157,8 +157,7 @@ void ShaderQueueSuit_CommonTex::createShaderModule(VkDevice &device) {
     moduleCreateInfo.codeSize = vtx_spv.size() * sizeof(uint32_t);// 顶点着色器SPV数据总字节数
     moduleCreateInfo.pCode = reinterpret_cast<const uint32_t *>(vtx_spv.data());// 顶点着色器SPV数据
 
-    VkResult result = vkCreateShaderModule(device, &moduleCreateInfo, nullptr,
-                                           &shaderStages[0].module);// 创建顶点着色器模块
+    VkResult result = vkCreateShaderModule(device, &moduleCreateInfo, nullptr, &shaderStages[0].module);// 创建顶点着色器模块
     assert(result == VK_SUCCESS);// 检查顶点着色器模块创建是否成功
 
     shaderStages[1].sType = VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO;// 结构体类型

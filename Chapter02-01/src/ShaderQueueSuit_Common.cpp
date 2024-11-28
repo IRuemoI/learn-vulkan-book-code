@@ -19,8 +19,7 @@ void ShaderQueueSuit_Common::createUniformBuffer(VkDevice &device, VkPhysicalDev
     buf_info.sharingMode = VK_SHARING_MODE_EXCLUSIVE;// 共享模式
     buf_info.flags = 0;// 标志
 
-    VkResult result = vkCreateBuffer(device, &buf_info, nullptr,
-                                     &uniformBuf);// 创建一致变量缓冲
+    VkResult result = vkCreateBuffer(device, &buf_info, nullptr, &uniformBuf);// 创建一致变量缓冲
     assert(result == VK_SUCCESS);// 检查创建是否成功
 
     VkMemoryRequirements mem_reqs;// 内存需求变量
@@ -42,8 +41,7 @@ void ShaderQueueSuit_Common::createUniformBuffer(VkDevice &device, VkPhysicalDev
 
     result = vkAllocateMemory(device, &alloc_info, nullptr, &memUniformBuf);// 分配内存
     assert(result == VK_SUCCESS);// 检查内存分配是否成功
-    result = vkBindBufferMemory(device, uniformBuf, memUniformBuf,
-                                0);// 将内存和对应缓冲绑定
+    result = vkBindBufferMemory(device, uniformBuf, memUniformBuf, 0);// 将内存和对应缓冲绑定
     assert(result == VK_SUCCESS);// 检查绑定操作是否成功
 
     uniformBufferInfo.buffer = uniformBuf;// 指定一致变量缓冲

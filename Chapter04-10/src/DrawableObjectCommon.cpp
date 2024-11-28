@@ -160,8 +160,7 @@ void DrawableObjectCommonLight::drawSelf(VkCommandBuffer &cmd, VkPipelineLayout 
             offsetsVertex);
     float *mvp = MatrixState3D::getFinalMatrix();//获取总变换矩阵
     memcpy(pushConstantData, mvp, sizeof(float) * 16);//将总变换矩阵拷贝入内存
-    vkCmdPushConstants(cmd, pipelineLayout,//将常量数据送入管线
-                       VK_SHADER_STAGE_VERTEX_BIT, 0, sizeof(float) * 16, pushConstantData);
+    vkCmdPushConstants(cmd, pipelineLayout, VK_SHADER_STAGE_VERTEX_BIT, 0, sizeof(float) * 16, pushConstantData);//将常量数据送入管线
     vkCmdBindIndexBuffer(//将顶点数据与当前使用的命令缓冲绑定
             cmd,//当前使用的命令缓冲
             indexDatabuf,//索引数据缓冲

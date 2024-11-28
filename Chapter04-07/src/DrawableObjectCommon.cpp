@@ -33,8 +33,7 @@ DrawableObjectCommon::DrawableObjectCommon(float *vdataIn, int dataByteCount, in
     alloc_info.memoryTypeIndex = 0;// 内存类型索引
     alloc_info.allocationSize = mem_reqs.size;// 内存总字节数
 
-    VkFlags requirements_mask =
-            VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT;// 需要的内存类型掩码
+    VkFlags requirements_mask = VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT;// 需要的内存类型掩码
     bool flag = memoryTypeFromProperties(memoryProperties, mem_reqs.memoryTypeBits, requirements_mask, &alloc_info.memoryTypeIndex);// 获取所需内存类型索引
     if (flag) {
         printf("确定内存类型成功 类型索引为%d", alloc_info.memoryTypeIndex);

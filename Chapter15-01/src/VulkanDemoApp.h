@@ -126,7 +126,6 @@ public:
     std::thread treeMoveThread;
     static bool isTreeMoveThreadShouldClose;
 
-    // TODO:在该需要重建交换链的地方修改他的值并重建交换链
     bool frameBufferResized = false;
 
     //程序的骨架

@@ -231,12 +231,10 @@ void VulkanDemoApp::createVulkanDevices() {
     vkGetPhysicalDeviceQueueFamilyProperties(gpus[USED_GPU_INDEX], &queueFamilyCount,
                                              nullptr);// 获取物理设备0中队列族的数量
     VkPhysicalDeviceProperties device_properties;
-    vkGetPhysicalDeviceProperties(gpus[USED_GPU_INDEX],
-                                  &device_properties);// 获取物理设备0的属性
+    vkGetPhysicalDeviceProperties(gpus[USED_GPU_INDEX], &device_properties);// 获取物理设备0的属性
     printf("[Vulkan硬件设备\"%s\"支持的队列族数量为%d]\n", device_properties.deviceName, queueFamilyCount);
     queueFamilyProps.resize(queueFamilyCount);// 随队列族数量改变vector长度
-    vkGetPhysicalDeviceQueueFamilyProperties(gpus[USED_GPU_INDEX], &queueFamilyCount,
-                                             queueFamilyProps.data());// 填充物理设备0队列族属性列表
+    vkGetPhysicalDeviceQueueFamilyProperties(gpus[USED_GPU_INDEX], &queueFamilyCount, queueFamilyProps.data());// 填充物理设备0队列族属性列表
     printf("[成功获取Vulkan硬件设备支持的队列族属性列表]\n");
 
     VkDeviceQueueCreateInfo queueInfo = {};// 构建设备队列创建信息结构体实例
@@ -268,8 +266,7 @@ void VulkanDemoApp::createVulkanDevices() {
     deviceInfo.enabledLayerCount = 0;// 需启动Layer的数量
     deviceInfo.ppEnabledLayerNames = nullptr;// 需启动Layer的名称列表
     deviceInfo.pEnabledFeatures = nullptr;// 启用的设备特性
-    VkResult result = vkCreateDevice(gpus[USED_GPU_INDEX], &deviceInfo, nullptr,
-                                     &device);// 创建逻辑设备
+    VkResult result = vkCreateDevice(gpus[USED_GPU_INDEX], &deviceInfo, nullptr, &device);// 创建逻辑设备
     assert(result == VK_SUCCESS);// 检查逻辑设备是否创建成功
 }
 
@@ -286,8 +283,7 @@ void VulkanDemoApp::createVulkanCommandBuffer() {
     cmd_pool_info.pNext = nullptr;// 自定义数据的指针
     cmd_pool_info.queueFamilyIndex = queueGraphicsFamilyIndex;// 绑定所需队列族索引
     cmd_pool_info.flags = VK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT;// 执行控制标志
-    VkResult result = vkCreateCommandPool(device, &cmd_pool_info, nullptr,
-                                          &cmdPool);// 创建命令池
+    VkResult result = vkCreateCommandPool(device, &cmd_pool_info, nullptr, &cmdPool);// 创建命令池
     assert(result == VK_SUCCESS);// 检查命令池创建是否成功
 
     VkCommandBufferAllocateInfo cmdBAI = {};// 构建命令缓冲分配信息结构体实例
@@ -507,8 +503,7 @@ void VulkanDemoApp::createVulkanSwapChain() {
         swapchain_ci.pQueueFamilyIndices = queueFamilyIndices;// 交换链所需的队列族索引列表
     }
 
-    result = vkCreateSwapchainKHR(device, &swapchain_ci, nullptr,
-                                  &swapChain);// 创建交换链
+    result = vkCreateSwapchainKHR(device, &swapchain_ci, nullptr, &swapChain);// 创建交换链
     assert(result == VK_SUCCESS);// 检查交换链是否创建成功
 
     // 获取交换链中的图像数量
@@ -538,8 +533,7 @@ void VulkanDemoApp::createVulkanSwapChain() {
         color_image_view.subresourceRange.levelCount = 1;// Mipmap级别的数量
         color_image_view.subresourceRange.baseArrayLayer = 0;// 基础数组层
         color_image_view.subresourceRange.layerCount = 1;// 数组层的数量
-        result = vkCreateImageView(device, &color_image_view, nullptr,
-                                   &swapchainImageViews[i]);// 创建图像视图
+        result = vkCreateImageView(device, &color_image_view, nullptr, &swapchainImageViews[i]);// 创建图像视图
         assert(result == VK_SUCCESS);// 检查是否创建成功
     }
 }
@@ -558,8 +552,7 @@ void VulkanDemoApp::destroyVulkanSwapChain()// 销毁交换链相关的方法
 void VulkanDemoApp::createVulkanDepthBuffer() {
     depthFormat = VK_FORMAT_D16_UNORM;// 指定深度图像的格式
     VkImageCreateInfo image_info = {};// 构建深度图像创建信息结构体实例
-    vkGetPhysicalDeviceFormatProperties(gpus[USED_GPU_INDEX], depthFormat,
-                                        &depthFormatProps);// 获取物理设备支持的指定格式的属性
+    vkGetPhysicalDeviceFormatProperties(gpus[USED_GPU_INDEX], depthFormat, &depthFormatProps);// 获取物理设备支持的指定格式的属性
     // 确定平铺方式
     if (depthFormatProps.linearTilingFeatures &
         VK_FORMAT_FEATURE_DEPTH_STENCIL_ATTACHMENT_BIT)// 是否支持线性瓦片组织方式
@@ -614,16 +607,14 @@ void VulkanDemoApp::createVulkanDepthBuffer() {
     view_info.viewType = VK_IMAGE_VIEW_TYPE_2D;// 图像视图的类型
     view_info.flags = 0;// 标志
 
-    VkResult result = vkCreateImage(device, &image_info, nullptr,
-                                    &depthImage);// 创建深度图像
+    VkResult result = vkCreateImage(device, &image_info, nullptr, &depthImage);// 创建深度图像
     assert(result == VK_SUCCESS);
 
     VkMemoryRequirements mem_reqs;// 获取图像内存需求
     vkGetImageMemoryRequirements(device, depthImage, &mem_reqs);
     mem_alloc.allocationSize = mem_reqs.size;// 获取所需内存字节数
     VkFlags requirements_mask = 0;// 需要的内存类型掩码
-    bool flag = memoryTypeFromProperties(memoryProperties, mem_reqs.memoryTypeBits, requirements_mask,
-                                         &mem_alloc.memoryTypeIndex);// 获取所需内存类型索引
+    bool flag = memoryTypeFromProperties(memoryProperties, mem_reqs.memoryTypeBits, requirements_mask, &mem_alloc.memoryTypeIndex);// 获取所需内存类型索引
     assert(flag);// 检查获取是否成功
     printf("确定内存类型成功 类型索引为%d\n", mem_alloc.memoryTypeIndex);
     result = vkAllocateMemory(device, &mem_alloc, nullptr, &memDepth);// 分配内存
@@ -631,8 +622,7 @@ void VulkanDemoApp::createVulkanDepthBuffer() {
     result = vkBindImageMemory(device, depthImage, memDepth, 0);// 绑定图像和内存
     assert(result == VK_SUCCESS);
     view_info.image = depthImage;// 指定图像视图对应图像
-    result = vkCreateImageView(device, &view_info, nullptr,
-                               &depthImageView);// 创建深度图像视图
+    result = vkCreateImageView(device, &view_info, nullptr, &depthImageView);// 创建深度图像视图
     assert(result == VK_SUCCESS);
 }
 
@@ -651,8 +641,7 @@ void VulkanDemoApp::createRenderPass() {
     imageAcquiredSemaphoreCreateInfo.pNext = nullptr;// 自定义数据的指针
     imageAcquiredSemaphoreCreateInfo.flags = 0;// 供将来使用的标志
 
-    VkResult result = vkCreateSemaphore(device, &imageAcquiredSemaphoreCreateInfo, nullptr,
-                                        &imageAcquiredSemaphore);// 创建信号量
+    VkResult result = vkCreateSemaphore(device, &imageAcquiredSemaphoreCreateInfo, nullptr, &imageAcquiredSemaphore);// 创建信号量
     assert(result == VK_SUCCESS);// 检测信号量是否创建成功
 
     VkAttachmentDescription attachments[2];// 附件描述信息数组
@@ -705,8 +694,7 @@ void VulkanDemoApp::createRenderPass() {
     rp_info.dependencyCount = 0;// 子通道依赖数量
     rp_info.pDependencies = nullptr;// 子通道依赖列表
 
-    result = vkCreateRenderPass(device, &rp_info, nullptr,
-                                &renderPass);// 创建渲染通道
+    result = vkCreateRenderPass(device, &rp_info, nullptr, &renderPass);// 创建渲染通道
     assert(result == VK_SUCCESS);
 
     clear_values[0].color.float32[0] = 0.2f;// 帧缓冲清除用R分量值
@@ -760,8 +748,7 @@ void VulkanDemoApp::createFrameBuffer() {
     // 遍历交换链中的各个图像
     for (i = 0; i < swapchainImageCount; i++) {
         attachments[0] = swapchainImageViews[i];// 给定颜色附件对应图像视图
-        VkResult result = vkCreateFramebuffer(device, &fb_info, nullptr,
-                                              &framebuffers[i]);// 创建帧缓冲
+        VkResult result = vkCreateFramebuffer(device, &fb_info, nullptr, &framebuffers[i]);// 创建帧缓冲
         assert(result == VK_SUCCESS);// 检查是否创建成功
         printf("[创建帧缓冲%d成功！]\n", i);
     }
@@ -823,11 +810,9 @@ void VulkanDemoApp::flushUniformBuffer()// 将当前帧相关数据送入一致�
 {
     float *vertexUniformData = MatrixState3D::getFinalMatrix();// 获取最终变换矩阵
     uint8_t *pData;// CPU访问时的辅助指针
-    VkResult result = vkMapMemory(device, sqsCL->memUniformBuf, 0, sqsCL->bufferByteCount, 0,
-                                  (void **) &pData);// 将设备内存映射为CPU可访问
+    VkResult result = vkMapMemory(device, sqsCL->memUniformBuf, 0, sqsCL->bufferByteCount, 0, (void **) &pData);// 将设备内存映射为CPU可访问
     assert(result == VK_SUCCESS);
-    memcpy(pData, vertexUniformData,
-           sqsCL->bufferByteCount);// 将最终矩阵数据拷贝进显存
+    memcpy(pData, vertexUniformData, sqsCL->bufferByteCount);// 将最终矩阵数据拷贝进显存
     vkUnmapMemory(device, sqsCL->memUniformBuf);// 解除内存映射
 }
 
@@ -842,8 +827,7 @@ void VulkanDemoApp::drawObject() {
     FPSUtil::before();// 一帧开始
 
     // 获取交换链中的当前帧索引
-    VkResult result =
-            vkAcquireNextImageKHR(device, swapChain, UINT64_MAX, imageAcquiredSemaphore, VK_NULL_HANDLE, &currentBuffer);
+    VkResult result = vkAcquireNextImageKHR(device, swapChain, UINT64_MAX, imageAcquiredSemaphore, VK_NULL_HANDLE, &currentBuffer);
     if (result != VK_SUCCESS) {
         std::cout << "at vkAcquireNextImageKHR:" << (VkResult) result << '\n';
     }

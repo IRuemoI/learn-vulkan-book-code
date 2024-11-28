@@ -23,13 +23,11 @@ void ShaderQueueSuit_Common::createUniformBuffer(VkDevice &device, VkPhysicalDev
     buf_info.sharingMode = VK_SHARING_MODE_EXCLUSIVE;// 共享模式
     buf_info.flags = 0;// 标志
 
-    VkResult result = vkCreateBuffer(device, &buf_info, nullptr,
-                                     &uniformBuf);// 创建一致变量缓冲
+    VkResult result = vkCreateBuffer(device, &buf_info, nullptr, &uniformBuf);// 创建一致变量缓冲
     assert(result == VK_SUCCESS);// 检查创建是否成功
 
     VkMemoryRequirements mem_reqs;// 内存需求变量
-    vkGetBufferMemoryRequirements(device, uniformBuf,
-                                  &mem_reqs);// 获取此缓冲的内存需求
+    vkGetBufferMemoryRequirements(device, uniformBuf, &mem_reqs);// 获取此缓冲的内存需求
 
     VkMemoryAllocateInfo alloc_info = {};// 构建内存分配信息结构体实例
     alloc_info.sType = VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO;// 结构体类型
@@ -103,8 +101,7 @@ void ShaderQueueSuit_Common::destroyPipelineLayout(VkDevice &device)// 销毁管
 {
     for (int i = 0; i < NUM_DESCRIPTOR_SETS; i++)// 遍历描述集列表
     {
-        vkDestroyDescriptorSetLayout(device, descLayouts[i],
-                                     nullptr);// 销毁对应描述集布局
+        vkDestroyDescriptorSetLayout(device, descLayouts[i], nullptr);// 销毁对应描述集布局
     }
     vkDestroyPipelineLayout(device, pipelineLayout, nullptr);// 销毁管线布局
 }
@@ -176,8 +173,7 @@ void ShaderQueueSuit_Common::createShaderModule(VkDevice &device) {
     moduleCreateInfo.codeSize = vtx_spv.size() * sizeof(uint32_t);// 顶点着色器SPV数据总字节数
     moduleCreateInfo.pCode = reinterpret_cast<const uint32_t *>(vtx_spv.data());// 顶点着色器SPV数据
 
-    VkResult result = vkCreateShaderModule(device, &moduleCreateInfo, nullptr,
-                                           &shaderStages[0].module);// 创建顶点着色器模块
+    VkResult result = vkCreateShaderModule(device, &moduleCreateInfo, nullptr, &shaderStages[0].module);// 创建顶点着色器模块
     assert(result == VK_SUCCESS);// 检查顶点着色器模块创建是否成功
 
     shaderStages[1].sType = VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO;// 结构体类型
@@ -205,10 +201,8 @@ void ShaderQueueSuit_Common::createShaderModule(VkDevice &device) {
 
 void ShaderQueueSuit_Common::destroyShaderModule(VkDevice &device)// 销毁着色器模块的方法
 {
-    vkDestroyShaderModule(device, shaderStages[0].module,
-                          nullptr);// 销毁顶点着色器模块
-    vkDestroyShaderModule(device, shaderStages[1].module,
-                          nullptr);// 销毁片元着色器模块
+    vkDestroyShaderModule(device, shaderStages[0].module, nullptr);// 销毁顶点着色器模块
+    vkDestroyShaderModule(device, shaderStages[1].module, nullptr);// 销毁片元着色器模块
 }
 
 void ShaderQueueSuit_Common::initVertexAttributeInfo() {

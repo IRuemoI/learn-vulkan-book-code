@@ -509,8 +509,7 @@ void VulkanDemoApp::createVulkanSwapChain() {
         swapchain_ci.pQueueFamilyIndices = queueFamilyIndices;// 交换链所需的队列族索引列表
     }
 
-    result = vkCreateSwapchainKHR(device, &swapchain_ci, nullptr,
-                                  &swapChain);// 创建交换链
+    result = vkCreateSwapchainKHR(device, &swapchain_ci, nullptr, &swapChain);// 创建交换链
     assert(result == VK_SUCCESS);// 检查交换链是否创建成功
 
     // 获取交换链中的图像数量

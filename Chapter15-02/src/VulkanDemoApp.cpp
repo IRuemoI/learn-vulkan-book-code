@@ -193,12 +193,10 @@ void VulkanDemoApp::createVulkanDevices() {
     vkGetPhysicalDeviceQueueFamilyProperties(gpus[USED_GPU_INDEX], &queueFamilyCount,
                                              nullptr);// 获取物理设备0中队列族的数量
     VkPhysicalDeviceProperties device_properties;
-    vkGetPhysicalDeviceProperties(gpus[USED_GPU_INDEX],
-                                  &device_properties);// 获取物理设备0的属性
+    vkGetPhysicalDeviceProperties(gpus[USED_GPU_INDEX], &device_properties);// 获取物理设备0的属性
     printf("[Vulkan硬件设备\"%s\"支持的队列族数量为%d]\n", device_properties.deviceName, queueFamilyCount);
     queueFamilyProps.resize(queueFamilyCount);// 随队列族数量改变vector长度
-    vkGetPhysicalDeviceQueueFamilyProperties(gpus[USED_GPU_INDEX], &queueFamilyCount,
-                                             queueFamilyProps.data());// 填充物理设备0队列族属性列表
+    vkGetPhysicalDeviceQueueFamilyProperties(gpus[USED_GPU_INDEX], &queueFamilyCount, queueFamilyProps.data());// 填充物理设备0队列族属性列表
     printf("[成功获取Vulkan硬件设备支持的队列族属性列表]\n");
 
     VkDeviceQueueCreateInfo queueInfo = {};// 构建设备队列创建信息结构体实例
@@ -251,8 +249,7 @@ void VulkanDemoApp::createVulkanCommandBuffer() {
     cmd_pool_info.pNext = nullptr;// 自定义数据的指针
     cmd_pool_info.queueFamilyIndex = queueGraphicsFamilyIndex;// 绑定所需队列族索引
     cmd_pool_info.flags = VK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT;// 执行控制标志
-    VkResult result = vkCreateCommandPool(device, &cmd_pool_info, nullptr,
-                                          &cmdPool);// 创建命令池
+    VkResult result = vkCreateCommandPool(device, &cmd_pool_info, nullptr, &cmdPool);// 创建命令池
     assert(result == VK_SUCCESS);// 检查命令池创建是否成功
 
     VkCommandBufferAllocateInfo cmdBAI = {};// 构建命令缓冲分配信息结构体实例
@@ -476,8 +473,7 @@ void VulkanDemoApp::createVulkanSwapChain() {
         swapchain_ci.pQueueFamilyIndices = queueFamilyIndices;// 交换链所需的队列族索引列表
     }
 
-    result = vkCreateSwapchainKHR(device, &swapchain_ci, nullptr,
-                                  &swapChain);// 创建交换链
+    result = vkCreateSwapchainKHR(device, &swapchain_ci, nullptr, &swapChain);// 创建交换链
     assert(result == VK_SUCCESS);// 检查交换链是否创建成功
 
     // 获取交换链中的图像数量
@@ -507,8 +503,7 @@ void VulkanDemoApp::createVulkanSwapChain() {
         color_image_view.subresourceRange.levelCount = 1;// Mipmap级别的数量
         color_image_view.subresourceRange.baseArrayLayer = 0;// 基础数组层
         color_image_view.subresourceRange.layerCount = 1;// 数组层的数量
-        result = vkCreateImageView(device, &color_image_view, nullptr,
-                                   &swapchainImageViews[i]);// 创建图像视图
+        result = vkCreateImageView(device, &color_image_view, nullptr, &swapchainImageViews[i]);// 创建图像视图
         assert(result == VK_SUCCESS);// 检查是否创建成功
     }
 }
