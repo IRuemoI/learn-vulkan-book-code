@@ -55,7 +55,7 @@ int textureLevelSizeS3tcDxt5(int width, int height) {
 }
 LandData *FileUtil::loadHdtData(string filename)//加载灰度图数据的方法
 {
-    unsigned char *buf = new unsigned char[4]; //用于存放灰度图的宽度数据
+    unsigned char *buf = new unsigned char[4];//用于存放灰度图的宽度数据
     unsigned char *buf2 = new unsigned char[4];//用于存放灰度图的高度数据
     char c_file[1000];
     strcpy(c_file, filename.c_str());

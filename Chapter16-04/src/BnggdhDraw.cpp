@@ -2,30 +2,30 @@
 #include "TextureManager.h"
 #include "VulkanDemoApp.h"
 BnggdhDraw::BnggdhDraw(string sourceName, VkDevice &device, VkPhysicalDeviceMemoryProperties &memoryProperties) {
-    pushConstantData = new float[16];                 //创建推送常量数据数组
-    this->devicePointer = &device;                    //接收逻辑设备指针并保存
+    pushConstantData = new float[16];//创建推送常量数据数组
+    this->devicePointer = &device;//接收逻辑设备指针并保存
     this->memoryPropertiesPointer = &memoryProperties;//接收物理设备内存属性列表并保存
-    bnggdh = new Bnggdh(sourceName);                  //创建Bnggdh 类对象
-    initVertexData();                                 //初始化顶点数据
-    initIndexData();                                  //初始化索引数据
-    initVertexBuffer();                               //创建顶点数据缓冲
-    initIndexBuffer();                                //创建索引数据缓冲
+    bnggdh = new Bnggdh(sourceName);//创建Bnggdh 类对象
+    initVertexData();//初始化顶点数据
+    initIndexData();//初始化索引数据
+    initVertexBuffer();//创建顶点数据缓冲
+    initIndexBuffer();//创建索引数据缓冲
 }
-void BnggdhDraw::initVertexData() {              //初始化顶点数据的方法
-    maxKeyTime = bnggdh->getMaxKeytime();        //获取最大关键帧的时间
-    vCount = bnggdh->getVerNums();               //获取顶点数量
-    vdata = new float[vCount * 5]();             //初始化顶点数据数组
-    vDataTransfer = new float[vCount * 5]();     //初始化中间传输区顶点数据数组
-    vdataByteCount = vCount * 5 * sizeof(float); //计算顶点数据所占总字节数
-    int count = 0;                               //辅助索引
-    positionData = bnggdh->getPosition();        //获取顶点位置坐标数据
-    textureData = bnggdh->getTextures();         //获取顶点纹理坐标数据
-    for (int i = 0; i < vCount; i++) {           //遍历顶点数据数组的每个元素
+void BnggdhDraw::initVertexData() {//初始化顶点数据的方法
+    maxKeyTime = bnggdh->getMaxKeytime();//获取最大关键帧的时间
+    vCount = bnggdh->getVerNums();//获取顶点数量
+    vdata = new float[vCount * 5]();//初始化顶点数据数组
+    vDataTransfer = new float[vCount * 5]();//初始化中间传输区顶点数据数组
+    vdataByteCount = vCount * 5 * sizeof(float);//计算顶点数据所占总字节数
+    int count = 0;//辅助索引
+    positionData = bnggdh->getPosition();//获取顶点位置坐标数据
+    textureData = bnggdh->getTextures();//获取顶点纹理坐标数据
+    for (int i = 0; i < vCount; i++) {//遍历顶点数据数组的每个元素
         vdata[count++] = positionData[i * 3 + 0];//顶点位置坐标的X 分量
         vdata[count++] = positionData[i * 3 + 1];//顶点位置坐标的Y 分量
         vdata[count++] = positionData[i * 3 + 2];//顶点位置坐标的Z 分量
-        vdata[count++] = textureData[i * 2 + 0]; //顶点的纹理S 坐标
-        vdata[count++] = textureData[i * 2 + 1]; //顶点的纹理T 坐标
+        vdata[count++] = textureData[i * 2 + 0];//顶点的纹理S 坐标
+        vdata[count++] = textureData[i * 2 + 1];//顶点的纹理T 坐标
     }
     count = 0;
     for (int i = 0; i < vCount; i++) {
@@ -36,12 +36,12 @@ void BnggdhDraw::initVertexData() {              //初始化顶点数据的方�
         vDataTransfer[count++] = textureData[i * 2 + 1];
     }
 }
-void BnggdhDraw::initIndexData() {             //初始化索引数据的方法
-    iCount = bnggdh->getIndexNums();           //获取索引数量
-    idata = new uint16_t[iCount]();            //初始化索引数据数组
+void BnggdhDraw::initIndexData() {//初始化索引数据的方法
+    iCount = bnggdh->getIndexNums();//获取索引数量
+    idata = new uint16_t[iCount]();//初始化索引数据数组
     idataByteCount = iCount * sizeof(uint16_t);//计算索引数据所占总字节数
-    for (int i = 0; i < iCount; i++) {         //遍历索引数据数组的每个元素
-        idata[i] = bnggdh->getIndices()[i];    //获取顶点数据索引
+    for (int i = 0; i < iCount; i++) {//遍历索引数据数组的每个元素
+        idata[i] = bnggdh->getIndices()[i];//获取顶点数据索引
     }
 }
 void BnggdhDraw::initVertexBuffer() {
@@ -123,29 +123,29 @@ void BnggdhDraw::initIndexBuffer() {
     indexDataBufferInfo.range = imem_reqs.size;
 }
 void BnggdhDraw::updateData(float time) {//更新动画数据的方法
-    bnggdh->updata(time);                //调用update 方法更新动画数据
+    bnggdh->updata(time);//调用update 方法更新动画数据
     positionData = bnggdh->getPosition();//获取更新后的顶点位置坐标数据
-    textureData = bnggdh->getTextures(); //获取更新后的顶点纹理坐标数据
+    textureData = bnggdh->getTextures();//获取更新后的顶点纹理坐标数据
 }
-void BnggdhDraw::copyData() {                            //拷贝顶点数据进入中间传输区的方法
-    int count = 0;                                       //辅助索引
-    for (int i = 0; i < vCount; i++) {                   //遍历数组中的每一个元素
+void BnggdhDraw::copyData() {//拷贝顶点数据进入中间传输区的方法
+    int count = 0;//辅助索引
+    for (int i = 0; i < vCount; i++) {//遍历数组中的每一个元素
         vDataTransfer[count++] = positionData[i * 3 + 0];//顶点位置坐标的X 分量
         vDataTransfer[count++] = positionData[i * 3 + 1];//顶点位置坐标的Y 分量
         vDataTransfer[count++] = positionData[i * 3 + 2];//顶点位置坐标的Z 分量
-        vDataTransfer[count++] = textureData[i * 2 + 0]; //顶点的纹理S 坐标
-        vDataTransfer[count++] = textureData[i * 2 + 1]; //顶点的纹理T 坐标
+        vDataTransfer[count++] = textureData[i * 2 + 0];//顶点的纹理S 坐标
+        vDataTransfer[count++] = textureData[i * 2 + 1];//顶点的纹理T 坐标
     }
 }
-void BnggdhDraw::referVertexBuffer() {           //将顶点数据拷贝到绘制用内存的方法
+void BnggdhDraw::referVertexBuffer() {//将顶点数据拷贝到绘制用内存的方法
     memcpy(vdata, vDataTransfer, vdataByteCount);//将顶点数据从中间传输区拷贝到绘制用内存区
 }
 void BnggdhDraw::drawSelf(string picName, VkCommandBuffer &cmd, VkPipelineLayout &pipelineLayout, VkPipeline &pipeline) {
-    uint8_t *pData;                              //CPU 访问设备内存的辅助指针
+    uint8_t *pData;//CPU 访问设备内存的辅助指针
     VkResult result = vkMapMemory(*devicePointer,//将设备内存映射为CPU 可访问
                                   vertexDataMem, 0, vmem_reqs.size, 0, (void **) &pData);
-    assert(result == VK_SUCCESS);                //检查内存映射是否成功
-    memcpy(pData, vdata, vdataByteCount);        //将顶点数据拷贝进设备内存
+    assert(result == VK_SUCCESS);//检查内存映射是否成功
+    memcpy(pData, vdata, vdataByteCount);//将顶点数据拷贝进设备内存
     vkUnmapMemory(*devicePointer, vertexDataMem);//解除内存映射
     VkDescriptorSet desSetPointer = VulkanDemoApp::sqsCL->descSet[TextureManager::getVkDescriptorSetIndex(picName)];
     vkCmdBindPipeline(cmd, VK_PIPELINE_BIND_POINT_GRAPHICS, pipeline);

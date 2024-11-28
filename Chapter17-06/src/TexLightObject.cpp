@@ -195,12 +195,12 @@ void TexLightObject::drawSelf(VkCommandBuffer &cmd, VkPipelineLayout &pipelineLa
     vkCmdBindDescriptorSets(cmd, VK_PIPELINE_BIND_POINT_GRAPHICS, pipelineLayout, 0, 1, desSetPointer, 0, nullptr);
 
     const VkDeviceSize offsetsVertex[1] = {0};
-    vkCmdBindVertexBuffers(         //将顶点数据与当前使用的命令缓冲绑定
-            cmd,                    //当前使用的命令缓冲
-            0,                      //数据缓冲在列表中的首索引
-            1,                      //绑定数据缓冲的数量
+    vkCmdBindVertexBuffers(//将顶点数据与当前使用的命令缓冲绑定
+            cmd,//当前使用的命令缓冲
+            0,//数据缓冲在列表中的首索引
+            1,//绑定数据缓冲的数量
             &(vertexDatabufCompute),//绑定数据缓冲
-            offsetsVertex);         //数据缓冲的偏移量
+            offsetsVertex);//数据缓冲的偏移量
 
     vkCmdBindIndexBuffer(cmd, vertexIndexDatabuf, 0, VK_INDEX_TYPE_UINT32);
 
@@ -220,18 +220,18 @@ void TexLightObject::calSelfBD(VkCommandBuffer &cmd,
                                VkDescriptorSet *desSetPointer) {
 
     vkCmdBindPipeline(cmd, VK_PIPELINE_BIND_POINT_COMPUTE, pipeline);//绑定到计算管线
-    vkCmdBindDescriptorSets(cmd,                                     //将命令缓冲、管线布局、描述集绑定
+    vkCmdBindDescriptorSets(cmd,//将命令缓冲、管线布局、描述集绑定
                             VK_PIPELINE_BIND_POINT_COMPUTE, pipelineLayout, 0, 1, desSetPointer, 0, nullptr);
-    const VkDeviceSize offsetsVertex[2] = {0, 1};                //顶点数据偏移量数组
+    const VkDeviceSize offsetsVertex[2] = {0, 1};//顶点数据偏移量数组
     VkBuffer pBuffers[2] = {vertexDatabuf, vertexDatabufCompute};//数据缓冲数组
-    vkCmdBindVertexBuffers(                                      //将数据缓冲与当前使用的命令缓冲绑定
-            cmd,                                                 //当前使用的命令缓冲
-            0,                                                   //数据缓冲在列表中的首索引
-            2,                                                   //绑定数据缓冲的数量
-            pBuffers,                                            //绑定数据缓冲的列表
-            offsetsVertex);                                      //各个数据缓冲的偏移量
-    uint32_t size = CR + 1;                                      //水面顶点的行列数，作为计算着色器任务的X、Y 尺寸
-    vkCmdDispatch(cmd, size, size, 1);                           //将计算任务派送到计算管线
+    vkCmdBindVertexBuffers(//将数据缓冲与当前使用的命令缓冲绑定
+            cmd,//当前使用的命令缓冲
+            0,//数据缓冲在列表中的首索引
+            2,//绑定数据缓冲的数量
+            pBuffers,//绑定数据缓冲的列表
+            offsetsVertex);//各个数据缓冲的偏移量
+    uint32_t size = CR + 1;//水面顶点的行列数，作为计算着色器任务的X、Y 尺寸
+    vkCmdDispatch(cmd, size, size, 1);//将计算任务派送到计算管线
 }
 
 
@@ -243,14 +243,14 @@ void TexLightObject::calSelfNormal(VkCommandBuffer &cmd,
 
     vkCmdBindDescriptorSets(cmd, VK_PIPELINE_BIND_POINT_COMPUTE, pipelineLayout, 0, 1, desSetPointer, 0, nullptr);
 
-    const VkDeviceSize offsetsVertex[2] = {0};    //顶点数据偏移量数组
+    const VkDeviceSize offsetsVertex[2] = {0};//顶点数据偏移量数组
     VkBuffer pBuffers[2] = {vertexDatabufCompute};//数据缓冲数组
-    vkCmdBindVertexBuffers(                       //将顶点数据与当前使用的命令缓冲绑定
-            cmd,                                  //当前使用的命令缓冲
-            0,                                    //数据缓冲在列表中的首索引
-            1,                                    //绑定数据缓冲的数量
-            pBuffers,                             //绑定数据缓冲的列表
-            offsetsVertex);                       //数据缓冲的偏移量
+    vkCmdBindVertexBuffers(//将顶点数据与当前使用的命令缓冲绑定
+            cmd,//当前使用的命令缓冲
+            0,//数据缓冲在列表中的首索引
+            1,//绑定数据缓冲的数量
+            pBuffers,//绑定数据缓冲的列表
+            offsetsVertex);//数据缓冲的偏移量
     uint32_t size = CR + 1;
     vkCmdDispatch(cmd, size, size, 1);
 }

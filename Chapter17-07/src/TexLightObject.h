@@ -1,62 +1,61 @@
 #ifndef VULKANEXBASE_TexLightObject_H
 #define VULKANEXBASE_TexLightObject_H
 
-#include <vulkan/vulkan.h>
-#include <string>
 #include "TextureManager.h"
+#include <string>
+#include <vulkan/vulkan.h>
 
-class TexLightObject
-{
+class TexLightObject {
 public:
-	VkDevice* devicePointer;
-	float* vdata;
-	int vCount;
-	float* pushConstantData;
+    VkDevice *devicePointer;
+    float *vdata;
+    int vCount;
+    float *pushConstantData;
 
-	int* indexData;
-	int indexCount;
-
-
-
-	VkBuffer vertexDatabuf;
-
-	VkDeviceMemory vertexDataMem;
-
-	VkDescriptorBufferInfo vertexDataBufferInfo;
+    int *indexData;
+    int indexCount;
 
 
+    VkBuffer vertexDatabuf;
 
-	VkBuffer vertexDatabufCompute;
+    VkDeviceMemory vertexDataMem;
 
-	VkDeviceMemory vertexDataMemCompute;
-
-	VkDescriptorBufferInfo vertexDataBufferInfoCompute;
-
-
-	VkBuffer vertexIndexDatabuf;
-
-	VkDeviceMemory vertexIndexDataMem;
+    VkDescriptorBufferInfo vertexDataBufferInfo;
 
 
-	void createVertexDataBuffer(int dataByteCount, VkDevice& device, VkPhysicalDeviceMemoryProperties& memoryroperties);
+    VkBuffer vertexDatabufCompute;
 
-	void createVertexDataBufferCompute(int dataByteCount, VkDevice &device, VkPhysicalDeviceMemoryProperties &memoryroperties);
+    VkDeviceMemory vertexDataMemCompute;
 
-	void createVertexIndexDataBuffer(int indexDataByteCount, VkDevice& device, VkPhysicalDeviceMemoryProperties& memoryroperties);
-
-	TexLightObject(float* vdataIn, int vdataByteCount, int vCountIn, int* indexDataIn, int indexDataByteCount, int indexCountIn, VkDevice& device, VkPhysicalDeviceMemoryProperties& memoryroperties);
-	~TexLightObject();
+    VkDescriptorBufferInfo vertexDataBufferInfoCompute;
 
 
-	void drawSelf(VkCommandBuffer& cmd, VkPipelineLayout& pipelineLayout, VkPipeline& pipeline, VkDescriptorSet* desSetPointer);
+    VkBuffer vertexIndexDatabuf;
 
-	void calSelfBD(VkCommandBuffer &cmd,
-		VkPipelineLayout &pipelineLayout, VkPipeline &pipeline,
-		VkDescriptorSet *desSetPointer);
+    VkDeviceMemory vertexIndexDataMem;
 
-	void calSelfNormal(VkCommandBuffer &cmd,
-		VkPipelineLayout &pipelineLayout, VkPipeline &pipeline,
-		VkDescriptorSet *desSetPointer);
+
+    void createVertexDataBuffer(int dataByteCount, VkDevice &device, VkPhysicalDeviceMemoryProperties &memoryroperties);
+
+    void createVertexDataBufferCompute(int dataByteCount, VkDevice &device, VkPhysicalDeviceMemoryProperties &memoryroperties);
+
+    void createVertexIndexDataBuffer(int indexDataByteCount, VkDevice &device, VkPhysicalDeviceMemoryProperties &memoryroperties);
+
+    TexLightObject(float *vdataIn, int vdataByteCount, int vCountIn, int *indexDataIn, int indexDataByteCount, int indexCountIn, VkDevice &device, VkPhysicalDeviceMemoryProperties &memoryroperties);
+    ~TexLightObject();
+
+
+    void drawSelf(VkCommandBuffer &cmd, VkPipelineLayout &pipelineLayout, VkPipeline &pipeline, VkDescriptorSet *desSetPointer);
+
+    void calSelfBD(VkCommandBuffer &cmd,
+                   VkPipelineLayout &pipelineLayout,
+                   VkPipeline &pipeline,
+                   VkDescriptorSet *desSetPointer);
+
+    void calSelfNormal(VkCommandBuffer &cmd,
+                       VkPipelineLayout &pipelineLayout,
+                       VkPipeline &pipeline,
+                       VkDescriptorSet *desSetPointer);
 };
 
 

@@ -20,13 +20,13 @@ void Flare::initFlare() {//初始化光晕元素列表的方法
     sFl.push_back((new SingleFlare(2, 1.28f, 1.0f, vector<float>{1.0f, 0.7f, 0.0f, 0.02f})));
     sFl.push_back((new SingleFlare(2, 3.20f, 1.3f, vector<float>{1.0f, 0.0f, 0.0f, 0.3f})));
 }
-void Flare::update(float lx, float ly) {                                                                                    //更新光晕元素位置和尺寸的方法
-    float currDis = (float) sqrt(lx * lx + ly * ly);                                                                        //计算光源在屏幕上的投影位置距屏幕中心点的距离
+void Flare::update(float lx, float ly) {//更新光晕元素位置和尺寸的方法
+    float currDis = (float) sqrt(lx * lx + ly * ly);//计算光源在屏幕上的投影位置距屏幕中心点的距离
     float currScale = Constant::SCALE_MIN + (Constant::SCALE_MAX - Constant::SCALE_MIN) * (1 - currDis / Constant::DIS_MAX);//计算尺寸缩放系数
-    for (auto ss: sFl)                                                                                                      //遍历各个光晕元素
+    for (auto ss: sFl)//遍历各个光晕元素
     {
-        ss->px = -ss->distance * lx;     //更新x 坐标
-        ss->py = ss->distance * ly;      //更新y 坐标
+        ss->px = -ss->distance * lx;//更新x 坐标
+        ss->py = ss->distance * ly;//更新y 坐标
         ss->bSize = ss->size * currScale;//更新尺寸
     }
 }

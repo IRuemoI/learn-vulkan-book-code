@@ -65,8 +65,7 @@ public:
                          ml[11 + lhsOffset] * mr[14 + rhsOffset] + ml[15 + lhsOffset] * mr[15 + rhsOffset]);
     }
 
-    static void multiplyMV(float *resultVec, int resultVecOffset, float *mlIn, int lhsMatOffset, float *vrIn,
-                           int rhsVecOffset) {
+    static void multiplyMV(float *resultVec, int resultVecOffset, float *mlIn, int lhsMatOffset, float *vrIn, int rhsVecOffset) {
         double ml[16];
         double vr[4];
         for (int i = 0; i < 16; i++) {
@@ -164,8 +163,7 @@ public:
         }
     }
 
-    static void frustumM(float *m, int offset, float left, float right, float bottom, float top, float near1,
-                         float far1) {
+    static void frustumM(float *m, int offset, float left, float right, float bottom, float top, float near1, float far1) {
         const float r_width = 1.0f / (right - left);
         const float r_height = 1.0f / (top - bottom);
         const float r_depth = 1.0f / (near1 - far1);
@@ -226,8 +224,7 @@ public:
         m[mOffset + 11] = 0.0f;
     }
 
-    static void setLookAtM(float *rm, int rmOffset, float eyeX, float eyeY, float eyeZ, float centerX, float centerY,
-                           float centerZ, float upX, float upY, float upZ) {
+    static void setLookAtM(float *rm, int rmOffset, float eyeX, float eyeY, float eyeZ, float centerX, float centerY, float centerZ, float upX, float upY, float upZ) {
         float fx = centerX - eyeX;
         float fy = centerY - eyeY;
         float fz = centerZ - eyeZ;

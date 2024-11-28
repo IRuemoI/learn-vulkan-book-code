@@ -224,14 +224,14 @@ void ShaderQueueSuit_NoDepth::createPipeline(VkDevice &device, VkRenderPass &ren
     rs.depthBiasClamp = 0;
     rs.depthBiasSlopeFactor = 0;
     rs.lineWidth = 1.0f;
-    VkPipelineColorBlendAttachmentState att_state[1];                      //管线颜色混合附件状态数组
-    att_state[0].colorWriteMask = 0xf;                                     //设置写入掩码
-    att_state[0].blendEnable = VK_TRUE;                                    //打开混合
-    att_state[0].alphaBlendOp = VK_BLEND_OP_ADD;                           //设置Alpha 通道混合方式
-    att_state[0].colorBlendOp = VK_BLEND_OP_ADD;                           //设置RGB 通道混合方式
-    att_state[0].srcColorBlendFactor = VK_BLEND_FACTOR_SRC_ALPHA;          //设置源颜色混合因子
+    VkPipelineColorBlendAttachmentState att_state[1];//管线颜色混合附件状态数组
+    att_state[0].colorWriteMask = 0xf;//设置写入掩码
+    att_state[0].blendEnable = VK_TRUE;//打开混合
+    att_state[0].alphaBlendOp = VK_BLEND_OP_ADD;//设置Alpha 通道混合方式
+    att_state[0].colorBlendOp = VK_BLEND_OP_ADD;//设置RGB 通道混合方式
+    att_state[0].srcColorBlendFactor = VK_BLEND_FACTOR_SRC_ALPHA;//设置源颜色混合因子
     att_state[0].dstColorBlendFactor = VK_BLEND_FACTOR_ONE_MINUS_SRC_ALPHA;//设置目标颜色混合因子
-    att_state[0].srcAlphaBlendFactor = VK_BLEND_FACTOR_SRC_ALPHA;          //设置源Alpha 混合因子
+    att_state[0].srcAlphaBlendFactor = VK_BLEND_FACTOR_SRC_ALPHA;//设置源Alpha 混合因子
     att_state[0].dstAlphaBlendFactor = VK_BLEND_FACTOR_ONE_MINUS_SRC_ALPHA;//设置目标Alpha 混合因子
     VkPipelineColorBlendStateCreateInfo cb;
     cb.sType = VK_STRUCTURE_TYPE_PIPELINE_COLOR_BLEND_STATE_CREATE_INFO;

@@ -3,7 +3,7 @@
 #extension GL_ARB_shading_language_420pack : enable
 
 //目前的实验其表明 必须是4的整数倍 否则奇怪现象
-layout (std140,set = 0, binding = 0) uniform bufferVals {
+layout (std140, set = 0, binding = 0) uniform bufferVals {
     float brightFactor;
 } myBufferVals;
 
@@ -14,7 +14,7 @@ layout (location = 0) out vec4 outColor;
 
 void main() {
 
-      vec4 cyColor=myBufferVals.brightFactor*texture(tex, inTexCoor, 0.0);
-      outColor=vec4(cyColor.rgb,1.0);
+    vec4 cyColor=myBufferVals.brightFactor*texture(tex, inTexCoor, 0.0);
+    outColor=vec4(cyColor.rgb, 1.0);
 
 }

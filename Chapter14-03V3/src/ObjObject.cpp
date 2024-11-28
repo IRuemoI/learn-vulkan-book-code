@@ -60,10 +60,10 @@ void ObjObject::drawSelf(VkCommandBuffer &cmd, VkPipelineLayout &pipelineLayout,
     vkCmdBindVertexBuffers(cmd, 0, 1, &(vertexDatabuf), offsetsVertex);
     float *mvp = isLight ? MatrixState3D::getFinalMatrixExternal(LightManager::lcpm) ://获取总变换矩阵
                          MatrixState3D::getFinalMatrix();
-    float *mm = MatrixState3D::getMMatrix();              //获取基本变换矩阵
-    memcpy(pushConstantData, mvp, sizeof(float) * 16);    //将总变换矩阵数据送入推送常量数据
+    float *mm = MatrixState3D::getMMatrix();//获取基本变换矩阵
+    memcpy(pushConstantData, mvp, sizeof(float) * 16);//将总变换矩阵数据送入推送常量数据
     memcpy(pushConstantData + 16, mm, sizeof(float) * 16);//将基本变换矩阵数据送入推送常量数据
     vkCmdPushConstants(cmd, pipelineLayout, VK_SHADER_STAGE_VERTEX_BIT,
                        0, sizeof(float) * 32, pushConstantData);//将推送常量数据送入推送常量
-    vkCmdDraw(cmd, vCount, 1, 0, 0);                            //执行绘制
+    vkCmdDraw(cmd, vCount, 1, 0, 0);//执行绘制
 }

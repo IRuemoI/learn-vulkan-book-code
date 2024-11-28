@@ -2,16 +2,16 @@
 #include <cmath>
 #include <vector>
 
-float *BallData::vdata;        //顶点数据数组首地址指针
-int BallData::dataByteCount;   //顶点数据所占总字节数
-int BallData::vCount;          //顶点数量
+float *BallData::vdata;//顶点数据数组首地址指针
+int BallData::dataByteCount;//顶点数据所占总字节数
+int BallData::vCount;//顶点数量
 float toRadians(float degree) {//角度转换成弧度的方法
     return (float) (degree * 3.1415926535898 / 180.0);
 }
-void BallData::genBallData(float angleSpan) {                               //生成球面上各个小三角形顶点数据的方法
-    const float r = 1.0f;                                                   //球的半径
-    std::vector<float> alVertix;                                            //存放顶点坐标值的vector
-    for (float vAngle = -90; vAngle < 90; vAngle = vAngle + angleSpan) {    //垂直方向切分
+void BallData::genBallData(float angleSpan) {//生成球面上各个小三角形顶点数据的方法
+    const float r = 1.0f;//球的半径
+    std::vector<float> alVertix;//存放顶点坐标值的vector
+    for (float vAngle = -90; vAngle < 90; vAngle = vAngle + angleSpan) {//垂直方向切分
         for (float hAngle = 0; hAngle <= 360; hAngle = hAngle + angleSpan) {//水平方向切分
             float x0 = (float) (r * cos(toRadians(vAngle)) * cos(toRadians(hAngle)));
             float y0 = (float) (r * cos(toRadians(vAngle)) * sin(toRadians(hAngle)));
@@ -45,13 +45,13 @@ void BallData::genBallData(float angleSpan) {                               //�
             alVertix.push_back(z3);
         }
     }
-    vCount = alVertix.size() / 3;                   //顶点的数量为坐标值数量的1/3，因为一个顶点有3个坐标分量
+    vCount = alVertix.size() / 3;//顶点的数量为坐标值数量的1/3，因为一个顶点有3个坐标分量
     dataByteCount = alVertix.size() * sizeof(float);//计算顶点数据总字节数
-    vdata = new float[alVertix.size()];             //创建存放顶点数据的数组
-    int index = 0;                                  //辅助数组索引
-    for (int i = 0; i < vCount; i++) {              //将顶点数据存储到数组中
-        vdata[index++] = alVertix[i * 3 + 0];       //保存顶点位置X分量
-        vdata[index++] = alVertix[i * 3 + 1];       //保存顶点位置Y分量
-        vdata[index++] = alVertix[i * 3 + 2];       //保存顶点位置Z分量
+    vdata = new float[alVertix.size()];//创建存放顶点数据的数组
+    int index = 0;//辅助数组索引
+    for (int i = 0; i < vCount; i++) {//将顶点数据存储到数组中
+        vdata[index++] = alVertix[i * 3 + 0];//保存顶点位置X分量
+        vdata[index++] = alVertix[i * 3 + 1];//保存顶点位置Y分量
+        vdata[index++] = alVertix[i * 3 + 2];//保存顶点位置Z分量
     }
 }

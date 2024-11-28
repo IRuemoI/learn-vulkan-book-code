@@ -2,8 +2,7 @@
 #include <vector>
 #include <vulkan/vulkan.h>
 
-class ShaderQueueSuit_CommonTexLight
-{
+class ShaderQueueSuit_CommonTexLight {
 private:
     VkBuffer uniformBuf;
     VkDescriptorBufferInfo uniformBufferInfo;
@@ -18,23 +17,23 @@ private:
     //管线缓冲
     VkPipelineCache pipelineCache;
     //设备
-    VkDevice* devicePointer;
+    VkDevice *devicePointer;
     //描述池
     VkDescriptorPool descPool;
 
-    void createUniformBuffer(VkDevice& device,VkPhysicalDeviceMemoryProperties& memoryProperties);
-    void destroyUniformBuffer(VkDevice& device);
-    void createPipelineLayout(VkDevice& device);
-    void destroyPipelineLayout(VkDevice& device);
-    void initDescriptorSet(VkDevice& device);
-    void createShaderModule(VkDevice& device);
-    void destroyShaderModule(VkDevice& device);
+    void createUniformBuffer(VkDevice &device, VkPhysicalDeviceMemoryProperties &memoryProperties);
+    void destroyUniformBuffer(VkDevice &device);
+    void createPipelineLayout(VkDevice &device);
+    void destroyPipelineLayout(VkDevice &device);
+    void initDescriptorSet(VkDevice &device);
+    void createShaderModule(VkDevice &device);
+    void destroyShaderModule(VkDevice &device);
     //初始化顶点着色器输入变量信息
     void initVertexAttributeInfo();
-    void createPipeline(VkDevice& device,VkRenderPass& renderPass);
-    void destroyPipeline(VkDevice& device);
+    void createPipeline(VkDevice &device, VkRenderPass &renderPass);
+    void destroyPipeline(VkDevice &device);
 
-  public:
+public:
     VkDeviceMemory memUniformBuf;
     int bufferByteCount;
     //Uniform写入用描述集
@@ -46,6 +45,6 @@ private:
     //管线
     VkPipeline pipeline;
 
-    ShaderQueueSuit_CommonTexLight(VkDevice* deviceIn,VkRenderPass& renderPass,VkPhysicalDeviceMemoryProperties& memoryProperties);
+    ShaderQueueSuit_CommonTexLight(VkDevice *deviceIn, VkRenderPass &renderPass, VkPhysicalDeviceMemoryProperties &memoryProperties);
     ~ShaderQueueSuit_CommonTexLight();
 };

@@ -97,9 +97,9 @@ void ShaderQueueSuit_Color::createPipeline(VkDevice &device, VkRenderPass &rende
     vi.pVertexAttributeDescriptions = vertexAttributes;
     VkPipelineInputAssemblyStateCreateInfo ia;//管线图元组装状态创建信息结构体实例
     ia.sType = VK_STRUCTURE_TYPE_PIPELINE_INPUT_ASSEMBLY_STATE_CREATE_INFO;
-    ia.pNext = nullptr;                            //自定义数据的指针
-    ia.flags = 0;                                  //供将来使用的标志
-    ia.primitiveRestartEnable = VK_FALSE;          //关闭图元重启
+    ia.pNext = nullptr;//自定义数据的指针
+    ia.flags = 0;//供将来使用的标志
+    ia.primitiveRestartEnable = VK_FALSE;//关闭图元重启
     ia.topology = VK_PRIMITIVE_TOPOLOGY_POINT_LIST;//采用点图元列表模式
     VkPipelineRasterizationStateCreateInfo rs;
     rs.sType = VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_STATE_CREATE_INFO;

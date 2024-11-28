@@ -120,16 +120,16 @@ void TextureManager::init_SPEC_2DArray_Textures(std::string texName, VkDevice &d
     vkMapMemory(device, stagingMemory, 0, memReqs.size, 0, (void **) (&pData));
     memcpy(pData, ctdo->data, memReqs.size);
     vkUnmapMemory(device, stagingMemory);
-    VkImageCreateInfo image_create_info = {};                     //构建图像创建信息结构体实例
+    VkImageCreateInfo image_create_info = {};//构建图像创建信息结构体实例
     image_create_info.sType = VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO;//结构体的类型
-    image_create_info.pNext = nullptr;                            //自定义数据的指针
-    image_create_info.imageType = VK_IMAGE_TYPE_2D;               //图像类型
-    image_create_info.format = format;                            //图像像素格式
-    image_create_info.extent.width = ctdo->width;                 //图像宽度
-    image_create_info.extent.height = ctdo->height;               //图像高度
-    image_create_info.extent.depth = 1;                           //图像深度
-    image_create_info.mipLevels = 1;                              //图像 mipmap 级数
-    image_create_info.arrayLayers = ctdo->length;                 //图像数组层数量
+    image_create_info.pNext = nullptr;//自定义数据的指针
+    image_create_info.imageType = VK_IMAGE_TYPE_2D;//图像类型
+    image_create_info.format = format;//图像像素格式
+    image_create_info.extent.width = ctdo->width;//图像宽度
+    image_create_info.extent.height = ctdo->height;//图像高度
+    image_create_info.extent.depth = 1;//图像深度
+    image_create_info.mipLevels = 1;//图像 mipmap 级数
+    image_create_info.arrayLayers = ctdo->length;//图像数组层数量
     image_create_info.samples = VK_SAMPLE_COUNT_1_BIT;
     image_create_info.tiling = VK_IMAGE_TILING_OPTIMAL;
     image_create_info.initialLayout = VK_IMAGE_LAYOUT_UNDEFINED;
@@ -157,11 +157,11 @@ void TextureManager::init_SPEC_2DArray_Textures(std::string texName, VkDevice &d
     textureMemoryList[texName] = textureMemory;
     result = vkBindImageMemory(device, textureImage, textureMemory, 0);
     assert(result == VK_SUCCESS);
-    VkBufferImageCopy bufferCopyRegion = {};                                 //构建缓冲图像拷贝结构体实例
+    VkBufferImageCopy bufferCopyRegion = {};//构建缓冲图像拷贝结构体实例
     bufferCopyRegion.imageSubresource.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;//使用方面
-    bufferCopyRegion.imageSubresource.mipLevel = 0;                          //mipmap 级别
-    bufferCopyRegion.imageSubresource.baseArrayLayer = 0;                    //基础数组层
-    bufferCopyRegion.imageSubresource.layerCount = ctdo->length;             //数组层的数量
+    bufferCopyRegion.imageSubresource.mipLevel = 0;//mipmap 级别
+    bufferCopyRegion.imageSubresource.baseArrayLayer = 0;//基础数组层
+    bufferCopyRegion.imageSubresource.layerCount = ctdo->length;//数组层的数量
     bufferCopyRegion.imageExtent.width = ctdo->width;
     bufferCopyRegion.imageExtent.height = ctdo->height;
     bufferCopyRegion.imageExtent.depth = 1;
@@ -200,10 +200,10 @@ void TextureManager::init_SPEC_2DArray_Textures(std::string texName, VkDevice &d
     vkDestroyBuffer(device, stagingBuffer, nullptr);
     vkFreeMemory(device, stagingMemory, nullptr);
     vkDestroyFence(device, copyFence, nullptr);
-    VkImageViewCreateInfo view_info = {};                      //构建图像视图创建信息结构体实例
+    VkImageViewCreateInfo view_info = {};//构建图像视图创建信息结构体实例
     view_info.sType = VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO;//结构的类型
-    view_info.pNext = nullptr;                                 //自定义数据的指针
-    view_info.viewType = VK_IMAGE_VIEW_TYPE_2D_ARRAY;          //图像视图的类型
+    view_info.pNext = nullptr;//自定义数据的指针
+    view_info.viewType = VK_IMAGE_VIEW_TYPE_2D_ARRAY;//图像视图的类型
     view_info.format = VK_FORMAT_R8G8B8A8_UNORM;
     view_info.components.r = VK_COMPONENT_SWIZZLE_R;
     view_info.components.g = VK_COMPONENT_SWIZZLE_G;

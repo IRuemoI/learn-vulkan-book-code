@@ -4,10 +4,10 @@
 #include "ShaderQueueSuit_Light.h"
 #include "ShaderQueueSuit_PreProcess.h"
 #include <GLFW/glfw3.h>
-#include <cstdlib>        //标准库标准通用工具函数
-#include <functional>     //标准库与函数对象相关的模板类和函数
-#include <iostream>       //标准库输入输出头文件
-#include <stdexcept>      //标准库异常处理文件
+#include <cstdlib>//标准库标准通用工具函数
+#include <functional>//标准库与函数对象相关的模板类和函数
+#include <iostream>//标准库输入输出头文件
+#include <stdexcept>//标准库异常处理文件
 #include <vulkan/vulkan.h>//引用Vulkan的头文件
 
 #define SELF_COLOR_COUNT 3
@@ -17,7 +17,7 @@ public:
     static constexpr int WIDTH = 800;
     static constexpr int HEIGHT = 600;
 
-    static uint32_t screenWidth; // 屏幕宽度
+    static uint32_t screenWidth;// 屏幕宽度
     static uint32_t screenHeight;// 屏幕高度
 
     // 窗口辅助结构体
@@ -119,7 +119,7 @@ public:
     void initVulkan();// 初始化Vulkan
     void run();
     void mainLoop();// 图形程序渲染流程主循环
-    void cleanup(); // 后续清理工作
+    void cleanup();// 后续清理工作
     void destroyWindow() const;
     static void frameBufferResizeCallback(GLFWwindow *window, int width, int height);
     std::vector<const char *> static get_required_extensions();

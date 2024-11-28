@@ -8,11 +8,11 @@ int ObjectData::vCount;
 void ObjectData::genVertexData() {
     std::vector<float> alVertix;
     std::vector<float> alTexCoor;
-    float Y_MAX = 1.5f;                //Y的最大值
-    float Y_MIN = -1.5f;               //Y的最小值
-    int FD = 6;                        //一面中矩形个数
-    float hw = 0.575f;                 //矩形宽度的一半
-    float yStart = Y_MIN;              //起始Y坐标
+    float Y_MAX = 1.5f;//Y的最大值
+    float Y_MIN = -1.5f;//Y的最小值
+    int FD = 6;//一面中矩形个数
+    float hw = 0.575f;//矩形宽度的一半
+    float yStart = Y_MIN;//起始Y坐标
     float ySpan = (Y_MAX - Y_MIN) / FD;//Y坐标的步进
     for (int i = 0; i < FD; i++) {
         float x1 = -hw;
@@ -181,11 +181,11 @@ void ObjectData::genVertexData() {
         alTexCoor.push_back(1);
         alTexCoor.push_back(0);
     }
-    vCount = FD * 4 * 6;                       //计算顶点数量
+    vCount = FD * 4 * 6;//计算顶点数量
     dataByteCount = vCount * 5 * sizeof(float);//计算数据所占字节数
-    vdata = new float[vCount * 5];             //创建存放数据的数组
-    int index = 0;                             //辅助索引
-    for (int i = 0; i < vCount; i++) {         //将顶点数据和纹理坐标数据存储到数组中
+    vdata = new float[vCount * 5];//创建存放数据的数组
+    int index = 0;//辅助索引
+    for (int i = 0; i < vCount; i++) {//将顶点数据和纹理坐标数据存储到数组中
         vdata[index++] = alVertix[i * 3 + 0];
         vdata[index++] = alVertix[i * 3 + 1];
         vdata[index++] = alVertix[i * 3 + 2];

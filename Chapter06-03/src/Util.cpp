@@ -35,7 +35,7 @@ void mouse_button_callback(GLFWwindow *window, int button, int action, int mods)
         printf("鼠标按下\n");
     } else if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_RELEASE) {
         if (left_mouse_down) {
-            if (isClick) {                                        //若点击标志为 true
+            if (isClick) {//若点击标志为 true
                 if (preX < (int) VulkanDemoApp::screenWidth / 2) {//点击位置在屏幕左侧
                     VulkanDemoApp::samplerType = (++VulkanDemoApp::samplerType % 4);
                 } else {//点击位置在屏幕右侧

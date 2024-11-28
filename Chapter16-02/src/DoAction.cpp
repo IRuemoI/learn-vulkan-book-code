@@ -1,24 +1,21 @@
 #include "DoAction.h"
-DoAction::DoAction(Robot *robotIn)
-{
-    robot=robotIn;
+DoAction::DoAction(Robot *robotIn) {
+    robot = robotIn;
     ActionGenerator::genData();
-    currAction=ActionGenerator::acVector[currActionIndex];	
+    currAction = ActionGenerator::acVector[currActionIndex];
 }
-DoAction::~DoAction()
-{
+DoAction::~DoAction() {
 }
-void DoAction::run()
-{
+void DoAction::run() {
     robot->backToInit();
     if (currStep >= currAction->totalStep) {
         currActionIndex = (currActionIndex + 1) % ActionGenerator::acVector.size();
         currAction = ActionGenerator::acVector[currActionIndex];
         currStep = 0;
     }
-    for (float * ad:currAction->data) {
+    for (float *ad: currAction->data) {
         int partIndex = (int) ad[0];
-        int aType = (int) ad[1]; 
+        int aType = (int) ad[1];
         if (aType == 0) {
             float xStart = ad[2];
             float yStart = ad[3];
@@ -30,8 +27,7 @@ void DoAction::run()
             float currY = yStart + (yEnd - yStart) * currStep / currAction->totalStep;
             float currZ = zStart + (zEnd - zStart) * currStep / currAction->totalStep;
             robot->bpVector[partIndex]->translate(currX, currY, currZ);
-        }
-        else if (aType == 1) {
+        } else if (aType == 1) {
             float startAngle = ad[2];
             float endAngle = ad[3];
             float currAngle =
@@ -43,6 +39,6 @@ void DoAction::run()
         }
     }
     robot->updateState();
-	robot->calLowest();//调用calLowest 方法逐层级联计算最低控制点
-    currStep++;  
+    robot->calLowest();//调用calLowest 方法逐层级联计算最低控制点
+    currStep++;
 }

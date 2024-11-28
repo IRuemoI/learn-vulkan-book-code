@@ -247,7 +247,7 @@ add_subdirectory(Basic_chapter_10b_PushConstant) # 黑屏
 #add_subdirectory(Chapter15-08)
 
 #add_subdirectory(Chapter16-01)
-add_subdirectory(Chapter16-02) #未修复
+#add_subdirectory(Chapter16-02) #未修复
 #add_subdirectory(Chapter16-03)
 #add_subdirectory(Chapter16-04)
 #add_subdirectory(Chapter16-05)
@@ -258,7 +258,7 @@ add_subdirectory(Chapter16-02) #未修复
 #add_subdirectory(Chapter17-04)
 #add_subdirectory(Chapter17-05)
 #add_subdirectory(Chapter17-06)
-add_subdirectory(Chapter17-07) #未修复
+#add_subdirectory(Chapter17-07) #未修复
 #add_subdirectory(Chapter17-08)
 #add_subdirectory(Chapter17-09)
 #add_subdirectory(Chapter17-10)

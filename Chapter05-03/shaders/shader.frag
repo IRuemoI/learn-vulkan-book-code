@@ -14,12 +14,12 @@ vec4 genBoardColor(vec3 position)
     int i = int((position.x + 1.0)/span);
     int j = int((position.y + 1.0)/span);
     int k = int((position.z + 1.0)/span);
-    int whichColor = int(mod(float(i+j+k),2.0));
-    if(whichColor == 1) {
-        color = vec4(0.678,0.231,0.129,1.0);
+    int whichColor = int(mod(float(i+j+k), 2.0));
+    if (whichColor == 1) {
+        color = vec4(0.678, 0.231, 0.129, 1.0);
     }
     else {
-        color = vec4(1.0,1.0,1.0,1.0);
+        color = vec4(1.0, 1.0, 1.0, 1.0);
     }
     return color;
 }

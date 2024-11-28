@@ -18,12 +18,12 @@ vec4 genBoardColor(vec3 position)
     int j = int((position.y + 10.0)/spanh);//当前片元位置小方块的层数
 
     //计算当前片元行数、层数、列数的和并对2取模
-    int whichColor = int(mod(float(i+j),2.0));
-    if(whichColor == 1) {//奇数时为红色
-        color = vec4(0.678,0.231,0.129,1.0);//红色
+    int whichColor = int(mod(float(i+j), 2.0));
+    if (whichColor == 1) { //奇数时为红色
+        color = vec4(0.678, 0.231, 0.129, 1.0);//红色
     }
-    else {//偶数时为白色
-        color = vec4(1.0,1.0,1.0,1.0);//白色
+    else { //偶数时为白色
+        color = vec4(1.0, 1.0, 1.0, 1.0);//白色
     }
     return color;
 }

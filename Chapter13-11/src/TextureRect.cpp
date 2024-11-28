@@ -96,18 +96,18 @@ void TextureRect::createVertexIndexDataBuffer(int indexDataByteCount, VkDevice &
     vertexIndexDataBufferInfo.offset = 0;
     vertexIndexDataBufferInfo.range = mem_reqs.size;
 }
-void TextureRect::calVerticesNormalAndTangent() {         //计算顶点坐标与法向量的方法
-    for (int i = 0; i < vCount; i++) {                    //遍历所有顶点
+void TextureRect::calVerticesNormalAndTangent() {//计算顶点坐标与法向量的方法
+    for (int i = 0; i < vCount; i++) {//遍历所有顶点
         vdataForCal[i * 3 + 0] = vdataForTrans[i * 8 + 0];//复制顶点坐标x 分量
-        vdataForCal[i * 3 + 1] =                          //计算顶点坐标y 分量
+        vdataForCal[i * 3 + 1] =//计算顶点坐标y 分量
                 findHeight(vdataForTrans[i * 8 + 0], vdataForTrans[i * 8 + 2]);
         vdataForCal[i * 3 + 2] = vdataForTrans[i * 8 + 2];//复制顶点坐标z 分量
     }
     CalNormal::calNormal(vdataForTrans, vCount, indexData, indexCount, ndataForCal);//计算顶点法向量
 }
 float TextureRect::findHeight(float x, float z) {//计算3 个波影响后顶点高度值
-    float result = 0;                            //存放结果的辅助变量
-    float distance1 = (float) sqrt(              //计算顶点距离1 号波振源位置的距离
+    float result = 0;//存放结果的辅助变量
+    float distance1 = (float) sqrt(//计算顶点距离1 号波振源位置的距离
             (x - zero1[0]) * (x - zero1[0]) + (z - zero1[2]) * (z - zero1[2]));
     float distance2 = (float) sqrt(//计算顶点距离2 号波振源位置的距离
             (x - zero2[0]) * (x - zero2[0]) + (z - zero2[2]) * (z - zero2[2]));

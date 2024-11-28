@@ -6,7 +6,7 @@ public:
     VkDevice *devicePointer;
     float *vdata;
     int vCount;
-	float *pushConstantData;
+    float *pushConstantData;
     VkBuffer vertexDatabuf;
     VkDeviceMemory vertexDataMem;
     VkDescriptorBufferInfo vertexDataBufferInfo;

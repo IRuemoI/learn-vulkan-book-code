@@ -114,15 +114,15 @@ void MatrixState3D::fromPtoPreP//将摄像机坐标系中坐标变换为世界�
     helpArr[0] = x;
     helpArr[1] = y;
     helpArr[2] = z;
-    helpArr[3] = 1;                                              //将需要变换的点坐标转存进辅助数组
+    helpArr[3] = 1;//将需要变换的点坐标转存进辅助数组
     Matrix::multiplyMV(result, 0, invertMvMatrix, 0, helpArr, 0);//求变换之前世界坐标系中的坐标
 }
 Vector3f *MatrixState3D::fromGToO(Vector3f *v, float *m) {//将世界坐标系中坐标变换为物体坐标系中坐标
-    Matrix::invertM(invertMMatrix, 0, m, 0);              //求基本变换矩阵的逆矩阵
+    Matrix::invertM(invertMMatrix, 0, m, 0);//求基本变换矩阵的逆矩阵
     helpArr[0] = v->x;
     helpArr[1] = v->y;
     helpArr[2] = v->z;
-    helpArr[3] = 1;                                                  //将需变换的点坐标转存进辅助数组
-    Matrix::multiplyMV(helpResult, 0, invertMMatrix, 0, helpArr, 0); //求变换之前物体坐标系中的坐标
+    helpArr[3] = 1;//将需变换的点坐标转存进辅助数组
+    Matrix::multiplyMV(helpResult, 0, invertMMatrix, 0, helpArr, 0);//求变换之前物体坐标系中的坐标
     return new Vector3f(helpResult[0], helpResult[1], helpResult[2]);//返回变换后物体坐标系中的坐标
 }

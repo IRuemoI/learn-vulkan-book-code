@@ -8,8 +8,8 @@ public:
     static float cx;
     static float cy;
     static float cz;
-    static float mProjMatrix[16];     //投影矩阵
-    static float mVMatrix[16];        //摄像机矩阵
+    static float mProjMatrix[16];//投影矩阵
+    static float mVMatrix[16];//摄像机矩阵
     static float vulkanClipMatrix[16];//剪裁空间矩阵 X不变 Y置反 Z减半
 
     static void setInitStack(float *currMatrix);//初始化矩阵

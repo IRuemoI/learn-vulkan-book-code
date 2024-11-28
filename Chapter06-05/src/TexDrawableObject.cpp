@@ -62,10 +62,10 @@ void TexDrawableObject::drawSelf(VkCommandBuffer &cmd, VkPipelineLayout &pipelin
             1,
             &(vertexDatabuf),
             offsetsVertex);
-    float *mvp = MatrixState3D::getFinalMatrix();                                                                                      //获取最终变换矩阵
-    memcpy(pushConstantDataVertex, mvp, sizeof(float) * 16);                                                                           //将最终变换矩阵数据送入推送常量数据
-    vkCmdPushConstants(cmd, pipelineLayout, VK_SHADER_STAGE_VERTEX_BIT, 0, sizeof(float) * 16, pushConstantDataVertex);                //将最终变换矩阵数据送入推送常量
-    pushConstantDataFrag[0] = lodLevel;                                                                                                //纹理采样细节级别数据
+    float *mvp = MatrixState3D::getFinalMatrix();//获取最终变换矩阵
+    memcpy(pushConstantDataVertex, mvp, sizeof(float) * 16);//将最终变换矩阵数据送入推送常量数据
+    vkCmdPushConstants(cmd, pipelineLayout, VK_SHADER_STAGE_VERTEX_BIT, 0, sizeof(float) * 16, pushConstantDataVertex);//将最终变换矩阵数据送入推送常量
+    pushConstantDataFrag[0] = lodLevel;//纹理采样细节级别数据
     vkCmdPushConstants(cmd, pipelineLayout, VK_SHADER_STAGE_FRAGMENT_BIT, sizeof(float) * 16, sizeof(float) * 1, pushConstantDataFrag);//将纹理采样细节级别数据送入推送常量
-    vkCmdDraw(cmd, vCount, 1, 0, 0);                                                                                                   //执行绘制
+    vkCmdDraw(cmd, vCount, 1, 0, 0);//执行绘制
 }

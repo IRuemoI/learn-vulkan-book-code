@@ -19,7 +19,7 @@ void PlanePosition::initInstanceData() {
         curPosition.push_back(xPos);//x位置
         curPosition.push_back(yPos);//y位置
         curPosition.push_back(zPos);//z位置
-        curPosition.push_back(1);   //当前姿态（上升下降）
+        curPosition.push_back(1);//当前姿态（上升下降）
     }
 }
 void PlanePosition::update() {

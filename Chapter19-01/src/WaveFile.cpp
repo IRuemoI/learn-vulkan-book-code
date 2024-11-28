@@ -132,7 +132,7 @@ HRESULT CWaveFile::OpenFromMemory(BYTE *pbData, ULONG ulDataSize, WAVEFORMATEX *
 //       update m_ckRiff, and m_pwfx.
 //-----------------------------------------------------------------------------
 HRESULT CWaveFile::ReadMMIO() {
-    MMCKINFO ckIn;              // chunk info. for general use.
+    MMCKINFO ckIn;// chunk info. for general use.
     PCMWAVEFORMAT pcmWaveFormat;// Temp PCM structure to load in.
 
     m_pwfx = nullptr;

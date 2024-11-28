@@ -26,16 +26,16 @@ public:
     // 删除描述符池
     void destroyDescriptorPool();
 
-    // Create Descriptor set associated resources before creating the descriptor set
+    // 在创建描述符集之前创建描述符集的关联资源
     virtual void createDescriptorResources() = 0;
 
     // 从描述符池分配的内存中创建描述符集，并将描述符集信息更新到描述符池中
     virtual void createDescriptorSet(bool useTexture) = 0;
     void destroyDescriptorSet();
 
-    // Creates the pipeline layout to inject into the pipeline
+    // 创建流水线布局，注入流水线中
     virtual void createPipelineLayout() = 0;
-    // Destroys the create pipelineLayout
+    // 销毁已经创建的流水线布局
     void destroyPipelineLayouts();
 
 public:

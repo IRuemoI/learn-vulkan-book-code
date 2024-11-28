@@ -46,41 +46,41 @@ void ShaderQueueSuit_CommonTex::destroyUniformBuffer(VkDevice &device) {
     vkDestroyBuffer(device, uniformBuf, nullptr);
     vkFreeMemory(device, memUniformBuf, nullptr);
 }
-void ShaderQueueSuit_CommonTex::createPipelineLayout(VkDevice &device) {  //创建管线布局的方法
-    VkDescriptorSetLayoutBinding layout_bindings[2];                      //描述集布局绑定数组
-    layout_bindings[0].binding = 0;                                       //此绑定的绑定点编号为 0
+void ShaderQueueSuit_CommonTex::createPipelineLayout(VkDevice &device) {//创建管线布局的方法
+    VkDescriptorSetLayoutBinding layout_bindings[2];//描述集布局绑定数组
+    layout_bindings[0].binding = 0;//此绑定的绑定点编号为 0
     layout_bindings[0].descriptorType = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;//描述类型
-    layout_bindings[0].descriptorCount = 1;                               //描述数量
-    layout_bindings[0].stageFlags = VK_SHADER_STAGE_FRAGMENT_BIT;         //目标着色器阶段
+    layout_bindings[0].descriptorCount = 1;//描述数量
+    layout_bindings[0].stageFlags = VK_SHADER_STAGE_FRAGMENT_BIT;//目标着色器阶段
     layout_bindings[0].pImmutableSamplers = nullptr;
     layout_bindings[1].binding = 1;//此绑定的绑定点编号为 1
     layout_bindings[1].descriptorType = VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;
-    layout_bindings[1].descriptorCount = 1;                      //描述数量
+    layout_bindings[1].descriptorCount = 1;//描述数量
     layout_bindings[1].stageFlags = VK_SHADER_STAGE_FRAGMENT_BIT;//目标着色器阶段
     layout_bindings[1].pImmutableSamplers = nullptr;
-    VkDescriptorSetLayoutCreateInfo descriptor_layout = {};                                                //构建描述集布局创建信息结构体实例
-    descriptor_layout.sType = VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_CREATE_INFO;                         //结构体类型
-    descriptor_layout.pNext = nullptr;                                                                     //自定义数据的指针
-    descriptor_layout.bindingCount = 2;                                                                    //描述集布局绑定的数量
-    descriptor_layout.pBindings = layout_bindings;                                                         //描述集布局绑定数组
-    descLayouts.resize(NUM_DESCRIPTOR_SETS);                                                               //调整描述集布局列表尺寸
+    VkDescriptorSetLayoutCreateInfo descriptor_layout = {};//构建描述集布局创建信息结构体实例
+    descriptor_layout.sType = VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_CREATE_INFO;//结构体类型
+    descriptor_layout.pNext = nullptr;//自定义数据的指针
+    descriptor_layout.bindingCount = 2;//描述集布局绑定的数量
+    descriptor_layout.pBindings = layout_bindings;//描述集布局绑定数组
+    descLayouts.resize(NUM_DESCRIPTOR_SETS);//调整描述集布局列表尺寸
     VkResult result = vkCreateDescriptorSetLayout(device, &descriptor_layout, nullptr, descLayouts.data());//创建描述集布局
-    assert(result == VK_SUCCESS);                                                                          //检查描述集布局创建是否成功
-    const unsigned push_constant_range_count = 1;                                                          //推送常量范围实例数量
-    VkPushConstantRange push_constant_ranges[push_constant_range_count] = {};                              //推送常量范围数组
-    push_constant_ranges[0].stageFlags = VK_SHADER_STAGE_VERTEX_BIT;                                       //着色器阶段
-    push_constant_ranges[0].offset = 0;                                                                    //起始偏移量
-    push_constant_ranges[0].size = sizeof(float) * 16;                                                     //数据字节数
-    VkPipelineLayoutCreateInfo pPipelineLayoutCreateInfo = {};                                             //构建管线布局创建信息结构体实例
-    pPipelineLayoutCreateInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_LAYOUT_CREATE_INFO;                       //结构体类型
-    pPipelineLayoutCreateInfo.pNext = nullptr;                                                             //自定义数据的指针
+    assert(result == VK_SUCCESS);//检查描述集布局创建是否成功
+    const unsigned push_constant_range_count = 1;//推送常量范围实例数量
+    VkPushConstantRange push_constant_ranges[push_constant_range_count] = {};//推送常量范围数组
+    push_constant_ranges[0].stageFlags = VK_SHADER_STAGE_VERTEX_BIT;//着色器阶段
+    push_constant_ranges[0].offset = 0;//起始偏移量
+    push_constant_ranges[0].size = sizeof(float) * 16;//数据字节数
+    VkPipelineLayoutCreateInfo pPipelineLayoutCreateInfo = {};//构建管线布局创建信息结构体实例
+    pPipelineLayoutCreateInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_LAYOUT_CREATE_INFO;//结构体类型
+    pPipelineLayoutCreateInfo.pNext = nullptr;//自定义数据的指针
     pPipelineLayoutCreateInfo.pushConstantRangeCount =
-            push_constant_range_count;                                                            //推送常量范围的数量
-    pPipelineLayoutCreateInfo.pPushConstantRanges = push_constant_ranges;                         //推送常量范围的列表
-    pPipelineLayoutCreateInfo.setLayoutCount = NUM_DESCRIPTOR_SETS;                               //描述集布局的数量
-    pPipelineLayoutCreateInfo.pSetLayouts = descLayouts.data();                                   //描述集布局列表
+            push_constant_range_count;//推送常量范围的数量
+    pPipelineLayoutCreateInfo.pPushConstantRanges = push_constant_ranges;//推送常量范围的列表
+    pPipelineLayoutCreateInfo.setLayoutCount = NUM_DESCRIPTOR_SETS;//描述集布局的数量
+    pPipelineLayoutCreateInfo.pSetLayouts = descLayouts.data();//描述集布局列表
     result = vkCreatePipelineLayout(device, &pPipelineLayoutCreateInfo, nullptr, &pipelineLayout);//创建管线布局
-    assert(result == VK_SUCCESS);                                                                 //检查创建是否成功
+    assert(result == VK_SUCCESS);//检查创建是否成功
 }
 void ShaderQueueSuit_CommonTex::destroyPipelineLayout(VkDevice &device) {
     for (int i = 0; i < NUM_DESCRIPTOR_SETS; i++) {
@@ -88,58 +88,58 @@ void ShaderQueueSuit_CommonTex::destroyPipelineLayout(VkDevice &device) {
     }
     vkDestroyPipelineLayout(device, pipelineLayout, nullptr);
 }
-void ShaderQueueSuit_CommonTex::initDescriptorSet(VkDevice &device) {                      //初始化描述集的方法
-    VkDescriptorPoolSize type_count[2];                                                    //描述集池尺寸实例数组
-    type_count[0].type = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;                                //第 1 个描述类型
-    type_count[0].descriptorCount = TextureManager::texNames.size();                       //第 1 个描述数量
-    type_count[1].type = VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;                        //第 2 个描述类型
-    type_count[1].descriptorCount = TextureManager::texNames.size();                       //第 2 个描述数量
-    VkDescriptorPoolCreateInfo descriptor_pool = {};                                       //构建描述集池创建信息结构体实例
-    descriptor_pool.sType = VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO;                 //结构体类型
-    descriptor_pool.pNext = nullptr;                                                       //自定义数据的指针
-    descriptor_pool.maxSets = TextureManager::texNames.size();                             //描述集最大数量
-    descriptor_pool.poolSizeCount = 2;                                                     //描述集池尺寸实例数量
-    descriptor_pool.pPoolSizes = type_count;                                               //描述集池尺寸实例数组
+void ShaderQueueSuit_CommonTex::initDescriptorSet(VkDevice &device) {//初始化描述集的方法
+    VkDescriptorPoolSize type_count[2];//描述集池尺寸实例数组
+    type_count[0].type = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;//第 1 个描述类型
+    type_count[0].descriptorCount = TextureManager::texNames.size();//第 1 个描述数量
+    type_count[1].type = VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;//第 2 个描述类型
+    type_count[1].descriptorCount = TextureManager::texNames.size();//第 2 个描述数量
+    VkDescriptorPoolCreateInfo descriptor_pool = {};//构建描述集池创建信息结构体实例
+    descriptor_pool.sType = VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO;//结构体类型
+    descriptor_pool.pNext = nullptr;//自定义数据的指针
+    descriptor_pool.maxSets = TextureManager::texNames.size();//描述集最大数量
+    descriptor_pool.poolSizeCount = 2;//描述集池尺寸实例数量
+    descriptor_pool.pPoolSizes = type_count;//描述集池尺寸实例数组
     VkResult result = vkCreateDescriptorPool(device, &descriptor_pool, nullptr, &descPool);//创建描述集池
-    assert(result == VK_SUCCESS);                                                          //检查描述集池创建是否成功
-    std::vector<VkDescriptorSetLayout> layouts;                                            //描述集布局列表
-    for (int i = 0; i < TextureManager::texNames.size(); i++) {                            //遍历所有纹理
-        layouts.push_back(descLayouts[0]);                                                 //向列表中添加指定描述集布局
+    assert(result == VK_SUCCESS);//检查描述集池创建是否成功
+    std::vector<VkDescriptorSetLayout> layouts;//描述集布局列表
+    for (int i = 0; i < TextureManager::texNames.size(); i++) {//遍历所有纹理
+        layouts.push_back(descLayouts[0]);//向列表中添加指定描述集布局
     }
-    VkDescriptorSetAllocateInfo alloc_info[1];                            //构建描述集分配信息结构体实例数组
-    alloc_info[0].sType = VK_STRUCTURE_TYPE_DESCRIPTOR_SET_ALLOCATE_INFO; //结构体类型
-    alloc_info[0].pNext = nullptr;                                        //自定义数据的指针
-    alloc_info[0].descriptorPool = descPool;                              //指定描述集池
-    alloc_info[0].descriptorSetCount = TextureManager::texNames.size();   //描述集数量
-    alloc_info[0].pSetLayouts = layouts.data();                           //描述集布局列表
-    descSet.resize(TextureManager::texNames.size());                      //调整描述集列表尺寸
+    VkDescriptorSetAllocateInfo alloc_info[1];//构建描述集分配信息结构体实例数组
+    alloc_info[0].sType = VK_STRUCTURE_TYPE_DESCRIPTOR_SET_ALLOCATE_INFO;//结构体类型
+    alloc_info[0].pNext = nullptr;//自定义数据的指针
+    alloc_info[0].descriptorPool = descPool;//指定描述集池
+    alloc_info[0].descriptorSetCount = TextureManager::texNames.size();//描述集数量
+    alloc_info[0].pSetLayouts = layouts.data();//描述集布局列表
+    descSet.resize(TextureManager::texNames.size());//调整描述集列表尺寸
     result = vkAllocateDescriptorSets(device, alloc_info, descSet.data());//分配指定数量的描述集
-    assert(result == VK_SUCCESS);                                         //检查描述集分配是否成功
-    writes[0] = {};                                                       //完善一致变量写入描述集实例数组元素 0
-    writes[0].sType = VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET;             //结构体类型
-    writes[0].pNext = nullptr;                                            //自定义数据的指针
-    writes[0].descriptorCount = 1;                                        //描述数量
-    writes[0].descriptorType = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;         //描述类型(一致变量缓冲)
-    writes[0].pBufferInfo = &uniformBufferInfo;                           //对应一致变量缓冲的信息
-    writes[0].dstArrayElement = 0;                                        //目标数组起始元素
-    writes[0].dstBinding = 0;                                             //目标绑定编号
-    writes[1] = {};                                                       //完善一致变量写入描述集实例数组元素 1
-    writes[1].sType = VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET;             //结构体类型
-    writes[1].dstBinding = 1;                                             //目标绑定编号
-    writes[1].descriptorCount = 1;                                        //描述数量
-    writes[1].descriptorType = VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER; //描述类型（采样用纹理）
-    writes[1].dstArrayElement = 0;                                        //目标数组起始元素
+    assert(result == VK_SUCCESS);//检查描述集分配是否成功
+    writes[0] = {};//完善一致变量写入描述集实例数组元素 0
+    writes[0].sType = VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET;//结构体类型
+    writes[0].pNext = nullptr;//自定义数据的指针
+    writes[0].descriptorCount = 1;//描述数量
+    writes[0].descriptorType = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;//描述类型(一致变量缓冲)
+    writes[0].pBufferInfo = &uniformBufferInfo;//对应一致变量缓冲的信息
+    writes[0].dstArrayElement = 0;//目标数组起始元素
+    writes[0].dstBinding = 0;//目标绑定编号
+    writes[1] = {};//完善一致变量写入描述集实例数组元素 1
+    writes[1].sType = VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET;//结构体类型
+    writes[1].dstBinding = 1;//目标绑定编号
+    writes[1].descriptorCount = 1;//描述数量
+    writes[1].descriptorType = VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;//描述类型（采样用纹理）
+    writes[1].dstArrayElement = 0;//目标数组起始元素
 }
 void ShaderQueueSuit_CommonTex::createShaderModule(VkDevice &device) {
     const char *vs = "./shaders/shader.vert";
     const char *fs = "./shaders/shader.frag";
 
     shaderStages[0].sType = VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO;
-    shaderStages[0].pNext = nullptr;                   // 自定义数据的指针
-    shaderStages[0].pSpecializationInfo = nullptr;     // 特殊信息
-    shaderStages[0].flags = 0;                         // 供将来使用的标志
+    shaderStages[0].pNext = nullptr;// 自定义数据的指针
+    shaderStages[0].pSpecializationInfo = nullptr;// 特殊信息
+    shaderStages[0].flags = 0;// 供将来使用的标志
     shaderStages[0].stage = VK_SHADER_STAGE_VERTEX_BIT;// 着色器阶段为顶点
-    shaderStages[0].pName = "main";                    // 入口函数为main
+    shaderStages[0].pName = "main";// 入口函数为main
 
     std::vector<unsigned int> vtx_spv;//将顶点着色器脚本编译为SPV
     bool retVal = compileGLSLtoSPV(VK_SHADER_STAGE_VERTEX_BIT, FileUtil::loadAssetStr(vs).c_str(), vtx_spv);
@@ -148,31 +148,31 @@ void ShaderQueueSuit_CommonTex::createShaderModule(VkDevice &device) {
 
     VkShaderModuleCreateInfo moduleCreateInfo;// 准备顶点着色器模块创建信息
     moduleCreateInfo.sType = VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO;
-    moduleCreateInfo.pNext = nullptr;                                           // 自定义数据的指针
-    moduleCreateInfo.flags = 0;                                                 // 供将来使用的标志
-    moduleCreateInfo.codeSize = vtx_spv.size() * sizeof(uint32_t);              // 顶点着色器SPV数据总字节数
+    moduleCreateInfo.pNext = nullptr;// 自定义数据的指针
+    moduleCreateInfo.flags = 0;// 供将来使用的标志
+    moduleCreateInfo.codeSize = vtx_spv.size() * sizeof(uint32_t);// 顶点着色器SPV数据总字节数
     moduleCreateInfo.pCode = reinterpret_cast<const uint32_t *>(vtx_spv.data());// 顶点着色器SPV数据
 
     VkResult result = vkCreateShaderModule(device, &moduleCreateInfo, nullptr, &shaderStages[0].module);// 创建顶点着色器模块
-    assert(result == VK_SUCCESS);                                                                       // 检查顶点着色器模块创建是否成功
+    assert(result == VK_SUCCESS);// 检查顶点着色器模块创建是否成功
 
     shaderStages[1].sType = VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO;// 结构体类型
-    shaderStages[1].pNext = nullptr;                                            // 自定义数据的指针
-    shaderStages[1].pSpecializationInfo = nullptr;                              // 特殊信息
-    shaderStages[1].flags = 0;                                                  // 供将来使用的标志
-    shaderStages[1].stage = VK_SHADER_STAGE_FRAGMENT_BIT;                       // 着色器阶段为片元
-    shaderStages[1].pName = "main";                                             // 入口函数为main
+    shaderStages[1].pNext = nullptr;// 自定义数据的指针
+    shaderStages[1].pSpecializationInfo = nullptr;// 特殊信息
+    shaderStages[1].flags = 0;// 供将来使用的标志
+    shaderStages[1].stage = VK_SHADER_STAGE_FRAGMENT_BIT;// 着色器阶段为片元
+    shaderStages[1].pName = "main";// 入口函数为main
 
     std::vector<unsigned int> frag_spv;
     retVal = compileGLSLtoSPV(VK_SHADER_STAGE_FRAGMENT_BIT, FileUtil::loadAssetStr(fs).c_str(), frag_spv);//将片元着色器脚本编译为SPV
-    assert(retVal);                                                                                       //检查编译是否成功
+    assert(retVal);//检查编译是否成功
     printf("片元着色器脚本编译SPV成功！\n");
 
     // 准备片元着色器模块创建信息
-    moduleCreateInfo.sType = VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO;        // 设置结构体类型
-    moduleCreateInfo.pNext = nullptr;                                            // 自定义数据的指针
-    moduleCreateInfo.flags = 0;                                                  // 供将来使用的标志
-    moduleCreateInfo.codeSize = frag_spv.size() * sizeof(uint32_t);              // 片元着色器SPV数据总字节数
+    moduleCreateInfo.sType = VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO;// 设置结构体类型
+    moduleCreateInfo.pNext = nullptr;// 自定义数据的指针
+    moduleCreateInfo.flags = 0;// 供将来使用的标志
+    moduleCreateInfo.codeSize = frag_spv.size() * sizeof(uint32_t);// 片元着色器SPV数据总字节数
     moduleCreateInfo.pCode = reinterpret_cast<const uint32_t *>(frag_spv.data());// 片元着色器SPV数据
     // 创建片元着色器模块
     result = vkCreateShaderModule(device, &moduleCreateInfo, nullptr, &shaderStages[1].module);
@@ -182,14 +182,14 @@ void ShaderQueueSuit_CommonTex::destroyShaderModule(VkDevice &device) {
     vkDestroyShaderModule(device, shaderStages[0].module, nullptr);
     vkDestroyShaderModule(device, shaderStages[1].module, nullptr);
 }
-void ShaderQueueSuit_CommonTex::initVertexAttributeInfo() { //初始化顶点输入属性信息的方法
-    vertexBinding.binding = 0;                              //对应绑定点
-    vertexBinding.inputRate = VK_VERTEX_INPUT_RATE_VERTEX;  //数据输入频率为每顶点
-    vertexBinding.stride = sizeof(float) * 3;               //每组数据的跨度字节数
-    vertexAttributes[0].binding = 0;                        //第 1 个顶点输入属性的绑定点
-    vertexAttributes[0].location = 0;                       //第 1 个顶点输入属性的位置索引
+void ShaderQueueSuit_CommonTex::initVertexAttributeInfo() {//初始化顶点输入属性信息的方法
+    vertexBinding.binding = 0;//对应绑定点
+    vertexBinding.inputRate = VK_VERTEX_INPUT_RATE_VERTEX;//数据输入频率为每顶点
+    vertexBinding.stride = sizeof(float) * 3;//每组数据的跨度字节数
+    vertexAttributes[0].binding = 0;//第 1 个顶点输入属性的绑定点
+    vertexAttributes[0].location = 0;//第 1 个顶点输入属性的位置索引
     vertexAttributes[0].format = VK_FORMAT_R32G32B32_SFLOAT;//第 1 个顶点输入属性的数据格式
-    vertexAttributes[0].offset = 0;                         //第 1 个顶点输入属性的偏移量
+    vertexAttributes[0].offset = 0;//第 1 个顶点输入属性的偏移量
 }
 void ShaderQueueSuit_CommonTex::createPipeLine(VkDevice &device, VkRenderPass &renderPass) {
     //关于这里的修改参阅：https://github.com/LunarG/VulkanSamples/pull/294/commits/2667330a95f42a38e44567393a10f64ac9914fee
@@ -203,17 +203,17 @@ void ShaderQueueSuit_CommonTex::createPipeLine(VkDevice &device, VkRenderPass &r
     dynamicState.dynamicStateCount = 0;
     VkPipelineVertexInputStateCreateInfo vi;//管线顶点数据输入状态创建信息
     vi.sType = VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO;
-    vi.pNext = nullptr;                                //自定义数据的指针
-    vi.flags = 0;                                      //供将来使用的标志
-    vi.vertexBindingDescriptionCount = 1;              //顶点输入绑定描述数量
-    vi.pVertexBindingDescriptions = &vertexBinding;    //顶点输入绑定描述列表
-    vi.vertexAttributeDescriptionCount = 1;            //顶点输入属性描述数量
+    vi.pNext = nullptr;//自定义数据的指针
+    vi.flags = 0;//供将来使用的标志
+    vi.vertexBindingDescriptionCount = 1;//顶点输入绑定描述数量
+    vi.pVertexBindingDescriptions = &vertexBinding;//顶点输入绑定描述列表
+    vi.vertexAttributeDescriptionCount = 1;//顶点输入属性描述数量
     vi.pVertexAttributeDescriptions = vertexAttributes;//顶点输入属性描述列表
-    VkPipelineInputAssemblyStateCreateInfo ia;         //管线图元组装状态创建信息
+    VkPipelineInputAssemblyStateCreateInfo ia;//管线图元组装状态创建信息
     ia.sType = VK_STRUCTURE_TYPE_PIPELINE_INPUT_ASSEMBLY_STATE_CREATE_INFO;
-    ia.pNext = nullptr;                            //自定义数据的指针
-    ia.flags = 0;                                  //供将来使用的标志
-    ia.primitiveRestartEnable = VK_FALSE;          //关闭图元重启
+    ia.pNext = nullptr;//自定义数据的指针
+    ia.flags = 0;//供将来使用的标志
+    ia.primitiveRestartEnable = VK_FALSE;//关闭图元重启
     ia.topology = VK_PRIMITIVE_TOPOLOGY_POINT_LIST;//采用点图元列表模式
     VkPipelineRasterizationStateCreateInfo rs;
     rs.sType = VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_STATE_CREATE_INFO;

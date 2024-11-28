@@ -99,7 +99,7 @@ float *MatrixState3D::getGLFinalMatrix() {
 }
 
 float *MatrixState3D::getVPMatrix() {
-    Matrix::multiplyMM(mVPMatrix, 0, mProjMatrix, 0, mVMatrix, 0);      //投影*摄像机
+    Matrix::multiplyMM(mVPMatrix, 0, mProjMatrix, 0, mVMatrix, 0);//投影*摄像机
     Matrix::multiplyMM(mVPMatrix, 0, vulkanClipMatrix, 0, mVPMatrix, 0);//变换矩阵
     return mVPMatrix;
 }

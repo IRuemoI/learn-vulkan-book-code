@@ -49,18 +49,18 @@ TexDataObject *FileUtil::loadCommonTexData(string filename) {
 }
 
 LandData *FileUtil::loadHdtData(string filename) {
-    unsigned char *buf = new unsigned char[4]; //存放灰度图片宽度
+    unsigned char *buf = new unsigned char[4];//存放灰度图片宽度
     unsigned char *buf2 = new unsigned char[4];//存放灰度图片高度
-    char c_file[1000];                         //文件路径
-    strcpy(c_file, filename.c_str());          //将文件路径转换成字符数组
+    char c_file[1000];//文件路径
+    strcpy(c_file, filename.c_str());//将文件路径转换成字符数组
     FILE *fpPhoto;
     fpPhoto = fopen(c_file, "rb");//将文件以二进制形式打开
     if (fpPhoto == nullptr) {
         printf("打开文件1失败\n");
     }
-    fread(buf, 4, 1, fpPhoto);        //纹理宽度,读取4个字节存入buf
-    int width = fromBytesToInt(buf);  //将buf转成一个int宽度
-    fread(buf2, 4, 1, fpPhoto);       //纹理宽度,读取4个字节存入buf
+    fread(buf, 4, 1, fpPhoto);//纹理宽度,读取4个字节存入buf
+    int width = fromBytesToInt(buf);//将buf转成一个int宽度
+    fread(buf2, 4, 1, fpPhoto);//纹理宽度,读取4个字节存入buf
     int height = fromBytesToInt(buf2);//将buf转成一个int宽度
     printf(" HDt %d %d\n", width, height);
     unsigned char *data = new unsigned char[width * height];

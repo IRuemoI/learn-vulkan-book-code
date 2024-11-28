@@ -66,10 +66,10 @@ void MatrixState3D::scale(float x, float y, float z) {
 }
 
 void MatrixState3D::setCamera(float cx, float cy, float cz, float tx, float ty, float tz, float upx, float upy, float upz) {
-    	MatrixState3D::cx = cx;
-	MatrixState3D::cy = cy;
-	MatrixState3D::cz = cz;
-	Matrix::setLookAtM(mVMatrix, 0, cx, cy, cz, tx, ty, tz, upx, upy, upz);
+    MatrixState3D::cx = cx;
+    MatrixState3D::cy = cy;
+    MatrixState3D::cz = cz;
+    Matrix::setLookAtM(mVMatrix, 0, cx, cy, cz, tx, ty, tz, upx, upy, upz);
 }
 
 void MatrixState3D::setProjectFrustum(float left, float right, float bottom, float top, float near, float far) {

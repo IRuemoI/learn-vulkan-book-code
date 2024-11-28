@@ -16,6 +16,6 @@ out gl_PerVertex {
 void main() {
     outTexCoor = inTexCoor;//传入纹理坐标
     landHeight=pos.y;//传入当前的高度（计算多重纹理时使用）
-    gl_Position = myConstantVals.mvp * vec4(pos,1.0);//计算最终顶点位置
-    pLocation=myConstantVals.mm * vec4(pos,1.0);//计算世界坐标系下顶点位置
+    gl_Position = myConstantVals.mvp * vec4(pos, 1.0);//计算最终顶点位置
+    pLocation=myConstantVals.mm * vec4(pos, 1.0);//计算世界坐标系下顶点位置
 }

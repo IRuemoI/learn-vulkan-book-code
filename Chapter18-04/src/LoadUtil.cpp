@@ -117,12 +117,12 @@ int parseInt(const char *token) {
     return i;
 }
 ObjObject *LoadUtil::loadFromFile(const string &vname, VkDevice &device, VkPhysicalDeviceMemoryProperties &memoryProperties) {//读取obj 文件内容生成绘制用物体对象的方法
-    ObjObject *lo;                                                                                                            //指向生成的绘制用物体对象的指针
+    ObjObject *lo;//指向生成的绘制用物体对象的指针
     vector<float> alv;
     vector<float> alvResult;
     vector<float> alt;
     vector<float> altResult;
-    vector<float> aln;      //存放原始法向量数据的列表
+    vector<float> aln;//存放原始法向量数据的列表
     vector<float> alnResult;//存放结果法向量数据的列表
     std::string resultStr = FileUtil::loadAssetStr(vname);
     vector<string> lines;
@@ -145,11 +145,11 @@ ObjObject *LoadUtil::loadFromFile(const string &vname, VkDevice &device, VkPhysi
         } else if (splitStrs[0] == "vt") {
             alt.push_back(parseFloat(splitStrs[1].c_str()));
             alt.push_back(1 - parseFloat(splitStrs[2].c_str()));
-        } else if (splitStrs[0] == "vn") {                  //若此行为vn 开头则为法向量数据行
+        } else if (splitStrs[0] == "vn") {//若此行为vn 开头则为法向量数据行
             aln.push_back(parseFloat(splitStrs[1].c_str()));//将法向量X 分量存入原始法向量列表
             aln.push_back(parseFloat(splitStrs[2].c_str()));//将法向量Y 分量存入原始法向量列表
             aln.push_back(parseFloat(splitStrs[3].c_str()));//将法向量Z 分量存入原始法向量列表
-        } else if (splitStrs[0] == "f") {                   //若此行为f 开头则为面数据行
+        } else if (splitStrs[0] == "f") {//若此行为f 开头则为面数据行
             int index[3];
             string delimsF = "/";
             splitStrsF.clear();
@@ -162,9 +162,9 @@ ObjObject *LoadUtil::loadFromFile(const string &vname, VkDevice &device, VkPhysi
             altResult.push_back(alt[indexTex * 2]);
             altResult.push_back(alt[indexTex * 2 + 1]);
             int indexN = parseInt(splitStrsF[2].c_str()) - 1;//获取三角形面第1 个顶点的法向量编号
-            alnResult.push_back(aln[3 * indexN]);            //将第1 个顶点法向量的x 分量存入结果法向量列表
-            alnResult.push_back(aln[3 * indexN + 1]);        //将第1 个顶点法向量的y 分量存入结果法向量列表
-            alnResult.push_back(aln[3 * indexN + 2]);        //将第1 个顶点法向量的z 分量存入结果法向量列表
+            alnResult.push_back(aln[3 * indexN]);//将第1 个顶点法向量的x 分量存入结果法向量列表
+            alnResult.push_back(aln[3 * indexN + 1]);//将第1 个顶点法向量的y 分量存入结果法向量列表
+            alnResult.push_back(aln[3 * indexN + 2]);//将第1 个顶点法向量的z 分量存入结果法向量列表
             splitStrsF.clear();
             splitString(splitStrs[2].c_str(), delimsF, splitStrsF);
             index[1] = parseInt(splitStrsF[0].c_str()) - 1;
@@ -175,9 +175,9 @@ ObjObject *LoadUtil::loadFromFile(const string &vname, VkDevice &device, VkPhysi
             altResult.push_back(alt[indexTex * 2]);
             altResult.push_back(alt[indexTex * 2 + 1]);
             indexN = parseInt(splitStrsF[2].c_str()) - 1;//获取三角形面第2 个顶点的法向量编号
-            alnResult.push_back(aln[3 * indexN]);        //将第2 个顶点法向量的x 分量存入结果法向量列表
-            alnResult.push_back(aln[3 * indexN + 1]);    //将第2 个顶点法向量的y 分量存入结果法向量列表
-            alnResult.push_back(aln[3 * indexN + 2]);    //将第2 个顶点法向量的z 分量存入结果法向量列表
+            alnResult.push_back(aln[3 * indexN]);//将第2 个顶点法向量的x 分量存入结果法向量列表
+            alnResult.push_back(aln[3 * indexN + 1]);//将第2 个顶点法向量的y 分量存入结果法向量列表
+            alnResult.push_back(aln[3 * indexN + 2]);//将第2 个顶点法向量的z 分量存入结果法向量列表
             splitStrsF.clear();
             splitString(splitStrs[3].c_str(), delimsF, splitStrsF);
             index[2] = parseInt(splitStrsF[0].c_str()) - 1;
@@ -188,17 +188,17 @@ ObjObject *LoadUtil::loadFromFile(const string &vname, VkDevice &device, VkPhysi
             altResult.push_back(alt[indexTex * 2]);
             altResult.push_back(alt[indexTex * 2 + 1]);
             indexN = parseInt(splitStrsF[2].c_str()) - 1;//获取三角形面第3 个顶点的法向量编号
-            alnResult.push_back(aln[3 * indexN]);        //将第3 个顶点法向量的x 分量存入结果法向量列表
-            alnResult.push_back(aln[3 * indexN + 1]);    //将第3 个顶点法向量的y 分量存入结果法向量列表
-            alnResult.push_back(aln[3 * indexN + 2]);    //将第3 个顶点法向量的z 分量存入结果法向量列表
+            alnResult.push_back(aln[3 * indexN]);//将第3 个顶点法向量的x 分量存入结果法向量列表
+            alnResult.push_back(aln[3 * indexN + 1]);//将第3 个顶点法向量的y 分量存入结果法向量列表
+            alnResult.push_back(aln[3 * indexN + 2]);//将第3 个顶点法向量的z 分量存入结果法向量列表
         }
         splitStrs.clear();
     }
-    int vCount = (int) alvResult.size() / 3;       //计算顶点数量
+    int vCount = (int) alvResult.size() / 3;//计算顶点数量
     int dataByteCount = vCount * 8 * sizeof(float);//计算顶点数据所占总字节数
-    float *vdataIn = new float[vCount * 8];        //创建顶点数据数组
-    int indexTemp = 0;                             //辅助索引
-    for (int i = 0; i < vCount; i++) {             //遍历每个顶点
+    float *vdataIn = new float[vCount * 8];//创建顶点数据数组
+    int indexTemp = 0;//辅助索引
+    for (int i = 0; i < vCount; i++) {//遍历每个顶点
         vdataIn[indexTemp++] = alvResult[i * 3 + 0];
         vdataIn[indexTemp++] = alvResult[i * 3 + 1];
         vdataIn[indexTemp++] = alvResult[i * 3 + 2];
@@ -209,5 +209,5 @@ ObjObject *LoadUtil::loadFromFile(const string &vname, VkDevice &device, VkPhysi
         vdataIn[indexTemp++] = alnResult[i * 3 + 2];//将法向量z 分量转存到顶点数据数组中
     }
     lo = new ObjObject(vdataIn, dataByteCount, vCount, device, memoryProperties);//创建绘制用物体对象
-    return lo;                                                                   //返回指向绘制用物体对象的指针
+    return lo;//返回指向绘制用物体对象的指针
 }

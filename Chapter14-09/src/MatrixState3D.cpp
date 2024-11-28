@@ -67,8 +67,8 @@ float *MatrixState3D::getFinalMatrix() {
 float *MatrixState3D::getMMatrix() {
     return currMatrix;
 }
-float *MatrixState3D::getZHMatrix() {                                   //获取组合矩阵的方法
-    Matrix::multiplyMM(mZHMatrix, 0, mProjMatrix, 0, mVMatrix, 0);      //将投影矩阵与摄像机观察矩阵相乘
+float *MatrixState3D::getZHMatrix() {//获取组合矩阵的方法
+    Matrix::multiplyMM(mZHMatrix, 0, mProjMatrix, 0, mVMatrix, 0);//将投影矩阵与摄像机观察矩阵相乘
     Matrix::multiplyMM(mZHMatrix, 0, vulkanClipMatrix, 0, mZHMatrix, 0);//乘以Vulkan 标准设备空间调整矩阵
-    return mZHMatrix;                                                   //返回指向组合矩阵数组首地址的指针
+    return mZHMatrix;//返回指向组合矩阵数组首地址的指针
 }

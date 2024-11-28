@@ -59,12 +59,12 @@ void TexDrawableObject::drawSelf(VkCommandBuffer &cmd, VkPipelineLayout &pipelin
             1,
             &(vertexDatabuf),
             offsetsVertex);
-    float *mvp = MatrixState3D::getFinalMatrix();                                                                //获取最终变换矩阵
-    float *mm = MatrixState3D::getMMatrix();                                                                     //获取基本变换矩阵
-    float camea[4] = {MatrixState3D::cx, MatrixState3D::cy, MatrixState3D::cz, 1.0};                             //获取摄像机参数
-    memcpy(pushConstantData, mvp, sizeof(float) * 16);                                                           //将最终变换矩阵数据拷贝进推送常量
-    memcpy(pushConstantData + 16, mm, sizeof(float) * 16);                                                       //将基本变换矩阵数据拷贝进推送常量
-    memcpy(pushConstantData + 32, camea, sizeof(float) * 4);                                                     //将摄像机参数数据拷贝进推送常量
+    float *mvp = MatrixState3D::getFinalMatrix();//获取最终变换矩阵
+    float *mm = MatrixState3D::getMMatrix();//获取基本变换矩阵
+    float camea[4] = {MatrixState3D::cx, MatrixState3D::cy, MatrixState3D::cz, 1.0};//获取摄像机参数
+    memcpy(pushConstantData, mvp, sizeof(float) * 16);//将最终变换矩阵数据拷贝进推送常量
+    memcpy(pushConstantData + 16, mm, sizeof(float) * 16);//将基本变换矩阵数据拷贝进推送常量
+    memcpy(pushConstantData + 32, camea, sizeof(float) * 4);//将摄像机参数数据拷贝进推送常量
     vkCmdPushConstants(cmd, pipelineLayout, VK_SHADER_STAGE_VERTEX_BIT, 0, sizeof(float) * 36, pushConstantData);//将推送常量数据送入管线
-    vkCmdDraw(cmd, vCount, 1, 0, 0);                                                                             //执行绘制
+    vkCmdDraw(cmd, vCount, 1, 0, 0);//执行绘制
 }

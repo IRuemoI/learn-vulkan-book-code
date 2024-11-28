@@ -22,13 +22,13 @@ in vec3 position
 )
 {
     vec3 normalTarget=position+normal;
-    vec3 newNormal=(uMMatrix*vec4(normalTarget,1)).xyz-(uMMatrix*vec4(position,1)).xyz;
+    vec3 newNormal=(uMMatrix*vec4(normalTarget, 1)).xyz-(uMMatrix*vec4(position, 1)).xyz;
     newNormal=normalize(newNormal);
     return newNormal;
 }
 void main() {
     outTexCoor = inTexCoor;
-    outNormal = normalFromObjectToWorld(myConstantVals.mm,inNormal,pos);
-    outPos =(myConstantVals.mm*vec4(pos,1)).xyz;
-    gl_Position = myConstantVals.mvp * vec4(pos,1.0);
+    outNormal = normalFromObjectToWorld(myConstantVals.mm, inNormal, pos);
+    outPos =(myConstantVals.mm*vec4(pos, 1)).xyz;
+    gl_Position = myConstantVals.mvp * vec4(pos, 1.0);
 }

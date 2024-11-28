@@ -131,11 +131,11 @@ float *LoadUtil::vectorNormal(float *vector) {
 }
 ObjObject *LoadUtil::loadFromFile(const string &vname, VkDevice &device,
                                   VkPhysicalDeviceMemoryProperties &memoryProperties) {//读取obj 文件内容生成绘制用物体对象的方法
-    ObjObject *lo;                                                                     //指向生成的绘制用物体对象的指针
-    vector<float> alv;                                                                 //存放原始顶点坐标数据的列表
-    vector<float> alvResult;                                                           //存放结果顶点坐标数据的列表
-    vector<int> alFaceIndex;                                                           //存放三角形面顶点编号的列表
-    map<int, set<Normal *>> hmn;                                                       //存放各顶点法向量列表的map
+    ObjObject *lo;//指向生成的绘制用物体对象的指针
+    vector<float> alv;//存放原始顶点坐标数据的列表
+    vector<float> alvResult;//存放结果顶点坐标数据的列表
+    vector<int> alFaceIndex;//存放三角形面顶点编号的列表
+    map<int, set<Normal *>> hmn;//存放各顶点法向量列表的map
     std::string resultStr = FileUtil::loadAssetStr(vname);
     vector<string> lines;
     splitString(resultStr, "\n", lines);
@@ -191,36 +191,36 @@ ObjObject *LoadUtil::loadFromFile(const string &vname, VkDevice &device,
             float vyb = y2 - y0;
             float vzb = z2 - z0;
             float *vNormal = vectorNormal(getCrossProduct(vxa, vya, vza, vxb, vyb, vzb));
-            alFaceIndex.push_back(index[0]);                                    //记录三角形面第一个顶点的编号
-            alFaceIndex.push_back(index[1]);                                    //记录三角形面第二个顶点的编号
-            alFaceIndex.push_back(index[2]);                                    //记录三角形面第三个顶点的编号
-            for (int tempIndex: index) {                                        //将此三角形面的法向量记录到此面3 个顶点各自的法向量集合中
-                set<Normal *> setN = hmn[tempIndex];                            //由顶点编号获取对应的法向量集合
+            alFaceIndex.push_back(index[0]);//记录三角形面第一个顶点的编号
+            alFaceIndex.push_back(index[1]);//记录三角形面第二个顶点的编号
+            alFaceIndex.push_back(index[2]);//记录三角形面第三个顶点的编号
+            for (int tempIndex: index) {//将此三角形面的法向量记录到此面3 个顶点各自的法向量集合中
+                set<Normal *> setN = hmn[tempIndex];//由顶点编号获取对应的法向量集合
                 Normal *normal = new Normal(vNormal[0], vNormal[1], vNormal[2]);//创建法向量对象
-                if (!Normal::exist(normal, setN)) {                             //判断当前法向量是否不在当前点的法向量集合中
-                    setN.insert(normal);                                        //若不在，则将该法向量添加到当前点的法向量集合中
+                if (!Normal::exist(normal, setN)) {//判断当前法向量是否不在当前点的法向量集合中
+                    setN.insert(normal);//若不在，则将该法向量添加到当前点的法向量集合中
                 }
                 hmn[tempIndex] = setN;//更新map 中当前点的法向量集合
             }
         }
         splitStrs.clear();
     }
-    int vCount = (int) alvResult.size() / 3;        //计算顶点数量
-    int dataByteCount = vCount * 6 * sizeof(float); //计算顶点数据所占总字节数
-    float *vdataIn = new float[vCount * 6];         //创建顶点数据数组
-    set<Normal *> setNTemp;                         //存放一个顶点法向量集合的辅助变量
-    float *nTemp;                                   //指向存放向量三分量数据数组的指针
-    int indexTemp = 0;                              //辅助索引
-    for (int i = 0; i < vCount; i++) {              //遍历所有的顶点
+    int vCount = (int) alvResult.size() / 3;//计算顶点数量
+    int dataByteCount = vCount * 6 * sizeof(float);//计算顶点数据所占总字节数
+    float *vdataIn = new float[vCount * 6];//创建顶点数据数组
+    set<Normal *> setNTemp;//存放一个顶点法向量集合的辅助变量
+    float *nTemp;//指向存放向量三分量数据数组的指针
+    int indexTemp = 0;//辅助索引
+    for (int i = 0; i < vCount; i++) {//遍历所有的顶点
         vdataIn[indexTemp++] = alvResult[i * 3 + 0];//将顶点x 坐标转存到顶点数据数组中
         vdataIn[indexTemp++] = alvResult[i * 3 + 1];//将顶点y 坐标转存到顶点数据数组中
         vdataIn[indexTemp++] = alvResult[i * 3 + 2];//将顶点z 坐标转存到顶点数据数组中
-        setNTemp = (hmn[alFaceIndex.at(i)]);        //获取当前顶点的法向量集合
-        nTemp = Normal::getAverage(setNTemp);       //求出此顶点的平均法向量
-        vdataIn[indexTemp++] = nTemp[0];            //将平均法向量的x 分量转存到顶点数据数组中
-        vdataIn[indexTemp++] = nTemp[1];            //将平均法向量的y 分量转存到顶点数据数组中
-        vdataIn[indexTemp++] = nTemp[2];            //将平均法向量的z 分量转存到顶点数据数组中
+        setNTemp = (hmn[alFaceIndex.at(i)]);//获取当前顶点的法向量集合
+        nTemp = Normal::getAverage(setNTemp);//求出此顶点的平均法向量
+        vdataIn[indexTemp++] = nTemp[0];//将平均法向量的x 分量转存到顶点数据数组中
+        vdataIn[indexTemp++] = nTemp[1];//将平均法向量的y 分量转存到顶点数据数组中
+        vdataIn[indexTemp++] = nTemp[2];//将平均法向量的z 分量转存到顶点数据数组中
     }
     lo = new ObjObject(vdataIn, dataByteCount, vCount, device, memoryProperties);//创建绘制用物体对象
-    return lo;                                                                   //返回指向绘制用物体对象的指针
+    return lo;//返回指向绘制用物体对象的指针
 }

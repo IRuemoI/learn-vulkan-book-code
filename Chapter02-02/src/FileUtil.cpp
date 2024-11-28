@@ -31,10 +31,10 @@ SpvData FileUtil::loadSPV(const string &filename)//加载文件夹下的SPIR-V �
 {
     size_t size = (getFileSize(filename));//获取SPIR-V 数据文件的总字节数
     cout << "len:" << size << endl;
-    SpvData spvData;                           //构建SpvData 结构体实例
-    spvData.size = size;                       //设置SPIR-V 数据总字节数
+    SpvData spvData;//构建SpvData 结构体实例
+    spvData.size = size;//设置SPIR-V 数据总字节数
     spvData.data = (uint32_t *) (malloc(size));//分配相应字节数的内存
-    char *buf = (char *) spvData.data;         //从文件中加载数据进入内存
+    char *buf = (char *) spvData.data;//从文件中加载数据进入内存
     char c_file[1000];
     strcpy(c_file, filename.c_str());
     FILE *fpSPV;

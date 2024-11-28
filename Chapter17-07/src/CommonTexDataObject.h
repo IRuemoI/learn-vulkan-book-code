@@ -2,17 +2,14 @@
 #define VULKANEXBASE_COMMONTEXDATAOBJECT_H
 
 
-class CommonTexDataObject
-{
+class CommonTexDataObject {
 public:
-	int width;
-	int height;
-	unsigned char* data;
+    int width;
+    int height;
+    unsigned char *data;
 
-	CommonTexDataObject(int width, int height, unsigned char* data);
-	~CommonTexDataObject();
+    CommonTexDataObject(int width, int height, unsigned char *data);
+    ~CommonTexDataObject();
 };
 
 #endif
-
-

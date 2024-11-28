@@ -189,13 +189,13 @@ void ShaderQueueSuit_Common::initVertexAttributeInfo() {
     vertexAttributes[2].offset = 20;
 }
 void ShaderQueueSuit_Common::createPipeline(VkDevice &device, VkRenderPass &renderPass) {
-    VkDynamicState dynamicStateEnables[1];                                    //动态状态启用标志数组
-    dynamicStateEnables[0] = VK_DYNAMIC_STATE_SCISSOR;                        //剪裁测试动态状态启用标志
-    VkPipelineDynamicStateCreateInfo dynamicState = {};                       //构建管线动态状态创建信息结构体实例
+    VkDynamicState dynamicStateEnables[1];//动态状态启用标志数组
+    dynamicStateEnables[0] = VK_DYNAMIC_STATE_SCISSOR;//剪裁测试动态状态启用标志
+    VkPipelineDynamicStateCreateInfo dynamicState = {};//构建管线动态状态创建信息结构体实例
     dynamicState.sType = VK_STRUCTURE_TYPE_PIPELINE_DYNAMIC_STATE_CREATE_INFO;//结构体类型
-    dynamicState.pNext = nullptr;                                             //自定义数据的指针
-    dynamicState.pDynamicStates = dynamicStateEnables;                        //指定动态状态启用标志数组
-    dynamicState.dynamicStateCount = 1;                                       //启用的动态状态项数量
+    dynamicState.pNext = nullptr;//自定义数据的指针
+    dynamicState.pDynamicStates = dynamicStateEnables;//指定动态状态启用标志数组
+    dynamicState.dynamicStateCount = 1;//启用的动态状态项数量
     VkPipelineVertexInputStateCreateInfo vi;
     vi.sType = VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO;
     vi.pNext = nullptr;

@@ -43,7 +43,7 @@ public:
         uint8_t *pData;// Host pointer containing the mapped device address which is used to write data into.
     } UniformData;
 
-    // ¶¥µã»º´æÔªÊı¾İ½á¹¹Ìå
+    // é¡¶ç‚¹ç¼“å­˜å…ƒæ•°æ®ç»“æ„ä½“
     struct
     {
         VkBuffer buf;
@@ -51,9 +51,9 @@ public:
         VkDescriptorBufferInfo bufferInfo;
     } VertexBuffer;
 
-    // ±£´æ¶¨µãÊäÈëËÙÂÊ
+    // ä¿å­˜å®šç‚¹è¾“å…¥é€Ÿç‡
     VkVertexInputBindingDescription viIpBind;
-    // ±£´æÊı¾İ½âÊÍ¹ı³ÌÖĞÓĞÓÃµÄÔªÊı¾İ
+    // ä¿å­˜æ•°æ®è§£é‡Šè¿‡ç¨‹ä¸­æœ‰ç”¨çš„å…ƒæ•°æ®
     VkVertexInputAttributeDescription viIpAttrb[2];
 
 private:

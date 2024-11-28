@@ -34,7 +34,7 @@ void mouse_button_callback(GLFWwindow *window, int button, int action, int mods)
         printf("鼠标按下\n");
     } else if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_RELEASE) {
         if (left_mouse_down) {
-            if (isClick) {          //点击标志为 true
+            if (isClick) {//点击标志为 true
                 switch (pressType) {//根据不同的pressType值分支
                     case 0:
                         VulkanDemoApp::smallType = 0;

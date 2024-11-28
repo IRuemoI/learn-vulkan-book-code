@@ -16,5 +16,5 @@ public:
     float linWidthSpan;
     float angleSpan;
     void initInstanceData();//初始化实例数据的方法
-    void update();          //更新数据的方法
+    void update();//更新数据的方法
 };

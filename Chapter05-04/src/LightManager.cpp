@@ -16,8 +16,8 @@ void LightManager::setLightPosition(float lxIn, float lyIn, float lzIn) {
     lz = lzIn;
 }
 void LightManager::setlightSpecular(float lightSpecularRIn, float lightSpecularGIn, float lightSpecularBIn, float lightSpecularAIn) {//设置镜面光强度的方法
-    lightSpecularR = lightSpecularRIn;                                                                                               //设置镜面光强度R 分量
-    lightSpecularG = lightSpecularGIn;                                                                                               //设置镜面光强度G 分量
-    lightSpecularB = lightSpecularBIn;                                                                                               //设置镜面光强度B 分量
-    lightSpecularA = lightSpecularAIn;                                                                                               //设置镜面光强度A 分量
+    lightSpecularR = lightSpecularRIn;//设置镜面光强度R 分量
+    lightSpecularG = lightSpecularGIn;//设置镜面光强度G 分量
+    lightSpecularB = lightSpecularBIn;//设置镜面光强度B 分量
+    lightSpecularA = lightSpecularAIn;//设置镜面光强度A 分量
 }

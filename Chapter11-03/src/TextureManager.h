@@ -7,9 +7,9 @@
 #define SAMPLER_COUNT 1
 class TextureManager {
 public:
-    static std::vector<std::string> texNames;   //存放所有纹理的vector
-    static std::vector<std::string> orTexNames; //存放普通纹理的vector
-    static std::vector<std::string> waterNames; //存放水纹理的vector
+    static std::vector<std::string> texNames;//存放所有纹理的vector
+    static std::vector<std::string> orTexNames;//存放普通纹理的vector
+    static std::vector<std::string> waterNames;//存放水纹理的vector
     static std::vector<std::string> doubleNames;//存放双纹理的vector
     static std::vector<VkSampler> samplerList;
     static std::map<std::string, VkImage> textureImageList;

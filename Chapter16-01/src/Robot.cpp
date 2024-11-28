@@ -2,7 +2,7 @@
 #include "MatrixState3D.h"
 using namespace std;
 Robot::Robot(vector<ObjObject *> objObject) {
-    bRoot = new BodyPart(0.0f, 0.0f, 0.0f, nullptr, 0);       //创建根骨骼对应部位对象
+    bRoot = new BodyPart(0.0f, 0.0f, 0.0f, nullptr, 0);//创建根骨骼对应部位对象
     bBody = new BodyPart(0.0f, 0.938f, 0.0f, objObject[0], 1);//创建身体对应部位对象
     bHead = new BodyPart(0.0f, 1.00f, 0.0f, objObject[1], 2);
     bLeftTop = new BodyPart(0.107f, 0.938f, 0.0f, objObject[2], 3);
@@ -40,23 +40,23 @@ Robot::Robot(vector<ObjObject *> objObject) {
     bLeftLegTop->addChild(bLeftLegBottom);
     bLeftLegBottom->addChild(bLeftFoot);
     bRightLegBottom->addChild(bRightFoot);
-    bRoot->initFratherMatrix(); //调用initFatherMatrix 方法初始化相关矩阵
-    bRoot->updateBone();        //调用updateBone 方法计算骨骼在世界坐标系中的初始变换矩阵
+    bRoot->initFratherMatrix();//调用initFatherMatrix 方法初始化相关矩阵
+    bRoot->updateBone();//调用updateBone 方法计算骨骼在世界坐标系中的初始变换矩阵
     bRoot->calMWorldInitInver();//调用calMWorldInitInver 方法计算初始变换矩阵的逆矩阵
 }
 void Robot::updateState() {//更新机器人状态的方法
-    bRoot->updateBone();   //调用根骨骼的updateBone 方法逐层级联更新所有骨骼的变换矩阵
+    bRoot->updateBone();//调用根骨骼的updateBone 方法逐层级联更新所有骨骼的变换矩阵
 }
 void Robot::backToInit() {//恢复机器人姿态到初始状态的方法
-    bRoot->backToInit();  //调用根骨骼的backToInit 方法逐层级联恢复所有骨骼到初始状态
+    bRoot->backToInit();//调用根骨骼的backToInit 方法逐层级联恢复所有骨骼到初始状态
 }
 void Robot::drawSelf(VkCommandBuffer &cmd,//绘制方法
                      VkPipelineLayout &pipelineLayout,
                      VkPipeline &pipeline,
                      VkDescriptorSet *desSetPointer) {
-    MatrixState3D::pushMatrix();                                  //保护现场
+    MatrixState3D::pushMatrix();//保护现场
     bRoot->drawSelf(cmd, pipelineLayout, pipeline, desSetPointer);//调用根骨骼的绘制方法逐层级联绘制
-    MatrixState3D::popMatrix();                                   //恢复现场
+    MatrixState3D::popMatrix();//恢复现场
 }
 Robot::~Robot() {
     for (BodyPart *bp: bpVector) {

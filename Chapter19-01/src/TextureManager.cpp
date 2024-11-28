@@ -300,11 +300,11 @@ void TextureManager::init_DXT5_BC3_Textures(std::string texName, VkDevice &devic
 }
 
 void TextureManager::initTextures(VkDevice &device, VkPhysicalDevice &gpu, VkPhysicalDeviceMemoryProperties &memoryProperties, VkCommandBuffer &cmdBuffer, VkQueue &queueGraphics) {
-    initSampler(device, gpu);                //初始化采样器
+    initSampler(device, gpu);//初始化采样器
     for (int i = 0; i < texNames.size(); i++)//遍历纹理文件名称列表
     {
-        TexDataObject *ctdo = FileUtil::load_DXT5_BC3_TexData(texNames[i]);                                                           //加载纹理文件数据
-        printf("\n%s w %d h %d", texNames[i].c_str(), ctdo->width, ctdo->height);                                                     //打印纹理数据信息
+        TexDataObject *ctdo = FileUtil::load_DXT5_BC3_TexData(texNames[i]);//加载纹理文件数据
+        printf("\n%s w %d h %d", texNames[i].c_str(), ctdo->width, ctdo->height);//打印纹理数据信息
         init_DXT5_BC3_Textures(texNames[i], device, gpu, memoryProperties, cmdBuffer, queueGraphics, VK_FORMAT_BC3_UNORM_BLOCK, ctdo);//加载压缩纹理
     }
 }

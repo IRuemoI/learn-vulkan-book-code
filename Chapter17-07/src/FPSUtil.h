@@ -2,25 +2,23 @@
 #define VULKANEXBASE_FPSUTIL_H
 
 
-class FPSUtil
-{
+class FPSUtil {
 public:
-
-	static int FPSCount;
-	static long long startTime;
-	static float currFPS;
-
-
-	static long long beforeTime;
+    static int FPSCount;
+    static long long startTime;
+    static float currFPS;
 
 
-	static void init();
-	static void calFPS();
+    static long long beforeTime;
 
 
-	static void before();
-	static void after(int dstFPS);
+    static void init();
+    static void calFPS();
+
+
+    static void before();
+    static void after(int dstFPS);
 };
 
 
-#endif 
+#endif

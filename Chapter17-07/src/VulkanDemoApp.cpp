@@ -116,15 +116,15 @@ VulkanDemoApp::get_required_extensions() {
 
 // 创建vulkan实例的方法
 void VulkanDemoApp::initVulkanInstance() {
-    instanceExtensionNames.push_back(VK_KHR_SURFACE_EXTENSION_NAME);// 此处移植Windows不需更改
+    instanceExtensionNames.push_back(VK_KHR_SURFACE_EXTENSION_NAME);
 
     VkApplicationInfo app_info = {};// 构建应用信息结构体实例
     app_info.sType = VK_STRUCTURE_TYPE_APPLICATION_INFO;// 结构体的类型
     app_info.pNext = nullptr;// 自定义数据的指针
     app_info.pApplicationName = "HelloVulkan";// 应用的名称
-    app_info.applicationVersion = 1;// 应用的版本号
+    app_info.applicationVersion = VK_MAKE_VERSION(1, 0, 0);// 应用的版本号
     app_info.pEngineName = "HelloVulkan";// 应用的引擎名称
-    app_info.engineVersion = 1;// 应用的引擎版本号
+    app_info.engineVersion = VK_MAKE_VERSION(1, 0, 0);// 应用的引擎版本号
     app_info.apiVersion = VK_API_VERSION_1_2;// 使用的Vulkan图形应用程序API版本
 
     instanceExtensionNames = get_required_extensions();// 获取所有glfw要求的扩展

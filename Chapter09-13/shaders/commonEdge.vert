@@ -12,7 +12,7 @@ out gl_PerVertex{
 };
 void main()
 {
-    vec3 position = pos;    // 获取此顶点的位置
-    position.xyz += inNormal * 0.4; // 进行顶点挤出
+    vec3 position = pos;// 获取此顶点的位置
+    position.xyz += inNormal * 0.4;// 进行顶点挤出
     gl_Position = myConstantVals.mvp * vec4(position.xyz, 1);
 }

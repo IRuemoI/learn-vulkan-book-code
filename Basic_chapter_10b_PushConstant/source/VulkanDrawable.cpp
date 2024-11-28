@@ -463,8 +463,7 @@ void VulkanDrawable::render() {
 }
 
 void VulkanDrawable::createDescriptorSetLayout(bool useTexture) {
-    // Define the layout binding information for the descriptor set(before creating it)
-    // Specify binding point, shader type(like vertex shader below), count etc.
+    // 在创建之前定义描述符布局绑定信息，设置绑定点，着色器类型(例如顶点着色器)、数量等等
     VkDescriptorSetLayoutBinding layoutBindings[2];
     layoutBindings[0].binding = 0;// DESCRIPTOR_SET_BINDING_INDEX
     layoutBindings[0].descriptorType = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
@@ -472,7 +471,7 @@ void VulkanDrawable::createDescriptorSetLayout(bool useTexture) {
     layoutBindings[0].stageFlags = VK_SHADER_STAGE_VERTEX_BIT;
     layoutBindings[0].pImmutableSamplers = nullptr;
 
-    // If texture is being used then there existing second binding in the fragment shader
+    // 使用纹理的话需要在片元着色器中定义第二个绑定
     if (useTexture) {
         layoutBindings[1].binding = 1;// DESCRIPTOR_SET_BINDING_INDEX
         layoutBindings[1].descriptorType = VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;
@@ -481,8 +480,7 @@ void VulkanDrawable::createDescriptorSetLayout(bool useTexture) {
         layoutBindings[1].pImmutableSamplers = nullptr;
     }
 
-    // Specify the layout bind into the VkDescriptorSetLayoutCreateInfo
-    // and use it to create a descriptor set layout
+    // 设置布局绑定信息，创建描述符集布局
     VkDescriptorSetLayoutCreateInfo descriptorLayout = {};
     descriptorLayout.sType = VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_CREATE_INFO;
     descriptorLayout.pNext = nullptr;
@@ -490,8 +488,7 @@ void VulkanDrawable::createDescriptorSetLayout(bool useTexture) {
     descriptorLayout.pBindings = layoutBindings;
 
     VkResult result;
-    // Allocate required number of descriptor layout objects and
-    // create them using vkCreateDescriptorSetLayout()
+    // 分配所需的描述符布局对象的数量。然后执行创建
     descLayout.resize(1);
     result = vkCreateDescriptorSetLayout(deviceObj->device, &descriptorLayout, nullptr, descLayout.data());
     assert(result == VK_SUCCESS);
@@ -501,14 +498,17 @@ void VulkanDrawable::createDescriptorSetLayout(bool useTexture) {
 // VulkanDescriptor and defined in the VulkanDrawable class.
 // virtual void VulkanDescriptor::createPipelineLayout() = 0;
 
-// Creates the pipeline layout to inject into the pipeline
+// 创建流水线布局，注入流水线中
 void VulkanDrawable::createPipelineLayout() {
     // Setup the push constant range
-    const unsigned pushConstantRangeCount = 1;
+    const unsigned pushConstantRangeCount = 2;
     VkPushConstantRange pushConstantRanges[pushConstantRangeCount] = {};
     pushConstantRanges[0].stageFlags = VK_SHADER_STAGE_FRAGMENT_BIT;
     pushConstantRanges[0].offset = 0;
-    pushConstantRanges[0].size = 8;
+    pushConstantRanges[0].size = sizeof(unsigned);
+    pushConstantRanges[1].stageFlags = VK_SHADER_STAGE_FRAGMENT_BIT;
+    pushConstantRanges[1].offset = sizeof(unsigned);
+    pushConstantRanges[1].size = sizeof(float);
 
     // Create the pipeline layout with the help of descriptor layout.
     VkPipelineLayoutCreateInfo pPipelineLayoutCreateInfo = {};

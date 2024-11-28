@@ -18,14 +18,14 @@ string FileUtil::loadAssetStr(string filename) {
     return shaderSource;
 }
 
-int fromBytesToInt(unsigned char *buff) {        //将字节序列转换为int值的方法
-    int k = 0;                                   //结果变量
+int fromBytesToInt(unsigned char *buff) {//将字节序列转换为int值的方法
+    int k = 0;//结果变量
     unsigned char *temp = (unsigned char *) (&k);//将结果变量所占内存以字节序列模式访问
-    temp[0] = buff[0];                           //设置第1个字节的数据
-    temp[1] = buff[1];                           //设置第2个字节的数据
-    temp[2] = buff[2];                           //设置第3个字节的数据
-    temp[3] = buff[3];                           //设置第4个字节的数据
-    return k;                                    //返回结果值
+    temp[0] = buff[0];//设置第1个字节的数据
+    temp[1] = buff[1];//设置第2个字节的数据
+    temp[2] = buff[2];//设置第3个字节的数据
+    temp[3] = buff[3];//设置第4个字节的数据
+    return k;//返回结果值
 }
 
 ThreeDTexDataObject *FileUtil::load3DTexData(string filename)//加载 3D 纹理数据的方法
@@ -38,14 +38,14 @@ ThreeDTexDataObject *FileUtil::load3DTexData(string filename)//加载 3D 纹理�
     if (fpPhoto == nullptr) {
         printf("打开文件失败\n");
     }
-    fread(buf, 4, 1, fpPhoto);                                                      //读取纹理宽度数据字节
-    int width = fromBytesToInt(buf);                                                //转换为 int 型数值
-    fread(buf, 4, 1, fpPhoto);                                                      //读取纹理高度数据字节
-    int height = fromBytesToInt(buf);                                               //转换为 int 型数值
-    fread(buf, 4, 1, fpPhoto);                                                      //读取纹理深度数据字节
-    int depth = fromBytesToInt(buf);                                                //转换为 int 型数值
-    unsigned char *data = new unsigned char[width * height * depth * 4];            //开辟纹理数据存储内存
-    fread(data, width * height * depth * 4, 1, fpPhoto);                            //读取纹理数据
+    fread(buf, 4, 1, fpPhoto);//读取纹理宽度数据字节
+    int width = fromBytesToInt(buf);//转换为 int 型数值
+    fread(buf, 4, 1, fpPhoto);//读取纹理高度数据字节
+    int height = fromBytesToInt(buf);//转换为 int 型数值
+    fread(buf, 4, 1, fpPhoto);//读取纹理深度数据字节
+    int depth = fromBytesToInt(buf);//转换为 int 型数值
+    unsigned char *data = new unsigned char[width * height * depth * 4];//开辟纹理数据存储内存
+    fread(data, width * height * depth * 4, 1, fpPhoto);//读取纹理数据
     ThreeDTexDataObject *ctdo = new ThreeDTexDataObject(width, height, depth, data);//创建纹理数据对象
-    return ctdo;                                                                    //返回结果
+    return ctdo;//返回结果
 }

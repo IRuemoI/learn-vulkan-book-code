@@ -86,11 +86,11 @@ void ObjObject::createAABB() {//创建物体AABB 包围盒的方法
         float currX = vdata[i * 6 + 0];
         float currY = vdata[i * 6 + 1];
         float currZ = vdata[i * 6 + 2];//获取当前顶点的坐标
-        if (minX > currX) {            //若原minX 值大于当前顶点X 坐标
-            minX = currX;              //更新AABB 包围盒的minX 值
+        if (minX > currX) {//若原minX 值大于当前顶点X 坐标
+            minX = currX;//更新AABB 包围盒的minX 值
         }
         if (maxX < currX) {//若原maxX 值小于当前顶点X 坐标
-            maxX = currX;  //更新AABB 包围盒的maxX 值
+            maxX = currX;//更新AABB 包围盒的maxX 值
         }
         if (minY > currY) { minY = currY; }
         if (maxY < currY) { maxY = currY; }

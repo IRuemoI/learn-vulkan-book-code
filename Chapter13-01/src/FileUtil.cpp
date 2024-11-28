@@ -50,20 +50,20 @@ TexDataObject *FileUtil::loadCommonTexData(string filename) {
 TexDataObject *FileUtil::loadCubemapTexData(string filename) {
 
     unsigned char *buf = new unsigned char[4];
-    char c_file[1000];               //文件路径
+    char c_file[1000];//文件路径
     strcpy(c_file, filename.c_str());//将文件路径转换成字符数组
     FILE *fpPhoto;
     fpPhoto = fopen(c_file, "rb");//将文件以二进制形式打开
     if (fpPhoto == nullptr) {
         printf("打开文件3失败\n");
     }
-    fread(buf, 4, 1, fpPhoto);      //纹理宽度,读取4个字节存入buf
+    fread(buf, 4, 1, fpPhoto);//纹理宽度,读取4个字节存入buf
     int width = fromBytesToInt(buf);//将buf转成一个int宽度
 
-    fread(buf, 4, 1, fpPhoto);       //纹理高度读取4个字节存入buf
+    fread(buf, 4, 1, fpPhoto);//纹理高度读取4个字节存入buf
     int height = fromBytesToInt(buf);//将buf转成一个int高度
 
-    fread(buf, 4, 1, fpPhoto);      //纹理高度读取4个字节存入buf
+    fread(buf, 4, 1, fpPhoto);//纹理高度读取4个字节存入buf
     int count = fromBytesToInt(buf);//读取纹理元素数量
     assert(count == 6);
 

@@ -24,15 +24,15 @@ void Planet::initInstanceData() {
     for (int i = 0; i < groupNumber; i++) {
         float curAngle = i * angleSpan;//当前的角度
         for (int j = 0; j < oneGroupNumber; j++) {
-            float translateDis = distanceDai + linWidthSpan * j;                       //当前平移距离
+            float translateDis = distanceDai + linWidthSpan * j;//当前平移距离
             float stoneAngle = curAngle + rotateAngle + angleSpan * random(0.0f, 1.0f);//石头的旋转角度
-            float translateX = translateDis * cos(toRadians(stoneAngle));              //X方向的平移
-            float translateZ = translateDis * sin(toRadians(stoneAngle));              //Z方向的平移
+            float translateX = translateDis * cos(toRadians(stoneAngle));//X方向的平移
+            float translateZ = translateDis * sin(toRadians(stoneAngle));//Z方向的平移
 
             attributeQiu.push_back(translateDis);//将半径存入列表
-            attributeQiu.push_back(stoneAngle);  //将角度存入列表
-            attributeQiu.push_back(translateX);  //X位移
-            attributeQiu.push_back(translateZ);  //Z位移位移
+            attributeQiu.push_back(stoneAngle);//将角度存入列表
+            attributeQiu.push_back(translateX);//X位移
+            attributeQiu.push_back(translateZ);//Z位移位移
         }
     }
 }

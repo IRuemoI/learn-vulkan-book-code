@@ -10,12 +10,12 @@ public:
     float *pushConstantData;
     VkBuffer vertexDatabuf;
     VkDeviceMemory vertexDataMem;
-    float postionX;   //树的中心X坐标
-    float postionY;   //树的中心Y坐标
-    float postionZ;   //树的中心Z坐标
-    float centerx;    //树叶的中心X坐标
-    float centery;    //树叶的中心Y坐标
-    float centerz;    //树叶的中心Z坐标
+    float postionX;//树的中心X坐标
+    float postionY;//树的中心Y坐标
+    float postionZ;//树的中心Z坐标
+    float centerx;//树叶的中心X坐标
+    float centery;//树叶的中心Y坐标
+    float centerz;//树叶的中心Z坐标
     float centerAngle;//树叶的旋转角度
     float id;
     VkDescriptorBufferInfo vertexDataBufferInfo;

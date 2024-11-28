@@ -13,7 +13,7 @@
 // 程序调用的显卡索引 若只有一个GPU此值只可能是0
 #define USED_GPU_INDEX 0
 
-uint32_t VulkanDemoApp::screenWidth; // 屏幕宽度
+uint32_t VulkanDemoApp::screenWidth;// 屏幕宽度
 uint32_t VulkanDemoApp::screenHeight;// 屏幕高度
 
 float VulkanDemoApp::xAngle = 0;
@@ -38,11 +38,11 @@ void VulkanDemoApp::initWindow() {
     glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);// 禁用OpenGL上下文
 
     window = glfwCreateWindow(WIDTH, HEIGHT, "Vulkan 14.7", nullptr, nullptr);// 创建窗口并返回窗口的句柄
-    glfwSetWindowUserPointer(window, this);                                   // 设置窗口用户指针
+    glfwSetWindowUserPointer(window, this);// 设置窗口用户指针
 
-    glfwSetCursorPosCallback(window, cursor_pos_callback);    // 设置光标位置回调函数
+    glfwSetCursorPosCallback(window, cursor_pos_callback);// 设置光标位置回调函数
     glfwSetMouseButtonCallback(window, mouse_button_callback);// 设置鼠标点击回调函数
-    glfwSetScrollCallback(window, scroll_callback);           // 设置鼠标滚轮回调函数
+    glfwSetScrollCallback(window, scroll_callback);// 设置鼠标滚轮回调函数
 
     glfwSetFramebufferSizeCallback(window, frameBufferResizeCallback);// 设置帧缓冲区大小更改回到函数(窗口大小更改时调用)
 }
@@ -55,13 +55,13 @@ void VulkanDemoApp::frameBufferResizeCallback(GLFWwindow *window, int width, int
 
 void VulkanDemoApp::initVulkan() {
     initVulkanInstance();// 创建Vulkan实例
-    // TODO:实现setupDebugMessenger函数
+
     enumerateVulkanPhysicalDevices();// 获取物理设备列表
-    createVulkanDevices();           // 创建逻辑设备
-    createVulkanCommandBuffer();     // 创建命令缓冲
-    initQueue();                     // 获取设备中支持图形工作的队列
-    createVulkanSwapChain();         // 初始化交换链
-    createVulkanDepthBuffer();       // 创建深度缓冲
+    createVulkanDevices();// 创建逻辑设备
+    createVulkanCommandBuffer();// 创建命令缓冲
+    initQueue();// 获取设备中支持图形工作的队列
+    createVulkanSwapChain();// 初始化交换链
+    createVulkanDepthBuffer();// 创建深度缓冲
     createVulkanSelfColorBuffer();
     createRenderPassScreen();
     createRenderPassSelf();
@@ -69,10 +69,10 @@ void VulkanDemoApp::initVulkan() {
     createFrameBufferSelf();
     initTextures();
     createDrawableObject();// 创建绘制用的物体
-    initPipeline();        // 初始化渲染管线
-    createFence();         // 创建栅栏
-    initPresentInfo();     // 初始化呈现信息
-    initMatrixAndLight();  // 初始化基本变换矩阵、摄像机矩阵、投影矩阵和光照
+    initPipeline();// 初始化渲染管线
+    createFence();// 创建栅栏
+    initPresentInfo();// 初始化呈现信息
+    initMatrixAndLight();// 初始化基本变换矩阵、摄像机矩阵、投影矩阵和光照
 }
 
 void VulkanDemoApp::mainLoop() {
@@ -81,15 +81,15 @@ void VulkanDemoApp::mainLoop() {
     // 若glfw所管理的窗口没有点击关闭按钮则一直循环
     while (!glfwWindowShouldClose(window)) {
         processInputs(window);// 处理键鼠输入
-        glfwPollEvents();     // 处理glfw相关的事件，比如窗口的移动和关闭等
-        drawObject();         // 绘制帧
+        glfwPollEvents();// 处理glfw相关的事件，比如窗口的移动和关闭等
+        drawObject();// 绘制帧
     }
     vkDeviceWaitIdle(device);// 等待所有指令提交后设备闲置
 }
 
 void VulkanDemoApp::cleanup() {
-    destroyFence();         // 销毁栅栏
-    destroyPipeline();      // 销毁管线
+    destroyFence();// 销毁栅栏
+    destroyPipeline();// 销毁管线
     destroyDrawableObject();// 销毁绘制用物体
     destroyTextures();
     destroyVulkanSelfColorBuffer();
@@ -99,10 +99,10 @@ void VulkanDemoApp::cleanup() {
     destroyRenderPassSelf();
     destroyVulkanDepthBuffer();
     destroyVulkanSelfColorBuffer();
-    destroyVulkanSwapChain();    // 销毁交换链相关
+    destroyVulkanSwapChain();// 销毁交换链相关
     destroyVulkanCommandBuffer();// 销毁命令缓冲
-    destroyVulkanDevices();      // 销毁逻辑设备
-    destroyVulkanInstance();     // 销毁Vulkan 实例
+    destroyVulkanDevices();// 销毁逻辑设备
+    destroyVulkanInstance();// 销毁Vulkan 实例
     destroyWindow();
     glfwTerminate();// 终止glfw程序
 }
@@ -114,8 +114,8 @@ void VulkanDemoApp::destroyWindow() const {
 // 获取所有glfw要求的扩展
 std::vector<const char *>
 VulkanDemoApp::get_required_extensions() {
-    uint32_t glfwExtensionCount = 0;                                        // 定义glfw所需的扩展数量
-    const char **glfwExtensions;                                            // glfw所需的扩展名称
+    uint32_t glfwExtensionCount = 0;// 定义glfw所需的扩展数量
+    const char **glfwExtensions;// glfw所需的扩展名称
     glfwExtensions = glfwGetRequiredInstanceExtensions(&glfwExtensionCount);// 查找glfw所需的扩展
 
     std::vector<const char *> extensions(
@@ -126,28 +126,28 @@ VulkanDemoApp::get_required_extensions() {
 
 // 创建vulkan实例的方法
 void VulkanDemoApp::initVulkanInstance() {
-    instanceExtensionNames.push_back(VK_KHR_SURFACE_EXTENSION_NAME);// 此处移植Windows不需更改
+    instanceExtensionNames.push_back(VK_KHR_SURFACE_EXTENSION_NAME);
 
-    VkApplicationInfo app_info = {};                    // 构建应用信息结构体实例
+    VkApplicationInfo app_info = {};// 构建应用信息结构体实例
     app_info.sType = VK_STRUCTURE_TYPE_APPLICATION_INFO;// 结构体的类型
-    app_info.pNext = nullptr;                           // 自定义数据的指针
-    app_info.pApplicationName = "HelloVulkan";          // 应用的名称
-    app_info.applicationVersion = 1;                    // 应用的版本号
-    app_info.pEngineName = "HelloVulkan";               // 应用的引擎名称
-    app_info.engineVersion = 1;                         // 应用的引擎版本号
-    app_info.apiVersion = VK_API_VERSION_1_2;           // 使用的Vulkan图形应用程序API版本
+    app_info.pNext = nullptr;// 自定义数据的指针
+    app_info.pApplicationName = "HelloVulkan";// 应用的名称
+    app_info.applicationVersion = VK_MAKE_VERSION(1, 0, 0);// 应用的版本号
+    app_info.pEngineName = "HelloVulkan";// 应用的引擎名称
+    app_info.engineVersion = VK_MAKE_VERSION(1, 0, 0);// 应用的引擎版本号
+    app_info.apiVersion = VK_API_VERSION_1_2;// 使用的Vulkan图形应用程序API版本
 
     instanceExtensionNames = get_required_extensions();// 获取所有glfw要求的扩展
 
-    VkInstanceCreateInfo inst_info = {};                                                   // 构建实例创建信息结构体实例
-    inst_info.sType = VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO;                              // 结构体的类型
-    inst_info.pNext = nullptr;                                                             // 自定义数据的指针
-    inst_info.flags = 0;                                                                   // 供将来使用的标志
-    inst_info.pApplicationInfo = &app_info;                                                // 绑定应用信息结构体
+    VkInstanceCreateInfo inst_info = {};// 构建实例创建信息结构体实例
+    inst_info.sType = VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO;// 结构体的类型
+    inst_info.pNext = nullptr;// 自定义数据的指针
+    inst_info.flags = 0;// 供将来使用的标志
+    inst_info.pApplicationInfo = &app_info;// 绑定应用信息结构体
     inst_info.enabledExtensionCount = static_cast<uint32_t>(instanceExtensionNames.size());// 设置启用扩展的数量
-    inst_info.ppEnabledExtensionNames = instanceExtensionNames.data();                     // 设置所有启用的扩展名称
+    inst_info.ppEnabledExtensionNames = instanceExtensionNames.data();// 设置所有启用的扩展名称
 
-    inst_info.enabledLayerCount = 0;        // 启动的层数量
+    inst_info.enabledLayerCount = 0;// 启动的层数量
     inst_info.ppEnabledLayerNames = nullptr;// 启动的层名称列表
 
     VkResult result;// 存储运行结果的辅助变量
@@ -194,41 +194,41 @@ void VulkanDemoApp::createVulkanDevices() {
                                              queueFamilyProps.data());// 填充物理设备0队列家族属性列表
     printf("[成功获取Vulkan硬件设备支持的队列家族属性列表]\n");
 
-    VkDeviceQueueCreateInfo queueInfo = {};                          // 构建设备队列创建信息结构体实例
-    for (unsigned int i = 0; i < queueFamilyCount; i++) {            // 遍历所有队列家族
+    VkDeviceQueueCreateInfo queueInfo = {};// 构建设备队列创建信息结构体实例
+    for (unsigned int i = 0; i < queueFamilyCount; i++) {// 遍历所有队列家族
         if (queueFamilyProps[i].queueFlags & VK_QUEUE_GRAPHICS_BIT) {// 若当前队列家族支持图形工作
-            queueInfo.queueFamilyIndex = i;                          // 绑定此队列家族索引
-            queueGraphicsFamilyIndex = i;                            // 记录支持图形工作的队列家族索引
+            queueInfo.queueFamilyIndex = i;// 绑定此队列家族索引
+            queueGraphicsFamilyIndex = i;// 记录支持图形工作的队列家族索引
             printf("[支持GRAPHICS工作的一个队列家族的索引为%d]\n", i);
             printf("[此家族中的实际队列数量是%d]\n", queueFamilyProps[i].queueCount);
             break;
         }
     }
 
-    float queue_priorities[1] = {0.0};                              // 创建队列优先级数组
-    queueInfo.sType = VK_STRUCTURE_TYPE_DEVICE_QUEUE_CREATE_INFO;   // 给出结构体类型
-    queueInfo.pNext = nullptr;                                      // 自定义数据的指针
-    queueInfo.queueCount = 1;                                       // 指定队列数量
-    queueInfo.pQueuePriorities = queue_priorities;                  // 给出每个队列的优先级
-    queueInfo.queueFamilyIndex = queueGraphicsFamilyIndex;          // 绑定队列家族索引
+    float queue_priorities[1] = {0.0};// 创建队列优先级数组
+    queueInfo.sType = VK_STRUCTURE_TYPE_DEVICE_QUEUE_CREATE_INFO;// 给出结构体类型
+    queueInfo.pNext = nullptr;// 自定义数据的指针
+    queueInfo.queueCount = 1;// 指定队列数量
+    queueInfo.pQueuePriorities = queue_priorities;// 给出每个队列的优先级
+    queueInfo.queueFamilyIndex = queueGraphicsFamilyIndex;// 绑定队列家族索引
     deviceExtensionNames.push_back(VK_KHR_SWAPCHAIN_EXTENSION_NAME);// 设置所需扩展
 
     VkPhysicalDeviceFeatures pdf;
     vkGetPhysicalDeviceFeatures(gpus[USED_GPU_INDEX], &pdf);
 
-    VkDeviceCreateInfo deviceInfo = {};                              // 构建逻辑设备创建信息结构体实例
-    deviceInfo.sType = VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO;         // 给出结构体类型
-    deviceInfo.pNext = nullptr;                                      // 自定义数据的指针
-    deviceInfo.queueCreateInfoCount = 1;                             // 指定设备队列创建信息结构体数量
-    deviceInfo.pQueueCreateInfos = &queueInfo;                       // 给定设备队列创建信息结构体列表
-    deviceInfo.enabledExtensionCount = deviceExtensionNames.size();  // 所需扩展数量
+    VkDeviceCreateInfo deviceInfo = {};// 构建逻辑设备创建信息结构体实例
+    deviceInfo.sType = VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO;// 给出结构体类型
+    deviceInfo.pNext = nullptr;// 自定义数据的指针
+    deviceInfo.queueCreateInfoCount = 1;// 指定设备队列创建信息结构体数量
+    deviceInfo.pQueueCreateInfos = &queueInfo;// 给定设备队列创建信息结构体列表
+    deviceInfo.enabledExtensionCount = deviceExtensionNames.size();// 所需扩展数量
     deviceInfo.ppEnabledExtensionNames = deviceExtensionNames.data();// 所需扩展列表
-    deviceInfo.enabledLayerCount = 0;                                // 需启动Layer的数量
-    deviceInfo.ppEnabledLayerNames = nullptr;                        // 需启动Layer的名称列表
-    deviceInfo.pEnabledFeatures = &pdf;                              // 启用的设备特性
+    deviceInfo.enabledLayerCount = 0;// 需启动Layer的数量
+    deviceInfo.ppEnabledLayerNames = nullptr;// 需启动Layer的名称列表
+    deviceInfo.pEnabledFeatures = &pdf;// 启用的设备特性
 
     VkResult result = vkCreateDevice(gpus[USED_GPU_INDEX], &deviceInfo, nullptr, &device);// 创建逻辑设备
-    assert(result == VK_SUCCESS);                                                         // 检查逻辑设备是否创建成功
+    assert(result == VK_SUCCESS);// 检查逻辑设备是否创建成功
 }
 
 // 销毁逻辑设备的方法
@@ -274,9 +274,9 @@ void VulkanDemoApp::destroyVulkanCommandBuffer()// 销毁命令缓冲的方法
     // 创建要释放的命令缓冲数组
     VkCommandBuffer cmdBufferArray[1] = {cmdBuffer};
     // 释放命令缓冲
-    vkFreeCommandBuffers(device,       // 所属逻辑设备
-                         cmdPool,      // 所属命令池
-                         1,            // 要销毁的命令缓冲数量
+    vkFreeCommandBuffers(device,// 所属逻辑设备
+                         cmdPool,// 所属命令池
+                         1,// 要销毁的命令缓冲数量
                          cmdBufferArray// 要销毁的命令缓冲数组
     );
     // 销毁命令池
@@ -296,8 +296,8 @@ void VulkanDemoApp::createVulkanSwapChain() {
         printf("队列家族索引=%d %s显示\n", i, (pSupportsPresent[i] == 1 ? "支持" : "不支持"));
     }
 
-    queueGraphicsFamilyIndex = UINT32_MAX;         // 支持图形工作的队列家族索引
-    queuePresentFamilyIndex = UINT32_MAX;          // 支持显示(呈现)工作的队列家族索引
+    queueGraphicsFamilyIndex = UINT32_MAX;// 支持图形工作的队列家族索引
+    queuePresentFamilyIndex = UINT32_MAX;// 支持显示(呈现)工作的队列家族索引
     for (uint32_t i = 0; i < queueFamilyCount; ++i)// 遍历设备对应的队列家族列表
     {
         // 如果当前遍历到的队列家族支持Graphics（图形）工作
@@ -310,7 +310,7 @@ void VulkanDemoApp::createVulkanSwapChain() {
             if (pSupportsPresent[i] == VK_TRUE)// 如果当前队列家族支持显示工作
             {
                 queueGraphicsFamilyIndex = i;// 记录此队列家族索引为支持图形工作的
-                queuePresentFamilyIndex = i; // 记录此队列家族索引为支持显示工作的
+                queuePresentFamilyIndex = i;// 记录此队列家族索引为支持显示工作的
                 printf("队列家族索引=%d "
                        "同时支持Graphics（图形）和Present（显示）工作\n",
                        i);
@@ -344,10 +344,10 @@ void VulkanDemoApp::createVulkanSwapChain() {
                                                   nullptr);// 获取支持的格式数量
     printf("支持的格式数量为 %d\n", formatCount);
     auto *surfFormats = (VkSurfaceFormatKHR *) malloc(formatCount * sizeof(VkSurfaceFormatKHR));// 分配对应数量的空间
-    formats.resize(formatCount);                                                                // 调整对应Vector尺寸
+    formats.resize(formatCount);// 调整对应Vector尺寸
     result = vkGetPhysicalDeviceSurfaceFormatsKHR(gpus[USED_GPU_INDEX], surface, &formatCount,
                                                   surfFormats);// 获取支持的格式信息
-    for (unsigned int i = 0; i < formatCount; i++) {           // 记录支持的格式信息
+    for (unsigned int i = 0; i < formatCount; i++) {// 记录支持的格式信息
         formats[i] = surfFormats[i].format;
         printf("[%d]支持的格式为%d\n", i, formats[i]);
     }
@@ -375,7 +375,7 @@ void VulkanDemoApp::createVulkanSwapChain() {
     }
 
     VkPresentModeKHR swapchainPresentMode = VK_PRESENT_MODE_FIFO_KHR;// 确定交换链显示模式
-    for (size_t i = 0; i < presentModeCount; i++)                    // 遍历显示模式列表
+    for (size_t i = 0; i < presentModeCount; i++)// 遍历显示模式列表
     {
         // 如果也支持VK_PRESENT_MODE_MAILBOX_KHR模式，由于其效率高，便选用
         if (presentModes[i] == VK_PRESENT_MODE_MAILBOX_KHR) {
@@ -392,7 +392,7 @@ void VulkanDemoApp::createVulkanSwapChain() {
     // 确定surface的宽度、高度
     // 如果surface能力中的尺寸没有定义（宽度为0xFFFFFFFF表示没定义）
     if (surfCapabilities.currentExtent.width == 0xFFFFFFFF) {
-        swapchainExtent.width = screenWidth;  // 设置宽度为窗体宽度
+        swapchainExtent.width = screenWidth;// 设置宽度为窗体宽度
         swapchainExtent.height = screenHeight;// 设置高度为窗体高度
         // 宽度设置值限制到最大值与最小值之间
         if (swapchainExtent.width < surfCapabilities.minImageExtent.width) {
@@ -413,7 +413,7 @@ void VulkanDemoApp::createVulkanSwapChain() {
         printf("使用获取的surface能力中的 宽度 %d 高度 %d\n", swapchainExtent.width, swapchainExtent.height);
     }
 
-    screenWidth = swapchainExtent.width;  // 记录实际采用的宽度
+    screenWidth = swapchainExtent.width;// 记录实际采用的宽度
     screenHeight = swapchainExtent.height;// 记录实际采用的高度
 
     // 期望交换链中的最少图像数量
@@ -433,25 +433,25 @@ void VulkanDemoApp::createVulkanSwapChain() {
         preTransform = surfCapabilities.currentTransform;
     }
 
-    VkSwapchainCreateInfoKHR swapchain_ci = {};                      // 构建交换链创建信息结构体实例
+    VkSwapchainCreateInfoKHR swapchain_ci = {};// 构建交换链创建信息结构体实例
     swapchain_ci.sType = VK_STRUCTURE_TYPE_SWAPCHAIN_CREATE_INFO_KHR;// 结构体类型
-    swapchain_ci.pNext = nullptr;                                    // 自定义数据的指针
-    swapchain_ci.surface = surface;                                  // 指定KHR表面
-    swapchain_ci.minImageCount = desiredMinNumberOfSwapChainImages;  // 最少图像数量
-    swapchain_ci.imageFormat = formats[0];                           // 图像格式
-    swapchain_ci.imageExtent.width = swapchainExtent.width;          // 交换链图像宽度
-    swapchain_ci.imageExtent.height = swapchainExtent.height;        // 交换链图像高度
-    swapchain_ci.preTransform = preTransform;                        // 指定变换标志
-    swapchain_ci.compositeAlpha = VK_COMPOSITE_ALPHA_OPAQUE_BIT_KHR; // 混合Alpha值
-    swapchain_ci.imageArrayLayers = 1;                               // 图像数组层数
-    swapchain_ci.presentMode = swapchainPresentMode;                 // 交换链的显示模式
-    swapchain_ci.oldSwapchain = VK_NULL_HANDLE;                      // 前导交换链
-    swapchain_ci.clipped = true;                                     // 开启剪裁
-    swapchain_ci.imageColorSpace = VK_COLORSPACE_SRGB_NONLINEAR_KHR; // 色彩空间
-    swapchain_ci.imageUsage = VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT;   // 图像用途
-    swapchain_ci.imageSharingMode = VK_SHARING_MODE_EXCLUSIVE;       // 图像共享模式
-    swapchain_ci.queueFamilyIndexCount = 0;                          // 队列家族数量
-    swapchain_ci.pQueueFamilyIndices = nullptr;                      // 队列家族索引列表
+    swapchain_ci.pNext = nullptr;// 自定义数据的指针
+    swapchain_ci.surface = surface;// 指定KHR表面
+    swapchain_ci.minImageCount = desiredMinNumberOfSwapChainImages;// 最少图像数量
+    swapchain_ci.imageFormat = formats[0];// 图像格式
+    swapchain_ci.imageExtent.width = swapchainExtent.width;// 交换链图像宽度
+    swapchain_ci.imageExtent.height = swapchainExtent.height;// 交换链图像高度
+    swapchain_ci.preTransform = preTransform;// 指定变换标志
+    swapchain_ci.compositeAlpha = VK_COMPOSITE_ALPHA_OPAQUE_BIT_KHR;// 混合Alpha值
+    swapchain_ci.imageArrayLayers = 1;// 图像数组层数
+    swapchain_ci.presentMode = swapchainPresentMode;// 交换链的显示模式
+    swapchain_ci.oldSwapchain = VK_NULL_HANDLE;// 前导交换链
+    swapchain_ci.clipped = true;// 开启剪裁
+    swapchain_ci.imageColorSpace = VK_COLORSPACE_SRGB_NONLINEAR_KHR;// 色彩空间
+    swapchain_ci.imageUsage = VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT;// 图像用途
+    swapchain_ci.imageSharingMode = VK_SHARING_MODE_EXCLUSIVE;// 图像共享模式
+    swapchain_ci.queueFamilyIndexCount = 0;// 队列家族数量
+    swapchain_ci.pQueueFamilyIndices = nullptr;// 队列家族索引列表
 
     if (queueGraphicsFamilyIndex != queuePresentFamilyIndex)// 若支持图形和显示工作的队列家族不相同
     {
@@ -463,38 +463,38 @@ void VulkanDemoApp::createVulkanSwapChain() {
 
     result = vkCreateSwapchainKHR(device, &swapchain_ci, nullptr,
                                   &swapChain);// 创建交换链
-    assert(result == VK_SUCCESS);             // 检查交换链是否创建成功
+    assert(result == VK_SUCCESS);// 检查交换链是否创建成功
 
     // 获取交换链中的图像数量
     result = vkGetSwapchainImagesKHR(device, swapChain, &swapchainImageCount, nullptr);
     assert(result == VK_SUCCESS);
     printf("[SwapChain中的Image数量为%d]\n", swapchainImageCount);// 检查是否获取成功
-    swapchainImages.resize(swapchainImageCount);                  // 调整图像列表尺寸
+    swapchainImages.resize(swapchainImageCount);// 调整图像列表尺寸
     // 获取交换链中的图像列表
     result = vkGetSwapchainImagesKHR(device, swapChain, &swapchainImageCount, swapchainImages.data());
     assert(result == VK_SUCCESS);
-    swapchainImageViews.resize(swapchainImageCount);  // 调整图像视图列表尺寸
+    swapchainImageViews.resize(swapchainImageCount);// 调整图像视图列表尺寸
     for (uint32_t i = 0; i < swapchainImageCount; i++)// 为交换链中的各幅图像创建图像视图
     {
-        VkImageViewCreateInfo color_image_view = {};                             // 构建图像视图创建信息结构体实例
-        color_image_view.sType = VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO;       // 设置结构体类型
-        color_image_view.pNext = nullptr;                                        // 自定义数据的指针
-        color_image_view.flags = 0;                                              // 供将来使用的标志
-        color_image_view.image = swapchainImages[i];                             // 对应交换链图像
-        color_image_view.viewType = VK_IMAGE_VIEW_TYPE_2D;                       // 图像视图的类型
-        color_image_view.format = formats[0];                                    // 图像视图格式
-        color_image_view.components.r = VK_COMPONENT_SWIZZLE_R;                  // 设置R通道调和
-        color_image_view.components.g = VK_COMPONENT_SWIZZLE_G;                  // 设置G通道调和
-        color_image_view.components.b = VK_COMPONENT_SWIZZLE_B;                  // 设置B通道调和
-        color_image_view.components.a = VK_COMPONENT_SWIZZLE_A;                  // 设置A通道调和
+        VkImageViewCreateInfo color_image_view = {};// 构建图像视图创建信息结构体实例
+        color_image_view.sType = VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO;// 设置结构体类型
+        color_image_view.pNext = nullptr;// 自定义数据的指针
+        color_image_view.flags = 0;// 供将来使用的标志
+        color_image_view.image = swapchainImages[i];// 对应交换链图像
+        color_image_view.viewType = VK_IMAGE_VIEW_TYPE_2D;// 图像视图的类型
+        color_image_view.format = formats[0];// 图像视图格式
+        color_image_view.components.r = VK_COMPONENT_SWIZZLE_R;// 设置R通道调和
+        color_image_view.components.g = VK_COMPONENT_SWIZZLE_G;// 设置G通道调和
+        color_image_view.components.b = VK_COMPONENT_SWIZZLE_B;// 设置B通道调和
+        color_image_view.components.a = VK_COMPONENT_SWIZZLE_A;// 设置A通道调和
         color_image_view.subresourceRange.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;// 图像视图使用方面
-        color_image_view.subresourceRange.baseMipLevel = 0;                      // 基础Mipmap级别
-        color_image_view.subresourceRange.levelCount = 1;                        // Mipmap级别的数量
-        color_image_view.subresourceRange.baseArrayLayer = 0;                    // 基础数组层
-        color_image_view.subresourceRange.layerCount = 1;                        // 数组层的数量
+        color_image_view.subresourceRange.baseMipLevel = 0;// 基础Mipmap级别
+        color_image_view.subresourceRange.levelCount = 1;// Mipmap级别的数量
+        color_image_view.subresourceRange.baseArrayLayer = 0;// 基础数组层
+        color_image_view.subresourceRange.layerCount = 1;// 数组层的数量
         result = vkCreateImageView(device, &color_image_view, nullptr,
                                    &swapchainImageViews[i]);// 创建图像视图
-        assert(result == VK_SUCCESS);                       // 检查是否创建成功
+        assert(result == VK_SUCCESS);// 检查是否创建成功
     }
 }
 
@@ -528,45 +528,45 @@ void VulkanDemoApp::createVulkanDepthBuffer() {
     } else {
         printf("不支持VK_FORMAT_D16_UNORM！\n");// 打印不支持指定格式的提示信息
     }
-    image_info.sType = VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO;        // 指定结构体类型
-    image_info.pNext = nullptr;                                    // 自定义数据的指针
-    image_info.imageType = VK_IMAGE_TYPE_2D;                       // 图像类型
-    image_info.format = depthFormat;                               // 图像格式
-    image_info.extent.width = screenWidth;                         // 图像宽度
-    image_info.extent.height = screenHeight;                       // 图像高度
-    image_info.extent.depth = 1;                                   // 图像深度
-    image_info.mipLevels = 1;                                      // 图像mipmap级数
-    image_info.arrayLayers = 1;                                    // 图像数组层数量
-    image_info.samples = VK_SAMPLE_COUNT_1_BIT;                    // 采样模式
-    image_info.initialLayout = VK_IMAGE_LAYOUT_UNDEFINED;          // 初始布局
+    image_info.sType = VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO;// 指定结构体类型
+    image_info.pNext = nullptr;// 自定义数据的指针
+    image_info.imageType = VK_IMAGE_TYPE_2D;// 图像类型
+    image_info.format = depthFormat;// 图像格式
+    image_info.extent.width = screenWidth;// 图像宽度
+    image_info.extent.height = screenHeight;// 图像高度
+    image_info.extent.depth = 1;// 图像深度
+    image_info.mipLevels = 1;// 图像mipmap级数
+    image_info.arrayLayers = 1;// 图像数组层数量
+    image_info.samples = VK_SAMPLE_COUNT_1_BIT;// 采样模式
+    image_info.initialLayout = VK_IMAGE_LAYOUT_UNDEFINED;// 初始布局
     image_info.usage = VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT;// 图像用途
-    image_info.queueFamilyIndexCount = 0;                          // 队列家族数量
-    image_info.pQueueFamilyIndices = nullptr;                      // 队列家族索引列表
-    image_info.sharingMode = VK_SHARING_MODE_EXCLUSIVE;            // 共享模式
-    image_info.flags = 0;                                          // 标志
+    image_info.queueFamilyIndexCount = 0;// 队列家族数量
+    image_info.pQueueFamilyIndices = nullptr;// 队列家族索引列表
+    image_info.sharingMode = VK_SHARING_MODE_EXCLUSIVE;// 共享模式
+    image_info.flags = 0;// 标志
 
-    VkMemoryAllocateInfo mem_alloc = {};                     // 构建内存分配信息结构体实例
+    VkMemoryAllocateInfo mem_alloc = {};// 构建内存分配信息结构体实例
     mem_alloc.sType = VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO;// 结构体类型
-    mem_alloc.pNext = nullptr;                               // 自定义数据的指针
-    mem_alloc.allocationSize = 0;                            // 分配的内存字节数
-    mem_alloc.memoryTypeIndex = 0;                           // 内存的类型索引
+    mem_alloc.pNext = nullptr;// 自定义数据的指针
+    mem_alloc.allocationSize = 0;// 分配的内存字节数
+    mem_alloc.memoryTypeIndex = 0;// 内存的类型索引
 
-    VkImageViewCreateInfo view_info = {};                             // 构建深度图像视图创建信息结构体实例
-    view_info.sType = VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO;       // 设置结构体类型
-    view_info.pNext = nullptr;                                        // 自定义数据的指针
-    view_info.image = VK_NULL_HANDLE;                                 // 对应的图像
-    view_info.format = depthFormat;                                   // 图像视图的格式
-    view_info.components.r = VK_COMPONENT_SWIZZLE_R;                  // 设置R通道调和
-    view_info.components.g = VK_COMPONENT_SWIZZLE_G;                  // 设置G通道调和
-    view_info.components.b = VK_COMPONENT_SWIZZLE_B;                  // 设置B通道调和
-    view_info.components.a = VK_COMPONENT_SWIZZLE_A;                  // 设置A通道调和
+    VkImageViewCreateInfo view_info = {};// 构建深度图像视图创建信息结构体实例
+    view_info.sType = VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO;// 设置结构体类型
+    view_info.pNext = nullptr;// 自定义数据的指针
+    view_info.image = VK_NULL_HANDLE;// 对应的图像
+    view_info.format = depthFormat;// 图像视图的格式
+    view_info.components.r = VK_COMPONENT_SWIZZLE_R;// 设置R通道调和
+    view_info.components.g = VK_COMPONENT_SWIZZLE_G;// 设置G通道调和
+    view_info.components.b = VK_COMPONENT_SWIZZLE_B;// 设置B通道调和
+    view_info.components.a = VK_COMPONENT_SWIZZLE_A;// 设置A通道调和
     view_info.subresourceRange.aspectMask = VK_IMAGE_ASPECT_DEPTH_BIT;// 图像视图使用方面
-    view_info.subresourceRange.baseMipLevel = 0;                      // 基础Mipmap级别
-    view_info.subresourceRange.levelCount = 1;                        // Mipmap级别的数量
-    view_info.subresourceRange.baseArrayLayer = 0;                    // 基础数组层
-    view_info.subresourceRange.layerCount = 1;                        // 数组层的数量
-    view_info.viewType = VK_IMAGE_VIEW_TYPE_2D;                       // 图像视图的类型
-    view_info.flags = 0;                                              // 标志
+    view_info.subresourceRange.baseMipLevel = 0;// 基础Mipmap级别
+    view_info.subresourceRange.levelCount = 1;// Mipmap级别的数量
+    view_info.subresourceRange.baseArrayLayer = 0;// 基础数组层
+    view_info.subresourceRange.layerCount = 1;// 数组层的数量
+    view_info.viewType = VK_IMAGE_VIEW_TYPE_2D;// 图像视图的类型
+    view_info.flags = 0;// 标志
 
     VkResult result = vkCreateImage(device, &image_info, nullptr,
                                     &depthImage);// 创建深度图像
@@ -575,10 +575,10 @@ void VulkanDemoApp::createVulkanDepthBuffer() {
     VkMemoryRequirements mem_reqs;// 获取图像内存需求
     vkGetImageMemoryRequirements(device, depthImage, &mem_reqs);
     mem_alloc.allocationSize = mem_reqs.size;// 获取所需内存字节数
-    VkFlags requirements_mask = 0;           // 需要的内存类型掩码
+    VkFlags requirements_mask = 0;// 需要的内存类型掩码
     bool flag = memoryTypeFromProperties(memoryProperties, mem_reqs.memoryTypeBits, requirements_mask,
                                          &mem_alloc.memoryTypeIndex);// 获取所需内存类型索引
-    assert(flag);                                                    // 检查获取是否成功
+    assert(flag);// 检查获取是否成功
     printf("确定内存类型成功 类型索引为%d\n", mem_alloc.memoryTypeIndex);
     result = vkAllocateMemory(device, &mem_alloc, nullptr, &memDepth);// 分配内存
     assert(result == VK_SUCCESS);
@@ -785,22 +785,22 @@ void VulkanDemoApp::createFrameBufferScreen() {
 
 void VulkanDemoApp::createFrameBufferSelf()//创建帧缓冲的方法（服务于 MRT）
 {
-    VkImageView attachments[4];          //深度附件和颜色附件的图像视图数组
-    attachments[5] = depthImageView;     //指定深度图像视图
+    VkImageView attachments[4];//深度附件和颜色附件的图像视图数组
+    attachments[5] = depthImageView;//指定深度图像视图
     VkFramebufferCreateInfo fb_info = {};//构建帧缓冲创建信息结构体实例
     fb_info.sType = VK_STRUCTURE_TYPE_FRAMEBUFFER_CREATE_INFO;
     fb_info.pNext = nullptr;
     fb_info.renderPass = renderPassSelf;//指定渲染通道
-    fb_info.attachmentCount = 4;        //附件数量
-    fb_info.pAttachments = attachments; //附件图像视图数组
+    fb_info.attachmentCount = 4;//附件数量
+    fb_info.pAttachments = attachments;//附件图像视图数组
     fb_info.width = screenWidth;
     fb_info.height = screenHeight;
     fb_info.layers = 1;
-    attachments[0] = colorImageView[0];                                                   //第 0 个颜色附件的图像视图
-    attachments[1] = colorImageView[1];                                                   //第 1 个颜色附件的图像视图
-    attachments[2] = colorImageView[2];                                                   //第 2 个颜色附件的图像视图
+    attachments[0] = colorImageView[0];//第 0 个颜色附件的图像视图
+    attachments[1] = colorImageView[1];//第 1 个颜色附件的图像视图
+    attachments[2] = colorImageView[2];//第 2 个颜色附件的图像视图
     VkResult result = vkCreateFramebuffer(device, &fb_info, nullptr, &selfTexFramebuffer);//创建帧缓冲
-    assert(result == VK_SUCCESS);                                                         //检查是否创建成功
+    assert(result == VK_SUCCESS);//检查是否创建成功
 }
 
 
@@ -838,10 +838,10 @@ void VulkanDemoApp::destroyDrawableObject() {
 }
 
 void VulkanDemoApp::createFence() {
-    VkFenceCreateInfo fenceInfo;                                 // 栅栏创建信息结构体实例
-    fenceInfo.sType = VK_STRUCTURE_TYPE_FENCE_CREATE_INFO;       // 结构体类型
-    fenceInfo.pNext = nullptr;                                   // 自定义数据的指针
-    fenceInfo.flags = 0;                                         // 供将来使用的标志位
+    VkFenceCreateInfo fenceInfo;// 栅栏创建信息结构体实例
+    fenceInfo.sType = VK_STRUCTURE_TYPE_FENCE_CREATE_INFO;// 结构体类型
+    fenceInfo.pNext = nullptr;// 自定义数据的指针
+    fenceInfo.flags = 0;// 供将来使用的标志位
     vkCreateFence(device, &fenceInfo, nullptr, &taskFinishFence);// 创建时栅栏
 }
 
@@ -851,12 +851,12 @@ void VulkanDemoApp::destroyFence() {
 
 void VulkanDemoApp::initPresentInfo() {
     present.sType = VK_STRUCTURE_TYPE_PRESENT_INFO_KHR;// 结构体类型
-    present.pNext = nullptr;                           // 自定义数据的指针
-    present.swapchainCount = 1;                        // 交换链的数量
-    present.pSwapchains = &swapChain;                  // 交换链列表
-    present.waitSemaphoreCount = 0;                    // 等待的信号量数量
-    present.pWaitSemaphores = nullptr;                 // 等待的信号量列表
-    present.pResults = nullptr;                        // 呈现操作结果标志列表
+    present.pNext = nullptr;// 自定义数据的指针
+    present.swapchainCount = 1;// 交换链的数量
+    present.pSwapchains = &swapChain;// 交换链列表
+    present.waitSemaphoreCount = 0;// 等待的信号量数量
+    present.pWaitSemaphores = nullptr;// 等待的信号量列表
+    present.pResults = nullptr;// 呈现操作结果标志列表
 }
 
 void VulkanDemoApp::initMatrixAndLight() {
@@ -867,12 +867,12 @@ void VulkanDemoApp::initMatrixAndLight() {
     MatrixState2D::setInitStack();
     MatrixState2D::setProjectOrtho(-ratio, ratio, -1, 1, 1.5f, 1000);
     MatrixState2D::setCamera(0, 0, 10, 0, 0, 0, 0, 1, 0);
-    for (int i = 0; i < LIGHTS_COUNT; i++) {                             //遍历所有的光源
-        LightManager::setLightRange(i, 350 + 80 * i);                    //设置光源的范围
-        LightManager::setLightPosition(i, 0, 100, 100);                  //设置光源的位置
+    for (int i = 0; i < LIGHTS_COUNT; i++) {//遍历所有的光源
+        LightManager::setLightRange(i, 350 + 80 * i);//设置光源的范围
+        LightManager::setLightPosition(i, 0, 100, 100);//设置光源的位置
         LightManager::setLightAmbient(i, 0.025f, 0.025f, 0.025f, 0.025f);//设置光源的环境光强度
-        LightManager::setLightDiffuse(i, 0.4f, 0.4f, 0.4f, 0.4f);        //设置光源的散射光强度
-        LightManager::setLightSpecular(i, 0.4f, 0.4f, 0.4f, 0.4f);       //设置光源的镜面光强度
+        LightManager::setLightDiffuse(i, 0.4f, 0.4f, 0.4f, 0.4f);//设置光源的散射光强度
+        LightManager::setLightSpecular(i, 0.4f, 0.4f, 0.4f, 0.4f);//设置光源的镜面光强度
     }
 }
 void VulkanDemoApp::flushTexToDesSetForToTex() {
@@ -883,7 +883,7 @@ void VulkanDemoApp::flushTexToDesSetForToTex() {
     }
 }
 void VulkanDemoApp::flushUniformBufferForToScreen() {//将摄像机及光照数据送入一致变量缓冲的方法
-    float fragmentUniformData[68] = {                //一致变量缓冲数据数组
+    float fragmentUniformData[68] = {//一致变量缓冲数据数组
                                      CameraUtil::camera9Para[0], CameraUtil::camera9Para[1], CameraUtil::camera9Para[2], 1.0};
     memcpy(&fragmentUniformData[4], LightManager::lightArray, sizeof(float) * 64);//拷贝四个光源的数据
     uint8_t *pData;
@@ -991,7 +991,7 @@ void VulkanDemoApp::destroyPipeline() {
 /*===========================================*/
 void VulkanDemoApp::createVulkanSelfColorBufferSpec(VkFormat colorFormat, int index) {
     VkFormatProperties colorFormatProps;//物理设备支持的颜色格式属性
-    VkImageCreateInfo image_info = {};  //构建颜色图像创建信息结构体实例
+    VkImageCreateInfo image_info = {};//构建颜色图像创建信息结构体实例
     vkGetPhysicalDeviceFormatProperties(gpus[USED_GPU_INDEX], colorFormat, &colorFormatProps);
     if (colorFormatProps.linearTilingFeatures & VK_FORMAT_FEATURE_COLOR_ATTACHMENT_BIT) {
         image_info.tiling = VK_IMAGE_TILING_LINEAR;
@@ -1019,7 +1019,7 @@ void VulkanDemoApp::createVulkanSelfColorBufferSpec(VkFormat colorFormat, int in
     image_info.sharingMode = VK_SHARING_MODE_EXCLUSIVE;
     image_info.flags = 0;
     VkResult result = vkCreateImage(device, &image_info, nullptr, &(colorImage[index]));//创建图像
-    assert(result == VK_SUCCESS);                                                       //检查是否创建成功
+    assert(result == VK_SUCCESS);//检查是否创建成功
     VkMemoryAllocateInfo mem_alloc = {};
     mem_alloc.sType = VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO;
     mem_alloc.pNext = nullptr;
@@ -1052,14 +1052,14 @@ void VulkanDemoApp::createVulkanSelfColorBufferSpec(VkFormat colorFormat, int in
     view_info.subresourceRange.layerCount = 1;
     view_info.viewType = VK_IMAGE_VIEW_TYPE_2D;
     view_info.flags = 0;
-    view_info.image = colorImage[index];                                              //指定图像
+    view_info.image = colorImage[index];//指定图像
     result = vkCreateImageView(device, &view_info, nullptr, &(colorImageView[index]));//创建图像视图
-    assert(result == VK_SUCCESS);                                                     //检查是否创建成功
+    assert(result == VK_SUCCESS);//检查是否创建成功
 }
 void VulkanDemoApp::createVulkanSelfColorBuffer() {
     VkFormat colorFormat[3] = {VK_FORMAT_R8G8B8A8_UNORM,//格式数组
                                VK_FORMAT_R32G32B32A32_SFLOAT, VK_FORMAT_R32G32B32A32_SFLOAT};
-    for (int i = 0; i < 3; i++) {                          //遍历所有颜色附件
+    for (int i = 0; i < 3; i++) {//遍历所有颜色附件
         createVulkanSelfColorBufferSpec(colorFormat[i], i);//创建颜色附件对应图像
     }
 }

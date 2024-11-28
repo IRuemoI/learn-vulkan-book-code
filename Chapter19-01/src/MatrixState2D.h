@@ -1,8 +1,7 @@
 #pragma once
 #include "Matrix.h"//导入需要的头文件
 
-class MatrixState2D
-{
+class MatrixState2D {
 public:
     static float currMatrix[16];//当前变换矩阵
     static float mProjMatrix[16];//投影矩阵
@@ -19,11 +18,11 @@ public:
 
     static void popMatrix();//恢复变换矩阵
 
-    static void translate(float x,float y,float z);//沿x、y、z轴平移
+    static void translate(float x, float y, float z);//沿x、y、z轴平移
 
-    static void rotate(float angle,float x,float y,float z);//绕指定轴旋转
+    static void rotate(float angle, float x, float y, float z);//绕指定轴旋转
 
-    static void scale(float x,float y,float z);//矩阵缩放
+    static void scale(float x, float y, float z);//矩阵缩放
     static void setCamera//设置摄像机
             (
                     float cx,
@@ -34,8 +33,7 @@ public:
                     float tz,
                     float upx,
                     float upy,
-                    float upz
-            );
+                    float upz);
 
     static void setProjectOrtho//设置平行投影参数
             (
@@ -44,10 +42,9 @@ public:
                     float bottom,
                     float top,
                     float near,
-                    float far
-            );
+                    float far);
 
-    static float* getFinalMatrix();//获取最终矩阵
+    static float *getFinalMatrix();//获取最终矩阵
 
-    static float* getMMatrix();//获取当前变换矩阵
+    static float *getMMatrix();//获取当前变换矩阵
 };

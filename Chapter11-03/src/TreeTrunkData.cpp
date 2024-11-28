@@ -13,10 +13,10 @@ float longitude_span = 12;//经度切分的角度
 /// \param jointNum  每个节点的高度
 /// \param availableNum 节点的数量
 void TreeTrunkData::genVertexData(float bottom_radius, float joint_Height, int jointNum, int availableNum) {
-    std::vector<float> alVertix;                  //存放顶点坐标的vector
-    std::vector<float> alTexCoor;                 //存放顶点坐标的vector
+    std::vector<float> alVertix;//存放顶点坐标的vector
+    std::vector<float> alTexCoor;//存放顶点坐标的vector
     for (int num = 0; num < availableNum; num++) {//循环计算出每节树干中的各个顶点
-                                                  //此节树干底端半径
+        //此节树干底端半径
         float temp_bottom_radius = bottom_radius * (jointNum - num) / (float) jointNum;
         //此节树干顶端半径
         float temp_top_radius = bottom_radius * (jointNum - (num + 1)) / (float) jointNum;
@@ -71,11 +71,11 @@ void TreeTrunkData::genVertexData(float bottom_radius, float joint_Height, int j
             alTexCoor.push_back(texcoor[i]);
         }
     }
-    vCount = alVertix.size() / 3;              //得到顶点数量
+    vCount = alVertix.size() / 3;//得到顶点数量
     dataByteCount = vCount * 5 * sizeof(float);//计算数据所占字节数
-    vdata = new float[vCount * 5];             //创建存放数据的数组
-    int index = 0;                             //辅助索引
-    for (int i = 0; i < vCount; i++) {         //将顶点数据和纹理坐标数据存储到数组中
+    vdata = new float[vCount * 5];//创建存放数据的数组
+    int index = 0;//辅助索引
+    for (int i = 0; i < vCount; i++) {//将顶点数据和纹理坐标数据存储到数组中
         vdata[index++] = alVertix[i * 3 + 0];
         vdata[index++] = alVertix[i * 3 + 1];
         vdata[index++] = alVertix[i * 3 + 2];

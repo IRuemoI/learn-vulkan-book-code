@@ -245,12 +245,12 @@ void ShaderQueueSuit_CommonEdge::createPipeline(VkDevice &device, VkRenderPass &
     vp.scissorCount = 1;
     vp.pScissors = &scissor;
     vp.pViewports = &viewports;
-    VkPipelineDepthStencilStateCreateInfo ds;                             //管线深度及模板状态创建信息
+    VkPipelineDepthStencilStateCreateInfo ds;//管线深度及模板状态创建信息
     ds.sType = VK_STRUCTURE_TYPE_PIPELINE_DEPTH_STENCIL_STATE_CREATE_INFO;//指定结构体类型
-    ds.pNext = nullptr;                                                   //自定义数据的指针
-    ds.flags = 0;                                                         //供将来使用的标志
-    ds.depthTestEnable = VK_TRUE;                                         //打开深度检测
-    ds.depthWriteEnable = VK_TRUE;                                        //关闭深度值写入
+    ds.pNext = nullptr;//自定义数据的指针
+    ds.flags = 0;//供将来使用的标志
+    ds.depthTestEnable = VK_TRUE;//打开深度检测
+    ds.depthWriteEnable = VK_TRUE;//关闭深度值写入
     ds.depthCompareOp = VK_COMPARE_OP_LESS_OR_EQUAL;
     ds.depthBoundsTestEnable = VK_FALSE;
     ds.minDepthBounds = 0;

@@ -3,14 +3,14 @@
 
 class MatrixState3D {
 public:
-    static float currMatrix[16];      // 当前变换矩阵
-    static float mProjMatrix[16];     // 投影矩阵
-    static float mVMatrix[16];        // 摄像机矩阵
-    static float mMVPMatrix[16];      // 总矩阵
+    static float currMatrix[16];// 当前变换矩阵
+    static float mProjMatrix[16];// 投影矩阵
+    static float mVMatrix[16];// 摄像机矩阵
+    static float mMVPMatrix[16];// 总矩阵
     static float vulkanClipMatrix[16];// 剪裁空间矩阵 X不变 Y置反 Z减半
-    static float mStack[10][16];      // 保护变换矩阵的栈
-    static int stackTop;              // 栈顶位置
-    static float cx, cy, cz;          //摄像机位置
+    static float mStack[10][16];// 保护变换矩阵的栈
+    static int stackTop;// 栈顶位置
+    static float cx, cy, cz;//摄像机位置
 
     static void setInitStack();// 初始化矩阵
 

@@ -3,16 +3,16 @@
 #include <string.h>
 #include <vector>
 #define PI 3.1415926
-float *TriangleData::vdata;                 //数据数组首地址指针
-int TriangleData::dataByteCount;            //数据所占总字节数量
-int TriangleData::vCount;                   //顶点数量
-void TriangleData::genVertexData() {        //顶点数据生成方法
-    std::vector<float> alVertex;            //存放顶点数据的vector
-    std::vector<float> alTexoor;            //存放纹理坐标的vector
-    float edgeLength = 24;                  //三角形边长
-    int levelNum = 40;                      //三角形组层数
+float *TriangleData::vdata;//数据数组首地址指针
+int TriangleData::dataByteCount;//数据所占总字节数量
+int TriangleData::vCount;//顶点数量
+void TriangleData::genVertexData() {//顶点数据生成方法
+    std::vector<float> alVertex;//存放顶点数据的vector
+    std::vector<float> alTexoor;//存放纹理坐标的vector
+    float edgeLength = 24;//三角形边长
+    int levelNum = 40;//三角形组层数
     float perLength = edgeLength / levelNum;//小三角形的边长
-    for (int i = 0; i < levelNum; i++)      //循环每一层生成小三角形
+    for (int i = 0; i < levelNum; i++)//循环每一层生成小三角形
     {
         //当前层顶端边数
         int currTopEdgeNum = i;
@@ -32,7 +32,7 @@ void TriangleData::genVertexData() {        //顶点数据生成方法
         //---------------纹理----------------
         float horSpan = 1 / (float) levelNum;//横向纹理的偏移量
         float verSpan = 1 / (float) levelNum;//纵向纹理的偏移量
-                                             //当前层顶端最左边点的纹理ST坐标
+                //当前层顶端最左边点的纹理ST坐标
         float topFirstS = 0.5f - currTopEdgeNum * horSpan / 2;
         float topFirstT = i * verSpan;
         ////当前层底端最左边点的纹理ST坐标
@@ -82,9 +82,9 @@ void TriangleData::genVertexData() {        //顶点数据生成方法
             alTexoor.push_back(rightBottomS);
             alTexoor.push_back(rightBottomT);
         }
-        for (int k = 0; k < currTopEdgeNum; k++) {              //循环产生当前层各个下三角形的顶点数据
+        for (int k = 0; k < currTopEdgeNum; k++) {//循环产生当前层各个下三角形的顶点数据
             float leftTopX = topEdgeFirstPointX + k * perLength;//当前三角形左上侧
-            float leftTopY = topEdgeFirstPointY;                //点的X、Y、Z坐标
+            float leftTopY = topEdgeFirstPointY;//点的X、Y、Z坐标
             float leftTopZ = topEdgeFirstPointZ;
             float leftTopS = topFirstS + k * horSpan;//当前三角形左上侧点的S、T纹理坐标
             float leftTopT = topFirstT;
@@ -119,7 +119,7 @@ void TriangleData::genVertexData() {        //顶点数据生成方法
             alTexoor.push_back(rightTopT);
         }
     }
-    vCount = alVertex.size() / 3;              //顶点数量
+    vCount = alVertex.size() / 3;//顶点数量
     dataByteCount = vCount * 5 * sizeof(float);//数据所占内存总字节数
     vdata = new float[vCount * 5];
     int index = 0;//辅助索引

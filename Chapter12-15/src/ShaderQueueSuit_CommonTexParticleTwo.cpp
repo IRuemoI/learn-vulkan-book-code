@@ -235,8 +235,8 @@ void ShaderQueueSuit_CommonTexParticleTwo::createPipeline(VkDevice &device, VkRe
     VkPipelineColorBlendAttachmentState att_state[1];
     att_state[0].colorWriteMask = 0xf;
     att_state[0].blendEnable = VK_TRUE;
-    att_state[0].alphaBlendOp = VK_BLEND_OP_ADD;           //设置Alpha 通道混合方式
-    att_state[0].colorBlendOp = VK_BLEND_OP_ADD;           //设置RGB 通道混合方式
+    att_state[0].alphaBlendOp = VK_BLEND_OP_ADD;//设置Alpha 通道混合方式
+    att_state[0].colorBlendOp = VK_BLEND_OP_ADD;//设置RGB 通道混合方式
     att_state[0].srcColorBlendFactor = VK_BLEND_FACTOR_ONE;//设置源颜色混合因子
     att_state[0].dstColorBlendFactor = VK_BLEND_FACTOR_ONE;//设置目标颜色混合因子
     att_state[0].srcAlphaBlendFactor = VK_BLEND_FACTOR_SRC_ALPHA;

@@ -21,7 +21,7 @@ void cursor_pos_callback(GLFWwindow *window, double xpos, double ypos) {
         }
         if (isMove) {
             CameraUtil::changeDirection(VulkanDemoApp::cursorDeltaX * 0.1f);//改变方向
-            CameraUtil::changeYj(VulkanDemoApp::cursorDeltaY * 0.1f);       //改变仰角
+            CameraUtil::changeYj(VulkanDemoApp::cursorDeltaY * 0.1f);//改变仰角
         }
     }
 

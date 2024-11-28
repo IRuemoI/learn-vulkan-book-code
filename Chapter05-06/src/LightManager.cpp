@@ -17,9 +17,9 @@ float LightManager::lightSpecularB = 0;
 float LightManager::lightSpecularA = 0;
 
 void LightManager::setLightDirection(float lxIn, float lyIn, float lzIn) {//设置定向光方向的方法
-    lx = lxIn;                                                            //设置定向光方向向量X 分量
-    ly = lyIn;                                                            //设置定向光方向向量Y 分量
-    lz = lzIn;                                                            //设置定向光方向向量Z 分量
+    lx = lxIn;//设置定向光方向向量X 分量
+    ly = lyIn;//设置定向光方向向量Y 分量
+    lz = lzIn;//设置定向光方向向量Z 分量
 }
 
 void LightManager::setlightAmbient(float lightAmbientRIn, float lightAmbientGIn, float lightAmbientBIn, float lightAmbientAIn) {

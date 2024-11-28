@@ -155,29 +155,29 @@ void ShaderQueueSuit_Common::createShaderModule(VkDevice &device) {
     VkResult result = vkCreateShaderModule(device, &moduleCreateInfo, nullptr, &shaderStages[0].module);
     assert(result == VK_SUCCESS);
     shaderStages[1].sType = VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO;
-    shaderStages[1].pNext = nullptr;                                                             //自定义数据的指针
-    shaderStages[1].pSpecializationInfo = nullptr;                                               //特殊信息
-    shaderStages[1].flags = 0;                                                                   //供将来使用的标志
-    shaderStages[1].stage = VK_SHADER_STAGE_TESSELLATION_CONTROL_BIT;                            //着色器阶段
-    shaderStages[1].pName = "main";                                                              //入口函数为main
-    std::vector<unsigned int> tcs_spv;                                                           //存放细分控制着色器SPV 数据用
+    shaderStages[1].pNext = nullptr;//自定义数据的指针
+    shaderStages[1].pSpecializationInfo = nullptr;//特殊信息
+    shaderStages[1].flags = 0;//供将来使用的标志
+    shaderStages[1].stage = VK_SHADER_STAGE_TESSELLATION_CONTROL_BIT;//着色器阶段
+    shaderStages[1].pName = "main";//入口函数为main
+    std::vector<unsigned int> tcs_spv;//存放细分控制着色器SPV 数据用
     retVal = compileGLSLtoSPV(VK_SHADER_STAGE_TESSELLATION_CONTROL_BIT, tcsStr.c_str(), tcs_spv);//将细分控制着色器脚本编译为SPV
-    assert(retVal);                                                                              //检查编译是否成功
+    assert(retVal);//检查编译是否成功
     printf("曲面细分控制着色器脚本编译SPV 成功！");
     moduleCreateInfo.sType = VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO;
-    moduleCreateInfo.pNext = nullptr;                                                          //自定义数据的指针
-    moduleCreateInfo.flags = 0;                                                                //供将来使用的标志
-    moduleCreateInfo.codeSize = tcs_spv.size() * sizeof(unsigned int);                         //细分控制着色器SPV 数据总字节数
-    moduleCreateInfo.pCode = tcs_spv.data();                                                   //细分控制着色器SPV 数据
+    moduleCreateInfo.pNext = nullptr;//自定义数据的指针
+    moduleCreateInfo.flags = 0;//供将来使用的标志
+    moduleCreateInfo.codeSize = tcs_spv.size() * sizeof(unsigned int);//细分控制着色器SPV 数据总字节数
+    moduleCreateInfo.pCode = tcs_spv.data();//细分控制着色器SPV 数据
     result = vkCreateShaderModule(device, &moduleCreateInfo, nullptr, &shaderStages[1].module);//创建细分控制着色器模块
-    assert(result == VK_SUCCESS);                                                              //检查创建是否成功
+    assert(result == VK_SUCCESS);//检查创建是否成功
     shaderStages[2].stage = VK_SHADER_STAGE_TESSELLATION_EVALUATION_BIT;
     shaderStages[2].sType = VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO;
     shaderStages[2].pNext = nullptr;
     shaderStages[2].pSpecializationInfo = nullptr;
     shaderStages[2].flags = 0;
     shaderStages[2].pName = "main";
-    std::vector<unsigned int> tes_spv;                                                              //存放细分求值着色器SPV 数据用
+    std::vector<unsigned int> tes_spv;//存放细分求值着色器SPV 数据用
     retVal = compileGLSLtoSPV(VK_SHADER_STAGE_TESSELLATION_EVALUATION_BIT, tesStr.c_str(), tes_spv);//将细分求值着色器脚本编译为SPV
     assert(retVal);
     printf("曲面细分执行着色器脚本编译SPV成功！");
@@ -187,7 +187,7 @@ void ShaderQueueSuit_Common::createShaderModule(VkDevice &device) {
     moduleCreateInfo.codeSize = tes_spv.size() * sizeof(unsigned int);
     moduleCreateInfo.pCode = tes_spv.data();
     result = vkCreateShaderModule(device, &moduleCreateInfo, nullptr, &shaderStages[2].module);//创建细分求值着色器模块
-    assert(result == VK_SUCCESS);                                                              //检查创建是否成功
+    assert(result == VK_SUCCESS);//检查创建是否成功
     shaderStages[3].sType = VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO;
     shaderStages[3].pNext = nullptr;
     shaderStages[3].pSpecializationInfo = nullptr;
@@ -336,11 +336,11 @@ void ShaderQueueSuit_Common::createPipeline(VkDevice &device, VkRenderPass &rend
     ms.alphaToOneEnable = VK_FALSE;
     ms.minSampleShading = 0.0;
     VkPipelineTessellationStateCreateInfo ts;//构建管线细分阶段创建信息结构体
-    ts.sType =                               //结构体类型
+    ts.sType =//结构体类型
             VK_STRUCTURE_TYPE_PIPELINE_TESSELLATION_STATE_CREATE_INFO;
-    ts.pNext = nullptr;                       //自定义数据的指针
-    ts.flags = 0;                             //供将来使用的标志
-    ts.patchControlPoints = 3;                //每个patch 包含的顶点数
+    ts.pNext = nullptr;//自定义数据的指针
+    ts.flags = 0;//供将来使用的标志
+    ts.patchControlPoints = 3;//每个patch 包含的顶点数
     VkGraphicsPipelineCreateInfo pipelineInfo;//构建图形管线创建信息结构体
     pipelineInfo.sType = VK_STRUCTURE_TYPE_GRAPHICS_PIPELINE_CREATE_INFO;
     pipelineInfo.pNext = nullptr;

@@ -53,7 +53,7 @@ void Dashboard2DObject::drawSelf(VkCommandBuffer &cmd, VkPipelineLayout &pipelin
     vkCmdBindPipeline(cmd, VK_PIPELINE_BIND_POINT_GRAPHICS, pipeline);
     vkCmdBindDescriptorSets(cmd, VK_PIPELINE_BIND_POINT_GRAPHICS, pipelineLayout, 0, 1, desSetPointer, 0, nullptr);
     const VkDeviceSize offsetsVertex[1] = {0};
-    vkCmdBindVertexBuffers(cmd,0,1,&(vertexDatabuf),offsetsVertex);
+    vkCmdBindVertexBuffers(cmd, 0, 1, &(vertexDatabuf), offsetsVertex);
     float *mvp = MatrixState2D::getFinalMatrix();
     memcpy(pushConstantData, mvp, sizeof(float) * 16);
     vkCmdPushConstants(cmd, pipelineLayout, VK_SHADER_STAGE_VERTEX_BIT, 0, sizeof(float) * 16, pushConstantData);

@@ -17,7 +17,7 @@ void cursor_pos_callback(GLFWwindow *window, double xpos, double ypos) {
         VulkanDemoApp::yAngle = VulkanDemoApp::yAngle + VulkanDemoApp::cursorDeltaX * 180 / 200;
         VulkanDemoApp::zAngle = VulkanDemoApp::zAngle + VulkanDemoApp::cursorDeltaY * 180 / 200;
         CameraUtil::calCamera(float(-VulkanDemoApp::cursorDeltaY * 180 / 1000.0), 0);//更新摄像机9参数
-        LightManager::move(float(VulkanDemoApp::cursorDeltaX * 180 / 1000.0));       //移动光源
+        LightManager::move(float(VulkanDemoApp::cursorDeltaX * 180 / 1000.0));//移动光源
         printf("拖动鼠标的表示的旋转:[Y轴:%f,Z轴:%f]\n", VulkanDemoApp::yAngle, VulkanDemoApp::zAngle);
     }
 

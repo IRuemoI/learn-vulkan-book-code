@@ -26,8 +26,8 @@ void mouse_button_callback(GLFWwindow *window, int button, int action, int mods)
     if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS) {
         left_mouse_down = true;
         printf("鼠标按下并尝试更改视口\n");
-        VulkanDemoApp::vpCenterX = preX;              //设置vpCenterX为触控点x坐标
-        VulkanDemoApp::vpCenterY = preY;              //设置vpCenterY为触控点y坐标
+        VulkanDemoApp::vpCenterX = preX;//设置vpCenterX为触控点x坐标
+        VulkanDemoApp::vpCenterY = preY;//设置vpCenterY为触控点y坐标
         if (preX > VulkanDemoApp::screenWidth / 4 * 3)//判断触控点x坐标是否大于允许的最大值
             VulkanDemoApp::vpCenterX = VulkanDemoApp::screenWidth / 4 * 3;
         if (preX < VulkanDemoApp::screenWidth / 4)//判断触控点x坐标是否小于允许的最小值

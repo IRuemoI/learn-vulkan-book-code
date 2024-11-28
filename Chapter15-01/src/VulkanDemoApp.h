@@ -6,9 +6,9 @@
 #include "ShaderQueueSuit_CommonTex.h"
 #include "ShaderQueueSuit_Dashboard2D.h"
 #include <GLFW/glfw3.h>
-#include <cstdlib>   //标准库标准通用工具函数
+#include <cstdlib>//标准库标准通用工具函数
 #include <functional>//标准库与函数对象相关的模板类和函数
-#include <iostream>  //标准库输入输出头文件
+#include <iostream>//标准库输入输出头文件
 #include <mutex>
 #include <stdexcept>//标准库异常处理文件
 #include <thread>
@@ -20,7 +20,7 @@ public:
     static constexpr int WIDTH = 800;
     static constexpr int HEIGHT = 600;
 
-    static uint32_t screenWidth; // 屏幕宽度
+    static uint32_t screenWidth;// 屏幕宽度
     static uint32_t screenHeight;// 屏幕高度
 
     // 窗口辅助结构体
@@ -69,11 +69,11 @@ public:
     ShaderQueueSuit_Common *sqsCL;
     ShaderQueueSuit_CommonTex *sqsCT;
     ShaderQueueSuit_Dashboard2D *sqsD2D;
-    Dashboard2DObject *sky;        //指向天空绘制对象的指针
+    Dashboard2DObject *sky;//指向天空绘制对象的指针
     Dashboard2DObject *landForDraw;//指向山地绘制对象的指针
-    ObjObject *tree1;              //指向第一种树绘制对象的指针
-    ObjObject *tree2;              //指向第二种树绘制对象的指针
-    Dashboard2DObject *d2dA;       //指向纹理矩形绘制对象的指针
+    ObjObject *tree1;//指向第一种树绘制对象的指针
+    ObjObject *tree2;//指向第二种树绘制对象的指针
+    Dashboard2DObject *d2dA;//指向纹理矩形绘制对象的指针
     static float SPAN;
     static float TIMESPAN;
     static float cz;
@@ -108,11 +108,11 @@ public:
     void destroyVulkanInstance();
     VkFormat colorFormat;
     VkFormatProperties colorFormatProps;
-    VkImage colorImage[5];                  //颜色附件图像数组
-    VkDeviceMemory memColor[5];             //颜色附件图像对应的设备内存数组
-    VkImageView colorImageView[5];          //颜色附件图像视图数组
+    VkImage colorImage[5];//颜色附件图像数组
+    VkDeviceMemory memColor[5];//颜色附件图像对应的设备内存数组
+    VkImageView colorImageView[5];//颜色附件图像视图数组
     VkDescriptorImageInfo colorImageInfo[5];//颜色附件图像信息数组
-    VkFramebuffer selfTexFramebuffer[5];    //服务于绘制到纹理的专用帧缓冲数组
+    VkFramebuffer selfTexFramebuffer[5];//服务于绘制到纹理的专用帧缓冲数组
     void drawSceneToTex();
     void drawSceneToScreen();
     void flushUniformBufferForToTex();
@@ -134,7 +134,7 @@ public:
     void initVulkan();// 初始化Vulkan
     void run();
     void mainLoop();// 图形程序渲染流程主循环
-    void cleanup(); // 后续清理工作
+    void cleanup();// 后续清理工作
     void destroyWindow() const;
     static void frameBufferResizeCallback(GLFWwindow *window, int width, int height);
     std::vector<const char *> static get_required_extensions();

@@ -41,11 +41,11 @@ void LightManager::setLightSpecular(float lightSpecularRIn, float lightSpecularG
 }
 void LightManager::move(float fwjSpan)//移动光源的方法
 {
-    lightFWJ = lightFWJ + fwjSpan;                               //光源方位角
+    lightFWJ = lightFWJ + fwjSpan;//光源方位角
     float tempLx = float(sin(lightFWJ / 180 * 3.14150265) * 300);//计算光源坐标 X分量
     float tempLz = float(cos(lightFWJ / 180 * 3.14150265) * 300);//计算光源坐标 Z 分量
-    LightManager::setLightPosition(tempLx, 0, tempLz);           //设置光源位置
-    if (lightFWJ >= 360)                                         //若光源方位角大于大于 360 度
+    LightManager::setLightPosition(tempLx, 0, tempLz);//设置光源位置
+    if (lightFWJ >= 360)//若光源方位角大于大于 360 度
     {
         lightFWJ = 0;//光源方位角归零
     }

@@ -3,27 +3,26 @@
 
 #define CAMERA_R 900
 
-class CameraUtil
-{
+class CameraUtil {
 public:
+    static float tx;
+    static float ty;
+    static float tz;
+    static float cx;
+    static float cy;
+    static float cz;
+    static float degree;
+    static float yj;
+    static float camera9Para[9];
 
-	static float tx;
-	static float ty;
-	static float tz;
-	static float cx;
-	static float cy;
-	static float cz;
-	static float degree;
-	static float yj;
-	static float camera9Para[9];
+    static void calCamera(float yjSpan, float cxSpan);
 
-	static void calCamera(float yjSpan, float cxSpan);
+    static void cameraGo(float goBack, float leftRight);
 
-	static void cameraGo(float goBack, float leftRight);
+    static void flushCameraToMatrix();
 
-	static void flushCameraToMatrix();
 private:
-	static void calCamera();
+    static void calCamera();
 };
 
 

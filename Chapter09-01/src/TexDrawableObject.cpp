@@ -71,9 +71,9 @@ void TexDrawableObject::drawSelf(VkCommandBuffer &cmd, VkPipelineLayout &pipelin
     vkCmdDraw(cmd, vCount, 1, 0, 0);
 }
 void TexDrawableObject::calculateBillboardDirection() {//根据摄像机的位置计算纹理矩形的朝向
-    float xspan = x - VulkanDemoApp::cx;               //计算从植物位置到摄像机位置向量的x 分量
-    float zspan = z - VulkanDemoApp::cz;               //计算从植物位置到摄像机位置向量的z 分量
-    if (zspan <= 0) {                                  //根据向量的两个分量计算出纹理矩形绕y 轴的旋转角度
+    float xspan = x - VulkanDemoApp::cx;//计算从植物位置到摄像机位置向量的x 分量
+    float zspan = z - VulkanDemoApp::cz;//计算从植物位置到摄像机位置向量的z 分量
+    if (zspan <= 0) {//根据向量的两个分量计算出纹理矩形绕y 轴的旋转角度
         yAngle = (float) (atanf(xspan / zspan) * 180 / 3.1415);
     } else {
         yAngle = 180 + (float) (atanf(xspan / zspan) * 180 / 3.1415);

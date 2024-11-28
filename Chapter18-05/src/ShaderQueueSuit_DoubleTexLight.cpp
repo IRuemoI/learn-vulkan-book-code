@@ -47,26 +47,26 @@ void ShaderQueueSuit_DoubleTexLight::destroyUniformBuffer(VkDevice &device) {
 }
 void ShaderQueueSuit_DoubleTexLight::createPipelineLayout(VkDevice &device) {
     /*NUM_DESCRIPTOR_SETS = 1;*/
-    VkDescriptorSetLayoutBinding layout_bindings[3];                      //描述集布局绑定数组
-    layout_bindings[0].binding = 0;                                       //此绑定的绑定点编号为 0
+    VkDescriptorSetLayoutBinding layout_bindings[3];//描述集布局绑定数组
+    layout_bindings[0].binding = 0;//此绑定的绑定点编号为 0
     layout_bindings[0].descriptorType = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;//描述类型
-    layout_bindings[0].descriptorCount = 1;                               //描述数量
-    layout_bindings[0].stageFlags = VK_SHADER_STAGE_VERTEX_BIT;           //目标着色器阶段
+    layout_bindings[0].descriptorCount = 1;//描述数量
+    layout_bindings[0].stageFlags = VK_SHADER_STAGE_VERTEX_BIT;//目标着色器阶段
     layout_bindings[0].pImmutableSamplers = nullptr;
     layout_bindings[1].binding = 1;//此绑定的绑定点编号为 1
     layout_bindings[1].descriptorType = VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;
-    layout_bindings[1].descriptorCount = 1;                      //描述数量
+    layout_bindings[1].descriptorCount = 1;//描述数量
     layout_bindings[1].stageFlags = VK_SHADER_STAGE_FRAGMENT_BIT;//目标着色器阶段
     layout_bindings[1].pImmutableSamplers = nullptr;
     layout_bindings[2].binding = 2;//此绑定的绑定点编号为 2
     layout_bindings[2].descriptorType = VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;
-    layout_bindings[2].descriptorCount = 1;                      //描述数量
+    layout_bindings[2].descriptorCount = 1;//描述数量
     layout_bindings[2].stageFlags = VK_SHADER_STAGE_FRAGMENT_BIT;//目标着色器阶段
     layout_bindings[2].pImmutableSamplers = nullptr;
     VkDescriptorSetLayoutCreateInfo descriptor_layout = {};//构建描述集布局创建信息结构体实例
     descriptor_layout.sType = VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_CREATE_INFO;
-    descriptor_layout.pNext = nullptr;            //自定义数据的指针
-    descriptor_layout.bindingCount = 3;           //描述集布局绑定的数量
+    descriptor_layout.pNext = nullptr;//自定义数据的指针
+    descriptor_layout.bindingCount = 3;//描述集布局绑定的数量
     descriptor_layout.pBindings = layout_bindings;//描述集布局绑定列表
     descLayouts.resize(NUM_DESCRIPTOR_SETS);
     VkResult result = vkCreateDescriptorSetLayout(device, &descriptor_layout, nullptr, descLayouts.data());

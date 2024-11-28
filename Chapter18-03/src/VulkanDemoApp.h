@@ -2,13 +2,13 @@
 #include "ObjObject.h"
 #include "ShaderQueueSuit_Common.h"
 #include <GLFW/glfw3.h>
-#include <cstdlib>        //标准库标准通用工具函数
-#include <functional>     //标准库与函数对象相关的模板类和函数
-#include <iostream>       //标准库输入输出头文件
-#include <stdexcept>      //标准库异常处理文件
+#include <cstdlib>//标准库标准通用工具函数
+#include <functional>//标准库与函数对象相关的模板类和函数
+#include <iostream>//标准库输入输出头文件
+#include <stdexcept>//标准库异常处理文件
 #include <vulkan/vulkan.h>//引用Vulkan的头文件
 
-#define MULSAMPLE_COUNT 4                   //使用的多重采样数
+#define MULSAMPLE_COUNT 4//使用的多重采样数
 #define _MULSAMPLE_FACTOR_H(a, b, c) a##b##c//定义连接宏的函数
 #define MULSAMPLE_FACTOR_H(a, b, c) _MULSAMPLE_FACTOR_H(a, b, c)
 #define MULSAMPLE_FACTOR MULSAMPLE_FACTOR_H(VK_SAMPLE_COUNT_, MULSAMPLE_COUNT, _BIT)//构造VkSampleCountFlagBits 型的值
@@ -18,7 +18,7 @@ public:
     static constexpr int WIDTH = 800;
     static constexpr int HEIGHT = 600;
 
-    static uint32_t screenWidth; // 屏幕宽度
+    static uint32_t screenWidth;// 屏幕宽度
     static uint32_t screenHeight;// 屏幕高度
     // 窗口辅助结构体
     GLFWwindow *window;

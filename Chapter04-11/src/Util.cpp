@@ -17,12 +17,12 @@ void cursor_pos_callback(GLFWwindow *window, double xpos, double ypos) {
         VulkanDemoApp::yAngle = VulkanDemoApp::yAngle + (float) VulkanDemoApp::cursorDeltaX * 180 / 200;
 
         if (abs((int) VulkanDemoApp::cursorDeltaX) > 10 || abs((int) VulkanDemoApp::cursorDeltaY) > 10) {//判断触控点位移是否超过阈值
-            isClick = false;                                                                             //点击标志置为false
+            isClick = false;//点击标志置为false
         }
-        if (!isClick) {                                                      //若为滑动操作
+        if (!isClick) {//若为滑动操作
             VulkanDemoApp::yAngle += VulkanDemoApp::cursorDeltaX * 180 / 200;//计算绕y 轴转角
-            preX = VulkanDemoApp::currentCursorX;                            //更新触控点x 坐标
-            preY = VulkanDemoApp::currentCursorY;                            //更新触控点y 坐标
+            preX = VulkanDemoApp::currentCursorX;//更新触控点x 坐标
+            preY = VulkanDemoApp::currentCursorY;//更新触控点y 坐标
         }
     }
 }
@@ -33,9 +33,9 @@ void mouse_button_callback(GLFWwindow *window, int button, int action, int mods)
         isClick = true;//点击标志置为true
         printf("鼠标按下\n");
     } else if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_RELEASE) {
-        if (isClick) {                                              //若为点击操作
+        if (isClick) {//若为点击操作
             VulkanDemoApp::ViewPara = ++VulkanDemoApp::ViewPara % 2;//更新当前采用的视角索引
-            VulkanDemoApp::initMatrix();                            //重新初始化矩阵
+            VulkanDemoApp::initMatrix();//重新初始化矩阵
         }
         left_mouse_down = false;
         printf("鼠标松开\n");

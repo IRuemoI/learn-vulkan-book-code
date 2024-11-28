@@ -53,11 +53,11 @@ ObjObject::ObjObject(float *vdataIn, int dataByteCount, int vCountIn, VkDevice &
     float minY = FLT_MAX;//初始化最小值
     float maxY = -FLT_MAX;
     float minZ = FLT_MAX;
-    float maxZ = -FLT_MAX;                 //初始化最大值
-    for (int i = 0; i < vCount; i++) {     //遍历物体中的各个顶点
-        float currX = vdataIn[i * 8 + 0];  //获取顶点的X 坐标
-        float currY = vdataIn[i * 8 + 1];  //获取顶点的Y 坐标
-        float currZ = vdataIn[i * 8 + 2];  //获取顶点的Z 坐标
+    float maxZ = -FLT_MAX;//初始化最大值
+    for (int i = 0; i < vCount; i++) {//遍历物体中的各个顶点
+        float currX = vdataIn[i * 8 + 0];//获取顶点的X 坐标
+        float currY = vdataIn[i * 8 + 1];//获取顶点的Y 坐标
+        float currZ = vdataIn[i * 8 + 2];//获取顶点的Z 坐标
         if (minX > currX) { minX = currX; }//更新X 轴坐标最小值
         if (minY > currY) { minY = currY; }//更新Y 轴坐标最小值
         if (minZ > currZ) { minZ = currZ; }//更新Z 轴坐标最小值

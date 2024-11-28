@@ -57,12 +57,12 @@ void ObjObject::drawSelf(VkCommandBuffer &cmd, VkPipelineLayout &pipelineLayout,
     vkCmdBindDescriptorSets(cmd, VK_PIPELINE_BIND_POINT_GRAPHICS, pipelineLayout, 0, 1, desSetPointer, 0, nullptr);
     const VkDeviceSize offsetsVertex[1] = {0};
     vkCmdBindVertexBuffers(cmd, 0, 1, &(vertexDatabuf), offsetsVertex);
-    float *mvp = MatrixState3D::getFinalMatrix();               //获取总变换矩阵
-    float *mm = MatrixState3D::getMMatrix();                    //获取基本变换矩阵
-    memcpy(pushConstantData, mvp, sizeof(float) * 16);          //将总变换矩阵数据送入推送常量数据
-    memcpy(pushConstantData + 16, mm, sizeof(float) * 16);      //将基本变换矩阵数据送入推送常量数据
+    float *mvp = MatrixState3D::getFinalMatrix();//获取总变换矩阵
+    float *mm = MatrixState3D::getMMatrix();//获取基本变换矩阵
+    memcpy(pushConstantData, mvp, sizeof(float) * 16);//将总变换矩阵数据送入推送常量数据
+    memcpy(pushConstantData + 16, mm, sizeof(float) * 16);//将基本变换矩阵数据送入推送常量数据
     memcpy(pushConstantData + 32, &isShadow, sizeof(float) * 1);//将阴影绘制标志数据送入推送常量数据
-    vkCmdPushConstants(cmd, pipelineLayout,                     //将推送常量数据送入推送常量
+    vkCmdPushConstants(cmd, pipelineLayout,//将推送常量数据送入推送常量
                        VK_SHADER_STAGE_VERTEX_BIT, 0, sizeof(float) * 33, pushConstantData);
     vkCmdDraw(cmd, vCount, 1, 0, 0);//执行绘制
 }

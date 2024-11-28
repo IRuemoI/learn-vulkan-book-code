@@ -4,9 +4,9 @@
 #include "ShaderQueueSuit_Common.h"
 #include "ShaderQueueSuit_ForQuery.h"
 #include <GLFW/glfw3.h>
-#include <cstdlib>   //标准库标准通用工具函数
+#include <cstdlib>//标准库标准通用工具函数
 #include <functional>//标准库与函数对象相关的模板类和函数
-#include <iostream>  //标准库输入输出头文件
+#include <iostream>//标准库输入输出头文件
 #include <mutex>
 #include <stdexcept>//标准库异常处理文件
 #include <thread>
@@ -17,7 +17,7 @@ public:
     static constexpr int WIDTH = 800;
     static constexpr int HEIGHT = 600;
 
-    static uint32_t screenWidth; // 屏幕宽度
+    static uint32_t screenWidth;// 屏幕宽度
     static uint32_t screenHeight;// 屏幕高度
 
     // 窗口辅助结构体
@@ -62,8 +62,8 @@ public:
     VkRenderPassBeginInfo rp_begin;
 
     VkQueryPool queryPool;//查询池对象
-    int *queryResultData; //存放查询结果数据的数组
-    int queryCount;       //查询数量
+    int *queryResultData;//存放查询结果数据的数组
+    int queryCount;//查询数量
 
     VkFence taskFinishFence;
     VkPresentInfoKHR present;
@@ -110,13 +110,13 @@ public:
     void initVulkan();// 初始化Vulkan
     void run();
     void mainLoop();// 图形程序渲染流程主循环
-    void cleanup(); // 后续清理工作
+    void cleanup();// 后续清理工作
     void destroyWindow() const;
     static void frameBufferResizeCallback(GLFWwindow *window, int width, int height);
     std::vector<const char *> static get_required_extensions();
 
 private:
-    void getQueryResult();  //获取查询结果的方法
+    void getQueryResult();//获取查询结果的方法
     void drawOcclusionObj();//绘制遮挡体
     void drawForQuery();
     void drawForPresent();

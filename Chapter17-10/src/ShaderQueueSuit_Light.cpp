@@ -95,16 +95,16 @@ VkDescriptorImageInfo descriptorImageInfo(//获取图像描述信息结构体实
         VkSampler sampler,
         VkImageView imageView,
         VkImageLayout imageLayout) {
-    VkDescriptorImageInfo descriptorImageInfo{};  //构建图像描述信息结构体实例
-    descriptorImageInfo.sampler = sampler;        //指定采用的采样器
-    descriptorImageInfo.imageView = imageView;    //指定采用的图像视图
+    VkDescriptorImageInfo descriptorImageInfo{};//构建图像描述信息结构体实例
+    descriptorImageInfo.sampler = sampler;//指定采用的采样器
+    descriptorImageInfo.imageView = imageView;//指定采用的图像视图
     descriptorImageInfo.imageLayout = imageLayout;//指定采用的图像布局
-    return descriptorImageInfo;                   //返回图像描述信息结构体实例
+    return descriptorImageInfo;//返回图像描述信息结构体实例
 }
 void ShaderQueueSuit_Light::initDescriptorSet(VkDevice &device) {//初始化描述集的方法
-    VkDescriptorPoolSize type_count[4];                          //描述集池尺寸实例数组
-    type_count[0].type = VK_DESCRIPTOR_TYPE_INPUT_ATTACHMENT;    //第1 个描述的类型
-    type_count[0].descriptorCount = 1;                           //第1 个描述的数量
+    VkDescriptorPoolSize type_count[4];//描述集池尺寸实例数组
+    type_count[0].type = VK_DESCRIPTOR_TYPE_INPUT_ATTACHMENT;//第1 个描述的类型
+    type_count[0].descriptorCount = 1;//第1 个描述的数量
     type_count[1].type = VK_DESCRIPTOR_TYPE_INPUT_ATTACHMENT;
     type_count[1].descriptorCount = 1;
     type_count[2].type = VK_DESCRIPTOR_TYPE_INPUT_ATTACHMENT;
@@ -130,17 +130,17 @@ void ShaderQueueSuit_Light::initDescriptorSet(VkDevice &device) {//初始化描�
     descSet.resize(1);
     result = vkAllocateDescriptorSets(device, alloc_info, descSet.data());
     assert(result == VK_SUCCESS);
-    writes[0] = {};                                                //完善一致变量写入描述集实例数组元素0
-    writes[0].sType = VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET;      //结构体类型
-    writes[0].dstBinding = 0;                                      //目标绑定编号
-    writes[0].pNext = nullptr;                                     //自定义数据的指针
-    writes[0].descriptorCount = 1;                                 //描述数量
+    writes[0] = {};//完善一致变量写入描述集实例数组元素0
+    writes[0].sType = VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET;//结构体类型
+    writes[0].dstBinding = 0;//目标绑定编号
+    writes[0].pNext = nullptr;//自定义数据的指针
+    writes[0].descriptorCount = 1;//描述数量
     writes[0].descriptorType = VK_DESCRIPTOR_TYPE_INPUT_ATTACHMENT;//描述类型(输入附件)
-    colorImageInfo = descriptorImageInfo(                          //调用方法获取图像描述信息结构体实例
+    colorImageInfo = descriptorImageInfo(//调用方法获取图像描述信息结构体实例
             VK_NULL_HANDLE, VulkanDemoApp::colorImageView[0],
             VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
     writes[0].pImageInfo = &colorImageInfo;//图像信息
-    writes[0].dstSet = descSet[0];         //更新描述集对应的写入属性0(一致变量)
+    writes[0].dstSet = descSet[0];//更新描述集对应的写入属性0(一致变量)
     writes[1] = {};
     writes[1].sType = VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET;
     writes[1].dstBinding = 1;

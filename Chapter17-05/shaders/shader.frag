@@ -6,5 +6,5 @@ layout (location = 0) in vec4 inLightQD;
 layout (location = 1) in vec2 inTexCoor;
 layout (location = 0) out vec4 outColor;
 void main() {
-    outColor=inLightQD*textureLod(tex,inTexCoor,0.0);
+    outColor=inLightQD*textureLod(tex, inTexCoor, 0.0);
 }

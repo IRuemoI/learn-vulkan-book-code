@@ -14,11 +14,11 @@ public:
     VkBuffer vertexDatabuf;
     VkDeviceMemory vertexDataMem;
     VkDescriptorBufferInfo vertexDataBufferInfo;
-    VkBuffer vertexDatabufCompute;                     //计算着色器和绘制共用的顶点数据缓冲
-    VkDeviceMemory vertexDataMemCompute;               //第4 行顶点数据缓冲对应的设备内存
+    VkBuffer vertexDatabufCompute;//计算着色器和绘制共用的顶点数据缓冲
+    VkDeviceMemory vertexDataMemCompute;//第4 行顶点数据缓冲对应的设备内存
     VkDescriptorBufferInfo vertexDataBufferInfoCompute;//第4 行顶点数据缓冲描述信息
-    VkBuffer vertexIndexDatabuf;                       //顶点索引数据缓冲
-    VkDeviceMemory vertexIndexDataMem;                 //顶点索引数据缓冲对应的设备内存
+    VkBuffer vertexIndexDatabuf;//顶点索引数据缓冲
+    VkDeviceMemory vertexIndexDataMem;//顶点索引数据缓冲对应的设备内存
 
     void createVertexDataBuffer(int dataByteCount, VkDevice &device, VkPhysicalDeviceMemoryProperties &memoryProperties);//创建存储原始顶点数据数据缓冲的方法
 

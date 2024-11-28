@@ -55,56 +55,56 @@ MS3DJoint::~MS3DJoint() {
     }
     positions.clear();
 }
-void MS3DJoint::update(float ttime) {                  //更新关节数据的方法
+void MS3DJoint::update(float ttime) {//更新关节数据的方法
     if (rotates.size() <= 0 && positions.size() <= 0) {//若没有旋转关键帧和平移关键帧数据
-        tmatrix->copyFrom(absolute);                   //将初始绝对矩阵的值复制进当前绝对矩阵
-        return;                                        //返回
+        tmatrix->copyFrom(absolute);//将初始绝对矩阵的值复制进当前绝对矩阵
+        return;//返回
     }
-    Mat4 *matrix0 = ttrotate(ttime);                     //获取当前时刻的旋转数据
-    matrix0->setTranslation(ttposition(ttime));          //将当前时刻的平移数据记录进矩阵
-    matrix0->mul(relative, matrix0);                     //与自身相对矩阵相乘
-    if (ifparent) {                                      //若有父关节
+    Mat4 *matrix0 = ttrotate(ttime);//获取当前时刻的旋转数据
+    matrix0->setTranslation(ttposition(ttime));//将当前时刻的平移数据记录进矩阵
+    matrix0->mul(relative, matrix0);//与自身相对矩阵相乘
+    if (ifparent) {//若有父关节
         tmatrix = matrix0->mul(parent->tmatrix, matrix0);//乘以父关节的当前矩阵
-    } else {                                             //若无父关节
-        tmatrix = matrix0;                               //给当前绝对矩阵赋值
+    } else {//若无父关节
+        tmatrix = matrix0;//给当前绝对矩阵赋值
     }
 }
-Vector3f *MS3DJoint::ttposition(float time) {                   //根据当前播放时间和关键帧数据进行平移数据插值计算的方法
-    int index = 0;                                              //初始化索引为0
-    int size = count_pos;                                       //得到平移关键帧的数量
+Vector3f *MS3DJoint::ttposition(float time) {//根据当前播放时间和关键帧数据进行平移数据插值计算的方法
+    int index = 0;//初始化索引为0
+    int size = count_pos;//得到平移关键帧的数量
     while (index < size && positions[index]->getTime() < time) {//根据当前时间计算用于插值的结束关键帧索引
-        index++;                                                //关键帧索引加1
+        index++;//关键帧索引加1
     }
-    if (index == 0) {                                     //若结束关键帧索引为0
-        return positions[index]->getPosition();           //获取第一帧的平移数据并返回
-    } else if (index == size) {                           //若结束关键帧索引等于关键帧数量
-        return positions[index - 1]->getPosition();       //获取最后一帧的平移数据并返回
-    } else {                                              //若结束关键帧索引既不为0 也不超过最终关键帧
-        MS3DKeyFramePosition *right = positions[index];   //插值用结束关键帧的平移数据
+    if (index == 0) {//若结束关键帧索引为0
+        return positions[index]->getPosition();//获取第一帧的平移数据并返回
+    } else if (index == size) {//若结束关键帧索引等于关键帧数量
+        return positions[index - 1]->getPosition();//获取最后一帧的平移数据并返回
+    } else {//若结束关键帧索引既不为0 也不超过最终关键帧
+        MS3DKeyFramePosition *right = positions[index];//插值用结束关键帧的平移数据
         MS3DKeyFramePosition *left = positions[index - 1];//上一关键帧的平移数据
-        tranV3Helper->interpolate(left->getPosition(),    //插值产生当前时刻的平移数据
+        tranV3Helper->interpolate(left->getPosition(),//插值产生当前时刻的平移数据
                                   right->getPosition(), (time - left->getTime()) / (right->getTime() - left->getTime()));
         return tranV3Helper;//返回当前时刻的平移数据
     }
 }
-Mat4 *MS3DJoint::ttrotate(float time) {                       //根据当前播放时间和关键帧数据进行旋转数据插值计算的方法
-    int index = 0;                                            //初始化索引为0
-    int size = count_rot;                                     //获取旋转关键帧的数量
+Mat4 *MS3DJoint::ttrotate(float time) {//根据当前播放时间和关键帧数据进行旋转数据插值计算的方法
+    int index = 0;//初始化索引为0
+    int size = count_rot;//获取旋转关键帧的数量
     while (index < size && rotates[index]->getTime() < time) {//根据当前时间计算用于插值的结束关键帧索引
-        index++;                                              //关键帧索引加1
+        index++;//关键帧索引加1
     }
-    if (index == 0) {                                  //若结束关键帧索引为0
-        tranV4Helper = rotates[index]->getRotate();    //获取第一帧的旋转数据
-    } else if (index == size) {                        //若结束关键帧索引等于关键帧数量
+    if (index == 0) {//若结束关键帧索引为0
+        tranV4Helper = rotates[index]->getRotate();//获取第一帧的旋转数据
+    } else if (index == size) {//若结束关键帧索引等于关键帧数量
         tranV4Helper = rotates[index - 1]->getRotate();//获取最后一帧的旋转数据
-    } else {                                           //若结束关键帧索引既不为0 也不超过最终关键帧
-        MS3DKeyFrameRotate *right = rotates[index];    //插值用结束关键帧的旋转
-        MS3DKeyFrameRotate *left = rotates[index - 1]; //上一关键帧的旋转
-        tranV4Helper->interpolate(left->getRotate(),   //插值产生当前时刻的旋转（四元数格式）
+    } else {//若结束关键帧索引既不为0 也不超过最终关键帧
+        MS3DKeyFrameRotate *right = rotates[index];//插值用结束关键帧的旋转
+        MS3DKeyFrameRotate *left = rotates[index - 1];//上一关键帧的旋转
+        tranV4Helper->interpolate(left->getRotate(),//插值产生当前时刻的旋转（四元数格式）
                                   right->getRotate(), (time - left->getTime()) / (right->getTime() - left->getTime()));
     }
     mHelper->genRotateFromQuaternion(tranV4Helper);//将四元数形式的旋转转换为矩阵形式
-    return mHelper;                                //返回当前时刻的旋转数据
+    return mHelper;//返回当前时刻的旋转数据
 }
 Mat4 *MS3DJoint::getMatrix() {
     return tmatrix;

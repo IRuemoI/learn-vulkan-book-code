@@ -45,7 +45,7 @@ void mouse_button_callback(GLFWwindow *window, int button, int action, int mods)
         VulkanDemoApp::cx = sinf(VulkanDemoApp::direction) * VulkanDemoApp::Offset;//计算摄像机的位置
         VulkanDemoApp::cz = cosf(VulkanDemoApp::direction) * VulkanDemoApp::Offset;
         MatrixState3D::setCamera(VulkanDemoApp::cx, 10, VulkanDemoApp::cz, 0, 0, 0, 0, 1, 0);//设置摄像机的位置
-        TreeControl::calculateBillboardDirection();                                          //对树群按照到摄像机的距离大小进行排序
+        TreeControl::calculateBillboardDirection();//对树群按照到摄像机的距离大小进行排序
         printf("鼠标松开\n");
     }
 }

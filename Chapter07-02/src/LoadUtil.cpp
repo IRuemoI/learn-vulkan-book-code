@@ -117,21 +117,21 @@ int parseInt(const char *token) {
     return i;
 }
 float *getCrossProduct(float x1, float y1, float z1, float x2, float y2, float z2) {//求两个向量叉积的方法
-    float A = y1 * z2 - y2 * z1;                                                    //求出两个向量的叉积向量在X 轴的分量A
-    float B = z1 * x2 - z2 * x1;                                                    //求出两个向量的叉积向量在Y 轴的分量B
-    float C = x1 * y2 - x2 * y1;                                                    //求出两个向量的叉积向量在Z 轴的分量C
-    return new float[3]{A, B, C};                                                   //返回叉积结果向量
+    float A = y1 * z2 - y2 * z1;//求出两个向量的叉积向量在X 轴的分量A
+    float B = z1 * x2 - z2 * x1;//求出两个向量的叉积向量在Y 轴的分量B
+    float C = x1 * y2 - x2 * y1;//求出两个向量的叉积向量在Z 轴的分量C
+    return new float[3]{A, B, C};//返回叉积结果向量
 }
-float *vectorNormal(float *vector) {                                                                   //向量规格化的方法
+float *vectorNormal(float *vector) {//向量规格化的方法
     float module = (float) sqrt(vector[0] * vector[0] + vector[1] * vector[1] + vector[2] * vector[2]);//求向量的模
-    return new float[3]{vector[0] / module, vector[1] / module, vector[2] / module};                   //返回规格化的向量
+    return new float[3]{vector[0] / module, vector[1] / module, vector[2] / module};//返回规格化的向量
 }
 ObjObject *LoadUtil::loadFromFile(const string &vname, VkDevice &device,
                                   VkPhysicalDeviceMemoryProperties &memoryProperties) {//读取obj 文件内容生成绘制用物体对象的方法
-    ObjObject *lo;                                                                     //指向生成的绘制用物体对象的指针
-    vector<float> alv;                                                                 //存放原始顶点坐标数据的列表
-    vector<float> alvResult;                                                           //存放结果顶点坐标数据的列表
-    vector<float> alnResult;                                                           //存放结果法向量数据的列表
+    ObjObject *lo;//指向生成的绘制用物体对象的指针
+    vector<float> alv;//存放原始顶点坐标数据的列表
+    vector<float> alvResult;//存放结果顶点坐标数据的列表
+    vector<float> alnResult;//存放结果法向量数据的列表
     std::string resultStr = FileUtil::loadAssetStr(vname);
     vector<string> lines;
     splitString(resultStr, "\n", lines);
@@ -186,9 +186,9 @@ ObjObject *LoadUtil::loadFromFile(const string &vname, VkDevice &device,
             float vxb = x2 - x0;
             float vyb = y2 - y0;
             float vzb = z2 - z0;//求三角形中第一个点到第三个点的向量
-            float *vNormal =    //通过计算两个向量的叉积计算出此三角形面的法向量
+            float *vNormal =//通过计算两个向量的叉积计算出此三角形面的法向量
                     vectorNormal(getCrossProduct(vxa, vya, vza, vxb, vyb, vzb));
-            for (int i = 0; i < 3; i++) {       //遍历当前三角形的三个顶点
+            for (int i = 0; i < 3; i++) {//遍历当前三角形的三个顶点
                 alnResult.push_back(vNormal[0]);//将计算出的法向量X 分量添加到结果法向量列表中
                 alnResult.push_back(vNormal[1]);//将计算出的法向量Y 分量添加到结果法向量列表中
                 alnResult.push_back(vNormal[2]);//将计算出的法向量Z 分量添加到结果法向量列表中
@@ -196,11 +196,11 @@ ObjObject *LoadUtil::loadFromFile(const string &vname, VkDevice &device,
         }
         splitStrs.clear();
     }
-    int vCount = (int) alvResult.size() / 3;        //计算顶点数量
-    int dataByteCount = vCount * 6 * sizeof(float); //技术顶点数据所占总字节数
-    float *vdataIn = new float[vCount * 6];         //顶点数据数组
-    int indexTemp = 0;                              //辅助索引
-    for (int i = 0; i < vCount; i++) {              //遍历所有的顶点
+    int vCount = (int) alvResult.size() / 3;//计算顶点数量
+    int dataByteCount = vCount * 6 * sizeof(float);//技术顶点数据所占总字节数
+    float *vdataIn = new float[vCount * 6];//顶点数据数组
+    int indexTemp = 0;//辅助索引
+    for (int i = 0; i < vCount; i++) {//遍历所有的顶点
         vdataIn[indexTemp++] = alvResult[i * 3 + 0];//将当前顶点x 坐标转存到顶点数据数组中
         vdataIn[indexTemp++] = alvResult[i * 3 + 1];//将当前顶点y 坐标转存到顶点数据数组中
         vdataIn[indexTemp++] = alvResult[i * 3 + 2];//将当前顶点z 坐标转存到顶点数据数组中
@@ -209,5 +209,5 @@ ObjObject *LoadUtil::loadFromFile(const string &vname, VkDevice &device,
         vdataIn[indexTemp++] = alnResult[i * 3 + 2];//将面法向量z 分量转存到顶点数据数组中
     }
     lo = new ObjObject(vdataIn, dataByteCount, vCount, device, memoryProperties);//创建绘制用物体对象
-    return lo;                                                                   //返回指向绘制用物体对象的指针
+    return lo;//返回指向绘制用物体对象的指针
 }

@@ -221,10 +221,10 @@ void ShaderQueueSuit_CommonTex::createPipeline(VkDevice &device, VkRenderPass &r
     rs.depthBiasSlopeFactor = 0;
     rs.lineWidth = 1.0f;
     VkPipelineColorBlendAttachmentState att_state[1];//管线颜色混合附件状态数组
-    att_state[0].colorWriteMask = 0xf;               //设置写入掩码
-    att_state[0].blendEnable = VK_TRUE;              //开启混合
-    att_state[0].alphaBlendOp = VK_BLEND_OP_ADD;     //设置 Alpha 通道混合方式
-    att_state[0].colorBlendOp = VK_BLEND_OP_ADD;     //设置 RGB 通道混合方式
+    att_state[0].colorWriteMask = 0xf;//设置写入掩码
+    att_state[0].blendEnable = VK_TRUE;//开启混合
+    att_state[0].alphaBlendOp = VK_BLEND_OP_ADD;//设置 Alpha 通道混合方式
+    att_state[0].colorBlendOp = VK_BLEND_OP_ADD;//设置 RGB 通道混合方式
     att_state[0].srcColorBlendFactor = VK_BLEND_FACTOR_SRC_ALPHA;
     att_state[0].dstColorBlendFactor = VK_BLEND_FACTOR_ONE_MINUS_SRC_ALPHA;
     att_state[0].srcAlphaBlendFactor = VK_BLEND_FACTOR_SRC_ALPHA;

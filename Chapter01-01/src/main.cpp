@@ -10,6 +10,7 @@ int main() {
     std::ifstream f("config.json");
     json data = json::parse(f);
     std::cout << data["key1"] << std::endl;
+    f.close();
 
     try {
         // 实例化一个三角形渲染程序对象

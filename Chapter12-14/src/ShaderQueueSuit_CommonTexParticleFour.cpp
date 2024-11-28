@@ -243,10 +243,10 @@ void ShaderQueueSuit_CommonTexParticleFour::createPipeline(VkDevice &device, VkR
     att_state[0].blendEnable = VK_TRUE;
     att_state[0].alphaBlendOp = VK_BLEND_OP_REVERSE_SUBTRACT;//设置Alpha 通道混合方式
     att_state[0].colorBlendOp = VK_BLEND_OP_REVERSE_SUBTRACT;//设置RGB 通道混合方式
-    att_state[0].srcColorBlendFactor = VK_BLEND_FACTOR_ONE;  //设置源颜色混合因子
-    att_state[0].dstColorBlendFactor = VK_BLEND_FACTOR_ONE;  //设置目标颜色混合因子
-    att_state[0].srcAlphaBlendFactor = VK_BLEND_FACTOR_ONE;  //设置源Alpha 混合因子
-    att_state[0].dstAlphaBlendFactor = VK_BLEND_FACTOR_ONE;  //设置目标Alpha 混合因子
+    att_state[0].srcColorBlendFactor = VK_BLEND_FACTOR_ONE;//设置源颜色混合因子
+    att_state[0].dstColorBlendFactor = VK_BLEND_FACTOR_ONE;//设置目标颜色混合因子
+    att_state[0].srcAlphaBlendFactor = VK_BLEND_FACTOR_ONE;//设置源Alpha 混合因子
+    att_state[0].dstAlphaBlendFactor = VK_BLEND_FACTOR_ONE;//设置目标Alpha 混合因子
     VkPipelineColorBlendStateCreateInfo cb;
     cb.sType = VK_STRUCTURE_TYPE_PIPELINE_COLOR_BLEND_STATE_CREATE_INFO;
     cb.pNext = nullptr;

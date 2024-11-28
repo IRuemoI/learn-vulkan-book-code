@@ -15,12 +15,12 @@ DrawableObjectCommonLight::DrawableObjectCommonLight(//构造函数
         int iCountIn,//传入的索引数据相关参数
         VkDevice &device,
         VkPhysicalDeviceMemoryProperties &memoryProperties) {
-    pushConstantData = new float[16];                           //创建推送常量数据数组
-    this->devicePointer = &device;                              //接收逻辑设备指针并保存
-    this->vdata = vdataIn;                                      //接收顶点数据数组首地址指针并保存
-    this->vCount = vCountIn;                                    //接收顶点数量并保存
-    this->idata = idataIn;                                      //接收索引数据数组首地址指针并保存
-    this->iCount = iCountIn;                                    //接收索引数量并保存
+    pushConstantData = new float[16];//创建推送常量数据数组
+    this->devicePointer = &device;//接收逻辑设备指针并保存
+    this->vdata = vdataIn;//接收顶点数据数组首地址指针并保存
+    this->vCount = vCountIn;//接收顶点数量并保存
+    this->idata = idataIn;//接收索引数据数组首地址指针并保存
+    this->iCount = iCountIn;//接收索引数量并保存
     createVertexBuffer(dataByteCount, device, memoryProperties);//调用方法创建顶点数据缓冲
     createIndexBuffer(indexByteCount, device, memoryProperties);//调用方法创建索引数据缓冲
 }
@@ -139,12 +139,12 @@ void DrawableObjectCommonLight::createIndexBuffer(int indexByteCount, VkDevice &
 }
 
 DrawableObjectCommonLight::~DrawableObjectCommonLight() {
-    delete[] vdata;                                         //释放顶点数据内存
+    delete[] vdata;//释放顶点数据内存
     vkDestroyBuffer(*devicePointer, vertexDatabuf, nullptr);//销毁顶点数据缓冲
-    vkFreeMemory(*devicePointer, vertexDataMem, nullptr);   //释放顶点数据缓冲对应设备内存
-    delete[] idata;                                         //释放索引数据内存
-    vkDestroyBuffer(*devicePointer, indexDatabuf, nullptr); //销毁索引数据缓冲
-    vkFreeMemory(*devicePointer, indexDataMem, nullptr);    //释放索引数据缓冲对应设备内存
+    vkFreeMemory(*devicePointer, vertexDataMem, nullptr);//释放顶点数据缓冲对应设备内存
+    delete[] idata;//释放索引数据内存
+    vkDestroyBuffer(*devicePointer, indexDatabuf, nullptr);//销毁索引数据缓冲
+    vkFreeMemory(*devicePointer, indexDataMem, nullptr);//释放索引数据缓冲对应设备内存
 }
 
 void DrawableObjectCommonLight::drawSelf(VkCommandBuffer &cmd, VkPipelineLayout &pipelineLayout, VkPipeline &pipeline, VkDescriptorSet *desSetPointer, uint32_t sIndex, uint32_t eIndex) {
@@ -157,20 +157,20 @@ void DrawableObjectCommonLight::drawSelf(VkCommandBuffer &cmd, VkPipelineLayout 
             1,
             &(vertexDatabuf),
             offsetsVertex);
-    float *mvp = MatrixState3D::getFinalMatrix();     //获取总变换矩阵
+    float *mvp = MatrixState3D::getFinalMatrix();//获取总变换矩阵
     memcpy(pushConstantData, mvp, sizeof(float) * 16);//将总变换矩阵拷贝入内存
-    vkCmdPushConstants(cmd, pipelineLayout,           //将常量数据送入管线
+    vkCmdPushConstants(cmd, pipelineLayout,//将常量数据送入管线
                        VK_SHADER_STAGE_VERTEX_BIT, 0, sizeof(float) * 16, pushConstantData);
-    vkCmdBindIndexBuffer(         //将顶点数据与当前使用的命令缓冲绑定
-            cmd,                  //当前使用的命令缓冲
-            indexDatabuf,         //索引数据缓冲
-            0,                    //索引数据缓冲首索引
+    vkCmdBindIndexBuffer(//将顶点数据与当前使用的命令缓冲绑定
+            cmd,//当前使用的命令缓冲
+            indexDatabuf,//索引数据缓冲
+            0,//索引数据缓冲首索引
             VK_INDEX_TYPE_UINT16);//索引数据类型
-    vkCmdDrawIndexed(             //执行索引绘制
-            cmd,                  //当前使用的命令缓冲
-            eIndex - sIndex,      //索引数量
-            1,                    //需要绘制的实例数量
-            sIndex,               //绘制用起始索引
-            0,                    //顶点数据偏移量
-            0);                   //需要绘制的第1 个实例的索引
+    vkCmdDrawIndexed(//执行索引绘制
+            cmd,//当前使用的命令缓冲
+            eIndex - sIndex,//索引数量
+            1,//需要绘制的实例数量
+            sIndex,//绘制用起始索引
+            0,//顶点数据偏移量
+            0);//需要绘制的第1 个实例的索引
 }

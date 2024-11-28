@@ -10,6 +10,6 @@ layout (location = 1) out vec4 outPos;
 layout (location = 2) out vec4 outNormal;
 void main() {
     outColor=textureLod(tex, inTexCoor, 0.0);
-    outPos=vec4(inPos.xyz,1.0);
-    outNormal=vec4(inNormal.xyz,1.0);
+    outPos=vec4(inPos.xyz, 1.0);
+    outNormal=vec4(inNormal.xyz, 1.0);
 }

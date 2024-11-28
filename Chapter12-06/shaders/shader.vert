@@ -12,5 +12,5 @@ out gl_PerVertex {
 };
 void main() {
     outTexCoor = inTexCoor;
-    gl_Position = myConstantVals.mvp * vec4(pos,1.0);
+    gl_Position = myConstantVals.mvp * vec4(pos, 1.0);
 }

@@ -3,7 +3,7 @@
 #extension GL_ARB_shading_language_420pack : enable
 
 
-layout (std140,set = 0, binding = 0) uniform bufferVals {
+layout (std140, set = 0, binding = 0) uniform bufferVals {
     float brightFactor;
 } myBufferVals;
 

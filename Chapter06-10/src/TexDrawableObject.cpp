@@ -59,9 +59,9 @@ void TexDrawableObject::drawSelf(VkCommandBuffer &cmd, VkPipelineLayout &pipelin
             1,
             &(vertexDatabuf),
             offsetsVertex);
-    float *mvp = MatrixState3D::getFinalMatrix();                                                                //获取最终变换矩阵
-    memcpy(pushConstantData, mvp, sizeof(float) * 16);                                                           //将最终变换矩阵数据送入推送常量数据
-    pushConstantData[16] = (float) texArrayIndex;                                                                //将纹理数组索引数据送入推送常量数据
+    float *mvp = MatrixState3D::getFinalMatrix();//获取最终变换矩阵
+    memcpy(pushConstantData, mvp, sizeof(float) * 16);//将最终变换矩阵数据送入推送常量数据
+    pushConstantData[16] = (float) texArrayIndex;//将纹理数组索引数据送入推送常量数据
     vkCmdPushConstants(cmd, pipelineLayout, VK_SHADER_STAGE_VERTEX_BIT, 0, sizeof(float) * 17, pushConstantData);//将推送常量数据送入推送常量
-    vkCmdDraw(cmd, vCount, 1, 0, 0);                                                                             //执行绘制
+    vkCmdDraw(cmd, vCount, 1, 0, 0);//执行绘制
 }

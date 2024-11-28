@@ -13,8 +13,8 @@ TexLeafDrawableObject::TexLeafDrawableObject(float *vdataIn, int dataByteCount, 
     this->postionX = pxIn;
     this->postionY = pyIn;
     this->postionZ = pzIn;
-    this->centerx = pxIn + Constant::leaves_width / 2 * cos(toRadians(tangle)); //计算当前中心X坐标
-    this->centery = pyIn + Constant::LEAVE_CENTER_HEIGHT;                       //计算当前中心Y坐标
+    this->centerx = pxIn + Constant::leaves_width / 2 * cos(toRadians(tangle));//计算当前中心X坐标
+    this->centery = pyIn + Constant::LEAVE_CENTER_HEIGHT;//计算当前中心Y坐标
     this->centerz = pzIn + Constant::leaves_height / 2 * sin(toRadians(tangle));//计算当前中心Z坐标
     float *initialPos = new float[3]{
             centerx, centery, centerz};

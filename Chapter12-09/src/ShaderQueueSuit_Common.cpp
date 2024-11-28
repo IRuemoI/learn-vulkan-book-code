@@ -171,31 +171,31 @@ void ShaderQueueSuit_Common::destroyShaderModule(VkDevice &device) {
     vkDestroyShaderModule(device, shaderStages[0].module, nullptr);
     vkDestroyShaderModule(device, shaderStages[1].module, nullptr);
 }
-void ShaderQueueSuit_Common::initVertexAttributeInfo() {    //设置顶点输入属性信息的方法
-    vertexBinding.binding = 0;                              //对应绑定点
-    vertexBinding.inputRate = VK_VERTEX_INPUT_RATE_VERTEX;  //数据输入频率为每顶点
-    vertexBinding.stride = sizeof(float) * 8;               //每组数据的跨度字节数
-    vertexAttributes[0].binding = 0;                        //第1 个顶点输入属性的绑定点
-    vertexAttributes[0].location = 0;                       //第1 个顶点输入属性的位置索引
+void ShaderQueueSuit_Common::initVertexAttributeInfo() {//设置顶点输入属性信息的方法
+    vertexBinding.binding = 0;//对应绑定点
+    vertexBinding.inputRate = VK_VERTEX_INPUT_RATE_VERTEX;//数据输入频率为每顶点
+    vertexBinding.stride = sizeof(float) * 8;//每组数据的跨度字节数
+    vertexAttributes[0].binding = 0;//第1 个顶点输入属性的绑定点
+    vertexAttributes[0].location = 0;//第1 个顶点输入属性的位置索引
     vertexAttributes[0].format = VK_FORMAT_R32G32B32_SFLOAT;//第1 个顶点输入属性的数据格式
-    vertexAttributes[0].offset = 0;                         //第1 个顶点输入属性的偏移量
-    vertexAttributes[1].binding = 0;                        //第2 个顶点输入属性的绑定点
-    vertexAttributes[1].location = 1;                       //第2 个顶点输入属性的位置索引
-    vertexAttributes[1].format = VK_FORMAT_R32G32_SFLOAT;   //第2 个顶点输入属性的数据格式
-    vertexAttributes[1].offset = 12;                        //第2 个顶点输入属性的偏移量
-    vertexAttributes[2].binding = 0;                        //第3 个顶点输入属性的绑定点
-    vertexAttributes[2].location = 2;                       //第3 个顶点输入属性的位置索引
+    vertexAttributes[0].offset = 0;//第1 个顶点输入属性的偏移量
+    vertexAttributes[1].binding = 0;//第2 个顶点输入属性的绑定点
+    vertexAttributes[1].location = 1;//第2 个顶点输入属性的位置索引
+    vertexAttributes[1].format = VK_FORMAT_R32G32_SFLOAT;//第2 个顶点输入属性的数据格式
+    vertexAttributes[1].offset = 12;//第2 个顶点输入属性的偏移量
+    vertexAttributes[2].binding = 0;//第3 个顶点输入属性的绑定点
+    vertexAttributes[2].location = 2;//第3 个顶点输入属性的位置索引
     vertexAttributes[2].format = VK_FORMAT_R32G32B32_SFLOAT;//第3 个顶点输入属性的数据格式
-    vertexAttributes[2].offset = 20;                        //第3 个顶点输入属性的偏移量
+    vertexAttributes[2].offset = 20;//第3 个顶点输入属性的偏移量
 }
 void ShaderQueueSuit_Common::createPipeline(VkDevice &device, VkRenderPass &renderPass) {
     VkPipelineVertexInputStateCreateInfo vi;//管线顶点数据输入状态创建信息
     vi.sType = VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO;
-    vi.pNext = nullptr;                                //自定义数据的指针
-    vi.flags = 0;                                      //供将来使用的标志
-    vi.vertexBindingDescriptionCount = 1;              //顶点输入绑定描述数量
-    vi.pVertexBindingDescriptions = &vertexBinding;    //顶点输入绑定描述列表
-    vi.vertexAttributeDescriptionCount = 3;            //顶点输入属性描述数量
+    vi.pNext = nullptr;//自定义数据的指针
+    vi.flags = 0;//供将来使用的标志
+    vi.vertexBindingDescriptionCount = 1;//顶点输入绑定描述数量
+    vi.pVertexBindingDescriptions = &vertexBinding;//顶点输入绑定描述列表
+    vi.vertexAttributeDescriptionCount = 3;//顶点输入属性描述数量
     vi.pVertexAttributeDescriptions = vertexAttributes;//顶点输入属性描述列表
     VkDynamicState dynamicStateEnables[2];
     memset(dynamicStateEnables, 0, sizeof dynamicStateEnables);

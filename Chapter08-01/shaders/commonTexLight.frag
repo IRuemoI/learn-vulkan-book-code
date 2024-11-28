@@ -8,7 +8,7 @@ layout (location = 0) in vec4 inLightQD;
 void main()
 {
 
-        outColor=inLightQD*vec4(0.9,0.9,0.9,1.0);
+    outColor=inLightQD*vec4(0.9, 0.9, 0.9, 1.0);
 
 
 }

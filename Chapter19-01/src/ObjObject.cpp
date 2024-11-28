@@ -1,7 +1,7 @@
 #include "ObjObject.h"
-#include "My3DLayer.h"
 #include "HelpFunction.h"
 #include "MatrixState3D.h"
+#include "My3DLayer.h"
 #include <assert.h>
 #include <string.h>
 #include <string>

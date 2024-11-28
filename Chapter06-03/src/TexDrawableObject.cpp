@@ -50,18 +50,18 @@ TexDrawableObject::~TexDrawableObject() {
     vkFreeMemory(*devicePointer, vertexDataMem, nullptr);
 }
 void TexDrawableObject::drawSelf(VkCommandBuffer &cmd, VkPipelineLayout &pipelineLayout, VkPipeline &pipeline, VkDescriptorSet *desSetPointer) {
-    vkCmdBindPipeline(cmd, VK_PIPELINE_BIND_POINT_GRAPHICS, pipeline);                                             //将当前使用的命令缓冲与管线绑定
+    vkCmdBindPipeline(cmd, VK_PIPELINE_BIND_POINT_GRAPHICS, pipeline);//将当前使用的命令缓冲与管线绑定
     vkCmdBindDescriptorSets(cmd, VK_PIPELINE_BIND_POINT_GRAPHICS, pipelineLayout, 0, 1, desSetPointer, 0, nullptr);//将命令缓冲、管线布局、描述集绑定
-    const VkDeviceSize offsetsVertex[1] = {0};                                                                     //顶点数据偏移量数组
-    vkCmdBindVertexBuffers(                                                                                        //将顶点数据与当前使用的命令缓冲绑定
-            cmd,                                                                                                   //当前使用的命令缓冲
-            0,                                                                                                     //顶点数据缓冲在列表中的首索引
-            1,                                                                                                     //绑定顶点缓冲的数量
-            &(vertexDatabuf),                                                                                      //绑定的顶点数据缓冲列表
-            offsetsVertex                                                                                          //各个顶点数据缓冲的内部偏移量
+    const VkDeviceSize offsetsVertex[1] = {0};//顶点数据偏移量数组
+    vkCmdBindVertexBuffers(//将顶点数据与当前使用的命令缓冲绑定
+            cmd,//当前使用的命令缓冲
+            0,//顶点数据缓冲在列表中的首索引
+            1,//绑定顶点缓冲的数量
+            &(vertexDatabuf),//绑定的顶点数据缓冲列表
+            offsetsVertex//各个顶点数据缓冲的内部偏移量
     );
-    float *mvp = MatrixState3D::getFinalMatrix();                                                                //获取最终变换矩阵
-    memcpy(pushConstantData, mvp, sizeof(float) * 16);                                                           //将最终变换矩阵数据送入推送常量数据
+    float *mvp = MatrixState3D::getFinalMatrix();//获取最终变换矩阵
+    memcpy(pushConstantData, mvp, sizeof(float) * 16);//将最终变换矩阵数据送入推送常量数据
     vkCmdPushConstants(cmd, pipelineLayout, VK_SHADER_STAGE_VERTEX_BIT, 0, sizeof(float) * 16, pushConstantData);//将最终变换矩阵数据送入推送常量
-    vkCmdDraw(cmd, vCount, 1, 0, 0);                                                                             //执行绘制
+    vkCmdDraw(cmd, vCount, 1, 0, 0);//执行绘制
 }

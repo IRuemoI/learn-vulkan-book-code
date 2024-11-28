@@ -7,7 +7,7 @@
 #include "VulkanDemoApp.h"
 #include <cassert>
 void ShaderQueueSuit_DoubleTex::createUniformBuffer(VkDevice &device, VkPhysicalDeviceMemoryProperties &memoryProperties) {//创建一致缓冲的方法
-    bufferByteCount = sizeof(float) * 3;                                                                                   //一致缓冲总字节数
+    bufferByteCount = sizeof(float) * 3;//一致缓冲总字节数
     VkBufferCreateInfo buf_info = {};
     buf_info.sType = VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO;
     buf_info.pNext = nullptr;
@@ -46,7 +46,7 @@ void ShaderQueueSuit_DoubleTex::destroyUniformBuffer(VkDevice &device) {
     vkFreeMemory(device, memUniformBuf, nullptr);
 }
 void ShaderQueueSuit_DoubleTex::createPipelineLayout(VkDevice &device) {//创建管线布局
-    VkDescriptorSetLayoutBinding layout_bindings[3];                    //创建描述集布局绑定数组
+    VkDescriptorSetLayoutBinding layout_bindings[3];//创建描述集布局绑定数组
     layout_bindings[0].binding = 0;
     layout_bindings[0].descriptorType = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
     layout_bindings[0].descriptorCount = 1;
@@ -57,10 +57,10 @@ void ShaderQueueSuit_DoubleTex::createPipelineLayout(VkDevice &device) {//创建
     layout_bindings[1].descriptorCount = 1;
     layout_bindings[1].stageFlags = VK_SHADER_STAGE_FRAGMENT_BIT;
     layout_bindings[1].pImmutableSamplers = nullptr;
-    layout_bindings[2].binding = 2;                                               //绑定点编号
+    layout_bindings[2].binding = 2;//绑定点编号
     layout_bindings[2].descriptorType = VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;//描述类型
-    layout_bindings[2].descriptorCount = 1;                                       //描述数量
-    layout_bindings[2].stageFlags = VK_SHADER_STAGE_FRAGMENT_BIT;                 //目标着色器阶段
+    layout_bindings[2].descriptorCount = 1;//描述数量
+    layout_bindings[2].stageFlags = VK_SHADER_STAGE_FRAGMENT_BIT;//目标着色器阶段
     layout_bindings[2].pImmutableSamplers = nullptr;
     VkDescriptorSetLayoutCreateInfo descriptor_layout = {};
     descriptor_layout.sType = VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_CREATE_INFO;
@@ -92,12 +92,12 @@ void ShaderQueueSuit_DoubleTex::destroyPipelineLayout(VkDevice &device) {
     vkDestroyPipelineLayout(device, pipelineLayout, nullptr);
 }
 void ShaderQueueSuit_DoubleTex::initDescriptorSet(VkDevice &device) {//初始化描述集
-    VkDescriptorPoolSize type_count[3];                              //描述池尺寸实例数组
+    VkDescriptorPoolSize type_count[3];//描述池尺寸实例数组
     type_count[0].type = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
     type_count[0].descriptorCount = TextureManager::texNames.size() / 2;
     type_count[1].type = VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;
     type_count[1].descriptorCount = TextureManager::texNames.size() / 2;
-    type_count[2].type = VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;     //描述类型
+    type_count[2].type = VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;//描述类型
     type_count[2].descriptorCount = TextureManager::texNames.size() / 2;//描述数量
     VkDescriptorPoolCreateInfo descriptor_pool = {};
     descriptor_pool.sType = VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO;
@@ -134,12 +134,12 @@ void ShaderQueueSuit_DoubleTex::initDescriptorSet(VkDevice &device) {//初始化
     writes[1].descriptorCount = 1;
     writes[1].descriptorType = VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;
     writes[1].dstArrayElement = 0;
-    writes[2] = {};                                                      //完善一致变量写入描述集实例数组元素2(对应过程纹理所需的第二幅纹理)
-    writes[2].sType = VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET;            //结构体类型
-    writes[2].dstBinding = 2;                                            //目标绑定编号
-    writes[2].descriptorCount = 1;                                       //描述数量
+    writes[2] = {};//完善一致变量写入描述集实例数组元素2(对应过程纹理所需的第二幅纹理)
+    writes[2].sType = VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET;//结构体类型
+    writes[2].dstBinding = 2;//目标绑定编号
+    writes[2].descriptorCount = 1;//描述数量
     writes[2].descriptorType = VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;//描述类型
-    writes[2].dstArrayElement = 0;                                       //目标数组起始元素
+    writes[2].dstArrayElement = 0;//目标数组起始元素
 }
 void ShaderQueueSuit_DoubleTex::createShaderModule(VkDevice &device) {
     std::string vertStr = FileUtil::loadAssetStr("./shaders/commonTexLand.vert");

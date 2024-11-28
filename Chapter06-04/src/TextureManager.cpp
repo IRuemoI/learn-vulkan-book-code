@@ -63,9 +63,9 @@ std::map<std::string, VkImageView> TextureManager::viewTextureList;
 std::map<std::string, VkDescriptorImageInfo> TextureManager::texImageInfoList;
 std::map<std::string, int> TextureManager::imageSampler;
 void TextureManager::initSampler(VkDevice &device, VkPhysicalDevice &gpu) {
-    VkSamplerCreateInfo samplerCreateInfo = {};                     //构建采样器创建信息结构体实例
+    VkSamplerCreateInfo samplerCreateInfo = {};//构建采样器创建信息结构体实例
     samplerCreateInfo.sType = VK_STRUCTURE_TYPE_SAMPLER_CREATE_INFO;//结构体的类型
-    for (int i = 0; i < SAMPLER_COUNT; i++) {                       //循环设置不同的采样方式
+    for (int i = 0; i < SAMPLER_COUNT; i++) {//循环设置不同的采样方式
         if (i == 0) {
             samplerCreateInfo.magFilter = VK_FILTER_NEAREST;//放大时采用最近点采样方式
             samplerCreateInfo.minFilter = VK_FILTER_NEAREST;//缩小时采用最近点采样方式
@@ -85,9 +85,9 @@ void TextureManager::initSampler(VkDevice &device, VkPhysicalDevice &gpu) {
         samplerCreateInfo.maxLod = 0.0;
         samplerCreateInfo.compareEnable = VK_FALSE;
         samplerCreateInfo.borderColor = VK_BORDER_COLOR_FLOAT_OPAQUE_WHITE;
-        VkSampler samplerTexture;                                                               //声明采样器对象
+        VkSampler samplerTexture;//声明采样器对象
         VkResult result = vkCreateSampler(device, &samplerCreateInfo, nullptr, &samplerTexture);//创建采样器
-        samplerList.push_back(samplerTexture);                                                  //将采样器加入列表
+        samplerList.push_back(samplerTexture);//将采样器加入列表
     }
 }
 void TextureManager::init_SPEC_2D_Textures(std::string texName, VkDevice &device, VkPhysicalDevice &gpu, VkPhysicalDeviceMemoryProperties &memoryProperties, VkCommandBuffer &cmdBuffer, VkQueue &queueGraphics, VkFormat format, TexDataObject *ctdo) {
@@ -252,15 +252,15 @@ void TextureManager::init_SPEC_2D_Textures(std::string texName, VkDevice &device
         memcpy(pData, ctdo->data, mem_reqs.size);
         vkUnmapMemory(device, textureMemory);
     }
-    VkImageViewCreateInfo view_info = {};                      //构建图像视图创建信息结构体实例
+    VkImageViewCreateInfo view_info = {};//构建图像视图创建信息结构体实例
     view_info.sType = VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO;//结构体的类型
-    view_info.pNext = nullptr;                                 //自定义数据的指针
-    view_info.viewType = VK_IMAGE_VIEW_TYPE_2D;                //图像视图的类型
-    view_info.format = format;                                 //图像视图的像素格式
-    view_info.components.r = VK_COMPONENT_SWIZZLE_R;           //设置 R 通道调和
-    view_info.components.g = VK_COMPONENT_SWIZZLE_G;           //设置 G 通道调和
-    view_info.components.b = VK_COMPONENT_SWIZZLE_B;           //设置 B 通道调和
-    view_info.components.a = VK_COMPONENT_SWIZZLE_A;           //设置 A 通道调和
+    view_info.pNext = nullptr;//自定义数据的指针
+    view_info.viewType = VK_IMAGE_VIEW_TYPE_2D;//图像视图的类型
+    view_info.format = format;//图像视图的像素格式
+    view_info.components.r = VK_COMPONENT_SWIZZLE_R;//设置 R 通道调和
+    view_info.components.g = VK_COMPONENT_SWIZZLE_G;//设置 G 通道调和
+    view_info.components.b = VK_COMPONENT_SWIZZLE_B;//设置 B 通道调和
+    view_info.components.a = VK_COMPONENT_SWIZZLE_A;//设置 A 通道调和
     view_info.subresourceRange.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
     view_info.subresourceRange.baseMipLevel = 0;
     view_info.subresourceRange.levelCount = 1;
@@ -270,20 +270,20 @@ void TextureManager::init_SPEC_2D_Textures(std::string texName, VkDevice &device
     VkImageView viewTexture;
     VkResult result = vkCreateImageView(device, &view_info, nullptr, &viewTexture);
     viewTextureList[texName] = viewTexture;
-    VkDescriptorImageInfo texImageInfo;                       //构建图像描述信息结构体实例
-    texImageInfo.imageView = viewTexture;                     //采用的图像视图
+    VkDescriptorImageInfo texImageInfo;//构建图像描述信息结构体实例
+    texImageInfo.imageView = viewTexture;//采用的图像视图
     texImageInfo.sampler = samplerList[imageSampler[texName]];//采用的采样器
-    texImageInfo.imageLayout = VK_IMAGE_LAYOUT_GENERAL;       //图像布局
-    texImageInfoList[texName] = texImageInfo;                 //添加到纹理图像描述信息列表
-    delete ctdo;                                              //删除内存中的纹理数据
+    texImageInfo.imageLayout = VK_IMAGE_LAYOUT_GENERAL;//图像布局
+    texImageInfoList[texName] = texImageInfo;//添加到纹理图像描述信息列表
+    delete ctdo;//删除内存中的纹理数据
 }
 void TextureManager::initTextures(VkDevice &device, VkPhysicalDevice &gpu, VkPhysicalDeviceMemoryProperties &memoryProperties, VkCommandBuffer &cmdBuffer, VkQueue &queueGraphics) {
-    initSampler(device, gpu);                  //初始化采样器
+    initSampler(device, gpu);//初始化采样器
     for (int i = 0; i < texNames.size(); i++) {//遍历纹理文件名称列表
-        if (i % 2 == 0) {                      //为偶数时
-            imageSampler[texNames[i]] = 0;     //纹理采样器索引为0
-        } else {                               //为奇数时
-            imageSampler[texNames[i]] = 1;     //纹理采样器索引为1
+        if (i % 2 == 0) {//为偶数时
+            imageSampler[texNames[i]] = 0;//纹理采样器索引为0
+        } else {//为奇数时
+            imageSampler[texNames[i]] = 1;//纹理采样器索引为1
         }
         TexDataObject *ctdo = FileUtil::loadCommonTexData(texNames[i]);//加载纹理文件数据
 

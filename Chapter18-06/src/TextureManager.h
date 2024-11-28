@@ -17,6 +17,7 @@ public:
     static void initTextures(VkDevice &device, VkPhysicalDevice &gpu, VkPhysicalDeviceMemoryProperties &memoryProperties, VkCommandBuffer &cmdBuffer, VkQueue &queueGraphics);
     static void destroyTextures(VkDevice &device);
     static int getVkDescriptorSetIndex(std::string texName);
+
 private:
     static void initSampler(VkDevice &device, VkPhysicalDevice &gpu);
     static void init_SPEC_2D_Textures(std::string texName, VkDevice &device, VkPhysicalDevice &gpu, VkPhysicalDeviceMemoryProperties &memoryProperties, VkCommandBuffer &cmdBuffer, VkQueue &queueGraphics, VkFormat format, TexDataObject *ctdo);

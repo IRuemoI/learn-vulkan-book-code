@@ -11,9 +11,9 @@ int SkyBallData::vCount;
 void SkyBallData::genVertexData() {
     float radius = Constant::Sky_R;
     float ANGLE_SPAN = 18;//切分间隔
-    float angleV = 90;    //纵向上的起始度数
+    float angleV = 90;//纵向上的起始度数
     std::vector<float> texCoorArray = generateSkyTexCoor(
-            (int) (360 / ANGLE_SPAN),  //纹理图切分的列数
+            (int) (360 / ANGLE_SPAN),//纹理图切分的列数
             (int) (angleV / ANGLE_SPAN)//纹理图切分的行数
     );
     int tc = 0;//纹理数组计数器
