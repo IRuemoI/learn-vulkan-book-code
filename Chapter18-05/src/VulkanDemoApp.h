@@ -116,6 +116,7 @@ public:
 
     // TODO:在该需要重建交换链的地方修改他的值并重建交换链
     bool frameBufferResized = false;
+    void recreateSwapChain();
 
 private:
     // 初始化窗体

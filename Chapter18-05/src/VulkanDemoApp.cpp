@@ -828,8 +828,11 @@ void VulkanDemoApp::drawObject() {
 
     // 获取交换链中的当前帧索引
     VkResult result = vkAcquireNextImageKHR(device, swapChain, UINT64_MAX, imageAcquiredSemaphore, VK_NULL_HANDLE, &currentBuffer);
-    if (result != VK_SUCCESS) {
-        std::cout << "at vkAcquireNextImageKHR:" << (VkResult) result << '\n';
+    if (result == VK_ERROR_OUT_OF_DATE_KHR) {// 交换链过期
+        recreateSwapChain();
+        return;
+    } else if (result != VK_SUCCESS && result != VK_SUBOPTIMAL_KHR) {// 如果结果范围不成功或者次最优
+        throw std::runtime_error("获取交换链图像失败！");
     }
     // 为渲染通道设置当前帧缓冲
     rp_begin.framebuffer = framebuffers[currentBuffer];
@@ -868,8 +871,7 @@ void VulkanDemoApp::drawObject() {
     submit_info[0].waitSemaphoreCount = 1;// 等待的信号量数量
     submit_info[0].pWaitSemaphores = &imageAcquiredSemaphore;// 等待的信号量列表
 
-    result = vkQueueSubmit(queueGraphics, 1, submit_info,
-                           taskFinishFence);// 提交命令缓冲
+    result = vkQueueSubmit(queueGraphics, 1, submit_info, taskFinishFence);// 提交命令缓冲
     if (result != VK_SUCCESS) {
         std::cout << "at vkQueueSubmit:" << (VkResult) result << '\n';
     }
@@ -881,10 +883,11 @@ void VulkanDemoApp::drawObject() {
 
     present.pImageIndices = &currentBuffer;// 指定此次呈现的交换链图像索引
     result = vkQueuePresentKHR(queueGraphics, &present);// 执行呈现
-    if (result != VK_SUCCESS) {
-        std::cout << "at vkQueuePresentKHR:" << (VkResult) result << '\n';
-        // TODO:拖动窗口边缘调整大小时提示次优或者超时应该重建交换链
-        // 修复请参照vulkanTutorial项目
+    if (result == VK_ERROR_OUT_OF_DATE_KHR || result == VK_SUBOPTIMAL_KHR || frameBufferResized) {
+        frameBufferResized = false;
+        recreateSwapChain();
+    } else if (result != VK_SUCCESS) {
+        throw std::runtime_error("交换链呈现图像失败！");
     }
     FPSUtil::after(60);// 限制FPS不超过指定的值
 }
@@ -905,4 +908,22 @@ void VulkanDemoApp::initPipeline() {
 }
 void VulkanDemoApp::destroyPipeline() const {
     delete sqsSTL;
+}
+void VulkanDemoApp::recreateSwapChain() {
+    int width = 0, height = 0;
+    glfwGetFramebufferSize(window, &width, &height);
+    while (width == 0 || height == 0)// 如果当前窗口最小化停止渲染
+    {
+        glfwGetFramebufferSize(window, &width, &height);
+        glfwWaitEvents();
+    }
+    vkDeviceWaitIdle(device);// 等待设备空闲
+
+    destroyFrameBuffer();
+    destroyVulkanDepthBuffer();
+    destroyVulkanSwapChain();
+
+    createVulkanSwapChain();
+    createVulkanDepthBuffer();
+    createFrameBuffer();
 }

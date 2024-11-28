@@ -267,7 +267,7 @@ add_subdirectory(Basic_chapter_10b_PushConstant) # 黑屏
 #add_subdirectory(Chapter18-02)
 #add_subdirectory(Chapter18-03)
 #add_subdirectory(Chapter18-04)
-#add_subdirectory(Chapter18-05)
+add_subdirectory(Chapter18-05)
 #add_subdirectory(Chapter18-06)
 #add_subdirectory(Chapter18-07)
 
