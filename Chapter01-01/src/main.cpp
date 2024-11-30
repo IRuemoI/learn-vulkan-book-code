@@ -7,7 +7,7 @@ using json = nlohmann::json;
 
 // 程序入口
 int main() {
-    std::ifstream f("config.json");
+    std::ifstream f("../config.json");
     json data = json::parse(f);
     std::cout << data["key1"] << std::endl;
     f.close();
