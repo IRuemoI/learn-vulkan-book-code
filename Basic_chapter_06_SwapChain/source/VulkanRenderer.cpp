@@ -296,7 +296,7 @@ void VulkanRenderer::createDepthImage() {
     CommandBufferMgr::beginCommandBuffer(cmdDepthImage);
     {
         // 设置图像布局为：深度蒙版优化
-        setImageLayout(Depth.image,
+        convertImageLayout(Depth.image,
                        imgViewInfo.subresourceRange.aspectMask,
                        VK_IMAGE_LAYOUT_UNDEFINED,
                        VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL, (VkAccessFlagBits) 0, cmdDepthImage);
@@ -339,7 +339,7 @@ void VulkanRenderer::buildSwapChainAndDepthImage() {
 }
 
 // 书中的示例代码，验证层会报错
-//void VulkanRenderer::setImageLayout(VkImage image, VkImageAspectFlags aspectMask, VkImageLayout oldImageLayout, VkImageLayout newImageLayout, VkAccessFlagBits srcAccessMask, const VkCommandBuffer &cmd) {
+//void VulkanRenderer::convertImageLayout(VkImage image, VkImageAspectFlags aspectMask, VkImageLayout oldImageLayout, VkImageLayout newImageLayout, VkAccessFlagBits srcAccessMask, const VkCommandBuffer &cmd) {
 //    // 依赖于指令缓冲
 //    assert(cmd != VK_NULL_HANDLE);
 //
@@ -396,7 +396,7 @@ void VulkanRenderer::buildSwapChainAndDepthImage() {
 //}
 
 
-void VulkanRenderer::setImageLayout(VkImage image, VkImageAspectFlags aspectMask, VkImageLayout oldImageLayout, VkImageLayout newImageLayout, VkAccessFlagBits srcAccessMask, const VkCommandBuffer &cmd) {
+void VulkanRenderer::convertImageLayout(VkImage image, VkImageAspectFlags aspectMask, VkImageLayout oldImageLayout, VkImageLayout newImageLayout, VkAccessFlagBits srcAccessMask, const VkCommandBuffer &cmd) {
     assert(cmd != VK_NULL_HANDLE);
     assert(deviceObj->queue != VK_NULL_HANDLE);
 

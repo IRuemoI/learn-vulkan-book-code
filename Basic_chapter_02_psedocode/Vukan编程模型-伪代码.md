@@ -115,7 +115,7 @@ vkGetSwapchainImagesKHR(device, swapChain, &swapchainImageCount, swapchainImages
 // 获取交换链中的图像
 foreach swapchainImages{
     // 设置布局方式，与具体驱动方式的实现兼容
-    SetImageLayout();
+    convertImageLayout();
 
     // 插入流水线屏障
     VkImageMemoryBarrier imgMemoryBarrier = { ... };
@@ -145,7 +145,7 @@ vkAllocateMemory(device, &memAlloc, nullptr, &memorys);
 vkBindImageMemory(device, imageObject, mem, 0);
 
 // 设置图像布局，可用于当前设备
-SetImageLayout(. . .)
+convertImageLayout(. . .)
 
     // 插入新的流水线屏障，确保刚才设置的图像布局在图像被真正的使用之前就已经被创建好了
     vkCmdPipelineBarrier(cmd, srcStages, destStages, 0, 0, nullptr, 0, nullptr, 1, &imgPipelineBarrier);
@@ -392,7 +392,7 @@ vkCmdDraw(cmd, 3, 1, 0, 0);			 //绘制指令 - 3 顶点, 1 实例, 初始索引
 vkCmdEndRenderPass(cmd);
 
 // 设置交换链图像布局
-setImageLayout()
+convertImageLayout()
     vkCmdPipelineBarrier(cmd, ....);
 
 /**** 结束指令缓存的录入 ****/

@@ -85,7 +85,7 @@ private:
     uint32_t getGraphicsQueueWithPresentationSupport();
     void getSurfaceCapabilitiesAndPresentMode();
     void managePresentMode();
-    void createSwapChainColorImages();
+    void getSwapChainColorImages();
     void createColorImageView(const VkCommandBuffer &cmd);
 
     // Public member variables

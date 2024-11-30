@@ -187,9 +187,9 @@ void VulkanSwapChain::createSwapChain(const VkCommandBuffer &cmd) {
     managePresentMode();
 
     // 创建交换链图像
-    createSwapChainColorImages();
+    getSwapChainColorImages();
 
-    // 获取创建颜色图绘制表面
+    // 创建用于绘制表面颜色图的视图
     createColorImageView(cmd);
 }
 
@@ -248,7 +248,7 @@ void VulkanSwapChain::managePresentMode() {
     }
 }
 
-void VulkanSwapChain::createSwapChainColorImages() {
+void VulkanSwapChain::getSwapChainColorImages() {
     VkResult result;
     VkSwapchainKHR oldSwapchain = scPublicVars.swapChain;
 
@@ -334,7 +334,7 @@ void VulkanSwapChain::destroySwapChain() {
 
     if (!appObj->isResizing) {
         // 这部分的代码只会在应用程序关闭时执行
-        // 在重设窗口大小期间旧的交换链图像会在createSwapChainColorImages()函数中被删除
+        // 在重设窗口大小期间旧的交换链图像会在getSwapChainColorImages()函数中被删除
         fpDestroySwapchainKHR(deviceObj->device, scPublicVars.swapChain, nullptr);
         vkDestroySurfaceKHR(appObj->instanceObj.instance, scPublicVars.surface, nullptr);
     }

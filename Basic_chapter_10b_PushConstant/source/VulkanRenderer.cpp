@@ -315,7 +315,11 @@ void VulkanRenderer::createDepthImage() {
     imgViewInfo.pNext = nullptr;
     imgViewInfo.image = VK_NULL_HANDLE;
     imgViewInfo.format = depthFormat;
-    imgViewInfo.components = {VK_COMPONENT_SWIZZLE_IDENTITY};
+    //imgViewInfo.components = {VK_COMPONENT_SWIZZLE_IDENTITY};
+    imgViewInfo.components.r = VK_COMPONENT_SWIZZLE_R;// 设置R通道调和
+    imgViewInfo.components.g = VK_COMPONENT_SWIZZLE_G;// 设置G通道调和
+    imgViewInfo.components.b = VK_COMPONENT_SWIZZLE_B;// 设置B通道调和
+    imgViewInfo.components.a = VK_COMPONENT_SWIZZLE_A;// 设置A通道调和
     imgViewInfo.subresourceRange.aspectMask = VK_IMAGE_ASPECT_DEPTH_BIT;
     imgViewInfo.subresourceRange.baseMipLevel = 0;
     imgViewInfo.subresourceRange.levelCount = 1;
@@ -335,7 +339,7 @@ void VulkanRenderer::createDepthImage() {
     CommandBufferMgr::beginCommandBuffer(cmdDepthImage);
     {
         // 设置图像布局为：深度蒙版优化
-        setImageLayout(Depth.image,
+        convertImageLayout(Depth.image,
                        imgViewInfo.subresourceRange.aspectMask,
                        VK_IMAGE_LAYOUT_UNDEFINED,
                        VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL, (VkAccessFlagBits) 0, cmdDepthImage);
@@ -560,20 +564,19 @@ void VulkanRenderer::createPushConstants() {
         MIXED_COLOR = 4,
     };
 
-    float mixerValue = 0.3f;
-    unsigned constColorRGBFlag = BLUE;
+    float mixerValue = 0.5f;
+    unsigned constColorRGBFlag = MIXED_COLOR;
 
-    // Create push constant data, this contain a constant
-    // color flag and mixer value for non-const color
+    // 创建推送常亮的数据，这里包含一个常数形式的颜色标记，以及针对非常亮颜色值的混合选项
     unsigned pushConstants[2] = {};
     pushConstants[0] = constColorRGBFlag;
     memcpy(&pushConstants[1], &mixerValue, sizeof(float));
 
-    // Check if number of push constants does not exceed the allowed size
+    // 检查推送推送常量的大小是否超出了设备的最大推送常亮的大小
     int maxPushContantSize = getDevice()->gpuProps.limits.maxPushConstantsSize;
     if (sizeof(pushConstants) > maxPushContantSize) {
         assert(0);
-        printf("Push constand size is greater than expected, max allow size is %d", maxPushContantSize);
+        printf("推送常量的数据比预期更大, 最大允许的大小为：%d", maxPushContantSize);
     }
 
     for (VulkanDrawable *drawableObj: drawableList) {
@@ -605,7 +608,7 @@ void VulkanRenderer::createPipelineStateManagement() {
     }
 }
 
-void VulkanRenderer::setImageLayout(VkImage image, VkImageAspectFlags aspectMask, VkImageLayout oldImageLayout, VkImageLayout newImageLayout, VkAccessFlagBits srcAccessMask, const VkCommandBuffer &cmd) {
+void VulkanRenderer::convertImageLayout(VkImage image, VkImageAspectFlags aspectMask, VkImageLayout oldImageLayout, VkImageLayout newImageLayout, VkAccessFlagBits srcAccessMask, const VkCommandBuffer &cmd) {
     assert(cmd != VK_NULL_HANDLE);
     assert(deviceObj->queue != VK_NULL_HANDLE);
 

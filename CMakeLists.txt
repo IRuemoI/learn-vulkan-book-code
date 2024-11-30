@@ -101,7 +101,7 @@ add_subdirectory(dependencies/glslang)
 #add_subdirectory(Basic_chapter_09a_DrawingHelloWorld)
 #add_subdirectory(Basic_chapter_09b_IndexedDraw)
 #add_subdirectory(Basic_chapter_09c_Resizing)
-#add_subdirectory(Basic_chapter_10a_Uniforms_And_Descriptors)
+add_subdirectory(Basic_chapter_10a_Uniforms_And_Descriptors)
 add_subdirectory(Basic_chapter_10b_PushConstant) # 黑屏
 #add_subdirectory(Basic_chapter_11a_Texture_LinearLayout)
 #add_subdirectory(Basic_chapter_11b_Texture_OptimalLayout)

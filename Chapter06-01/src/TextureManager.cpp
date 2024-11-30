@@ -2,7 +2,7 @@
 #include "FileUtil.h"
 #include "HelpFunction.h"
 #include <cassert>
-void setImageLayout(VkCommandBuffer cmd, VkImage image, VkImageAspectFlags aspectMask, VkImageLayout old_image_layout, VkImageLayout new_image_layout) {
+void convertImageLayout(VkCommandBuffer cmd, VkImage image, VkImageAspectFlags aspectMask, VkImageLayout old_image_layout, VkImageLayout new_image_layout) {
     VkImageMemoryBarrier image_memory_barrier = {};//构建图像内存屏障结构体实例
     image_memory_barrier.sType = VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER;//结构体类型
     image_memory_barrier.pNext = nullptr;//自定义数据的指针
@@ -200,9 +200,9 @@ void TextureManager::init_SPEC_2D_Textures(const std::string &texName, VkDevice 
         vkCreateFence(device, &fenceInfo, nullptr, &copyFence);//创建栅栏
         vkResetCommandBuffer(cmdBuffer, 0);//清除命令缓冲
         result = vkBeginCommandBuffer(cmdBuffer, &cmd_buf_info);//启动命令缓冲（开始记录命令）
-        setImageLayout(cmdBuffer, textureImage, VK_IMAGE_ASPECT_COLOR_BIT, VK_IMAGE_LAYOUT_UNDEFINED, VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL);//修改图像布局（为拷贝做准备）
+        convertImageLayout(cmdBuffer, textureImage, VK_IMAGE_ASPECT_COLOR_BIT, VK_IMAGE_LAYOUT_UNDEFINED, VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL);//修改图像布局（为拷贝做准备）
         vkCmdCopyBufferToImage(cmdBuffer, tempBuf, textureImage, VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL, 1, &bufferCopyRegion);//将缓冲中的数据拷贝到纹理图像中
-        setImageLayout(cmdBuffer, textureImage, VK_IMAGE_ASPECT_COLOR_BIT, VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL, VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);//修改图像布局（为纹理采样准备）
+        convertImageLayout(cmdBuffer, textureImage, VK_IMAGE_ASPECT_COLOR_BIT, VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL, VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);//修改图像布局（为纹理采样准备）
         result = vkEndCommandBuffer(cmdBuffer);//结束命令缓冲（停止记录命令）
         assert(result == VK_SUCCESS);
         result = vkQueueSubmit(queueGraphics, 1, submit_info, copyFence);//提交给队列执行

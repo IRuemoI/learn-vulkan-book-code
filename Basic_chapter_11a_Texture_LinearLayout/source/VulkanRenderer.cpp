@@ -347,7 +347,7 @@ void VulkanRenderer::createDepthImage() {
         subresourceRange.layerCount = 1;
 
         // 设置图像布局为：深度蒙版优化
-        setImageLayout(Depth.image,
+        convertImageLayout(Depth.image,
                        imgViewInfo.subresourceRange.aspectMask,
                        VK_IMAGE_LAYOUT_UNDEFINED,
                        VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL, subresourceRange, cmdDepthImage);
@@ -461,7 +461,7 @@ void VulkanRenderer::createTextureLinear(const char *filename, TextureData *text
     subresourceRange.layerCount = 1;
 
     texture->imageLayout = VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;
-    setImageLayout(texture->image, VK_IMAGE_ASPECT_COLOR_BIT,
+    convertImageLayout(texture->image, VK_IMAGE_ASPECT_COLOR_BIT,
                    VK_IMAGE_LAYOUT_PREINITIALIZED, texture->imageLayout,
                    subresourceRange, cmdTexture);
 
@@ -770,7 +770,7 @@ void VulkanRenderer::createPipelineStateManagement() {
     }
 }
 
-void VulkanRenderer::setImageLayout(VkImage image, VkImageAspectFlags aspectMask, VkImageLayout oldImageLayout, VkImageLayout newImageLayout, const VkImageSubresourceRange &subresourceRange, const VkCommandBuffer &cmd) {
+void VulkanRenderer::convertImageLayout(VkImage image, VkImageAspectFlags aspectMask, VkImageLayout oldImageLayout, VkImageLayout newImageLayout, const VkImageSubresourceRange &subresourceRange, const VkCommandBuffer &cmd) {
     // 依赖于指令缓冲
     assert(cmd != VK_NULL_HANDLE);
 

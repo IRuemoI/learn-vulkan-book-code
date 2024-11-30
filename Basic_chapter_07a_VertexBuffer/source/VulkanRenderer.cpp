@@ -303,7 +303,7 @@ void VulkanRenderer::createDepthImage() {
     CommandBufferMgr::beginCommandBuffer(cmdDepthImage);
     {
         // 设置图像布局为：深度蒙版优化
-        setImageLayout(Depth.image,
+        convertImageLayout(Depth.image,
                        imgViewInfo.subresourceRange.aspectMask,
                        VK_IMAGE_LAYOUT_UNDEFINED,
                        VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL, (VkAccessFlagBits) 0, cmdDepthImage);
@@ -361,7 +361,7 @@ void VulkanRenderer::createVertexBuffer() {
     CommandBufferMgr::submitCommandBuffer(deviceObj->queue, &cmdVertexBuffer);
 }
 
-void VulkanRenderer::setImageLayout(VkImage image, VkImageAspectFlags aspectMask, VkImageLayout oldImageLayout, VkImageLayout newImageLayout, VkAccessFlagBits srcAccessMask, const VkCommandBuffer &cmd) {
+void VulkanRenderer::convertImageLayout(VkImage image, VkImageAspectFlags aspectMask, VkImageLayout oldImageLayout, VkImageLayout newImageLayout, VkAccessFlagBits srcAccessMask, const VkCommandBuffer &cmd) {
     assert(cmd != VK_NULL_HANDLE);
     assert(deviceObj->queue != VK_NULL_HANDLE);
 

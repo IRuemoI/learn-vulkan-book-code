@@ -30,13 +30,12 @@ public:
     void deInitialize();// 释放资源
 
 private:
-    // ´´½¨VulkanÊµÀý¶ÔÏó
     VkResult createVulkanInstance(std::vector<const char *> &layers, std::vector<const char *> &extensions, const char *applicationName);
     VkResult handShakeWithDevice(VkPhysicalDevice *gpu, std::vector<const char *> &layers, std::vector<const char *> &extensions);
     VkResult enumeratePhysicalDevices(std::vector<VkPhysicalDevice> &gpus);
 
 public:
-    VulkanInstance instanceObj;// VulkanÊµÀý¶ÔÏó
+    VulkanInstance instanceObj;
     VulkanDevice *deviceObj;
     VulkanRenderer *rendererObj;
     bool isPrepared;

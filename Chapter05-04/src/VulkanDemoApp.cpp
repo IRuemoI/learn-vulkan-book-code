@@ -102,7 +102,7 @@ void VulkanDemoApp::destroyWindow() const {
 }
 
 // 内部使用的设置Image布局的方法
-void setImageLayout(VkCommandBuffer cmd, VkImage image, VkImageAspectFlags aspectMask, VkImageLayout old_image_layout, VkImageLayout new_image_layout) {
+void convertImageLayout(VkCommandBuffer cmd, VkImage image, VkImageAspectFlags aspectMask, VkImageLayout old_image_layout, VkImageLayout new_image_layout) {
     VkImageMemoryBarrier image_memory_barrier = {};
     image_memory_barrier.sType = VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER;
     image_memory_barrier.pNext = nullptr;

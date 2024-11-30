@@ -187,9 +187,9 @@ void VulkanSwapChain::createSwapChain(const VkCommandBuffer &cmd) {
     managePresentMode();
 
     // 创建交换链图像
-    createSwapChainColorImages();
+    getSwapChainColorImages();
 
-    // 获取创建颜色图绘制表面
+    // 创建用于绘制表面颜色图的视图
     createColorImageView(cmd);
 }
 
@@ -248,7 +248,7 @@ void VulkanSwapChain::managePresentMode() {
     }
 }
 
-void VulkanSwapChain::createSwapChainColorImages() {
+void VulkanSwapChain::getSwapChainColorImages() {
     VkResult result;
     VkSwapchainKHR oldSwapchain = scPublicVars.swapChain;
 
@@ -303,7 +303,11 @@ void VulkanSwapChain::createColorImageView(const VkCommandBuffer &cmd) {
         imgViewInfo.sType = VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO;
         imgViewInfo.pNext = nullptr;
         imgViewInfo.format = scPublicVars.format;
-        imgViewInfo.components = {VK_COMPONENT_SWIZZLE_IDENTITY};
+        //imgViewInfo.components = {VK_COMPONENT_SWIZZLE_IDENTITY};
+        imgViewInfo.components.r = VK_COMPONENT_SWIZZLE_R;// 设置R通道调和
+        imgViewInfo.components.g = VK_COMPONENT_SWIZZLE_G;// 设置G通道调和
+        imgViewInfo.components.b = VK_COMPONENT_SWIZZLE_B;// 设置B通道调和
+        imgViewInfo.components.a = VK_COMPONENT_SWIZZLE_A;// 设置A通道调和
         imgViewInfo.subresourceRange.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
         imgViewInfo.subresourceRange.baseMipLevel = 0;
         imgViewInfo.subresourceRange.levelCount = 1;
@@ -334,7 +338,7 @@ void VulkanSwapChain::destroySwapChain() {
 
     if (!appObj->isResizing) {
         // 这部分的代码只会在应用程序关闭时执行
-        // 在重设窗口大小期间旧的交换链图像会在createSwapChainColorImages()函数中被删除
+        // 在重设窗口大小期间旧的交换链图像会在getSwapChainColorImages()函数中被删除
         fpDestroySwapchainKHR(deviceObj->device, scPublicVars.swapChain, nullptr);
         vkDestroySurfaceKHR(appObj->instanceObj.instance, scPublicVars.surface, nullptr);
     }

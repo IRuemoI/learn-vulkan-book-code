@@ -25,7 +25,7 @@ public:
 
     // Create an empty window
     void createPresentationWindow(const int &windowWidth = 500, const int &windowHeight = 500);
-    void setImageLayout(VkImage image, VkImageAspectFlags aspectMask, VkImageLayout oldImageLayout, VkImageLayout newImageLayout, const VkImageSubresourceRange &subresourceRange, const VkCommandBuffer &cmdBuf);
+    void convertImageLayout(VkImage image, VkImageAspectFlags aspectMask, VkImageLayout oldImageLayout, VkImageLayout newImageLayout, const VkImageSubresourceRange &subresourceRange, const VkCommandBuffer &cmdBuf);
 
     //处理Windows窗口事件的回调函数
     static LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
