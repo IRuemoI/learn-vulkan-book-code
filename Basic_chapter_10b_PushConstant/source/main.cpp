@@ -7,6 +7,7 @@ std::vector<const char *> instanceExtensionNames = {
         VK_EXT_DEBUG_UTILS_EXTENSION_NAME};
 
 std::vector<const char *> layerNames = {
+        //"VK_LAYER_LUNARG_api_dump",//开启调用参数打印会导致拖动窗口边缘卡
         "VK_LAYER_KHRONOS_validation"};
 
 std::vector<const char *> deviceExtensionNames = {

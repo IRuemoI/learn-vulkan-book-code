@@ -89,7 +89,7 @@ public:
     VkCommandBuffer cmdDepthImage;// 深度图指令缓存
     VkCommandPool cmdPool;// 指令池
     VkCommandBuffer cmdVertexBuffer;// Command buffer for vertex buffer - Triangle geometry
-    VkCommandBuffer cmdPushConstant;// Command buffer for push constants
+    VkCommandBuffer	 cmdPushConstant;// Command buffer for push constants
 
     VkRenderPass renderPass;// Render pass created object
     std::vector<VkFramebuffer> framebuffers;// 对应于每个交换链的帧缓冲的数量

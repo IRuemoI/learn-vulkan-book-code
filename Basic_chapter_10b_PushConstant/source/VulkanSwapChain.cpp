@@ -303,11 +303,7 @@ void VulkanSwapChain::createColorImageView(const VkCommandBuffer &cmd) {
         imgViewInfo.sType = VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO;
         imgViewInfo.pNext = nullptr;
         imgViewInfo.format = scPublicVars.format;
-        //imgViewInfo.components = {VK_COMPONENT_SWIZZLE_IDENTITY};
-        imgViewInfo.components.r = VK_COMPONENT_SWIZZLE_R;// 设置R通道调和
-        imgViewInfo.components.g = VK_COMPONENT_SWIZZLE_G;// 设置G通道调和
-        imgViewInfo.components.b = VK_COMPONENT_SWIZZLE_B;// 设置B通道调和
-        imgViewInfo.components.a = VK_COMPONENT_SWIZZLE_A;// 设置A通道调和
+        imgViewInfo.components = {VK_COMPONENT_SWIZZLE_IDENTITY};
         imgViewInfo.subresourceRange.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
         imgViewInfo.subresourceRange.baseMipLevel = 0;
         imgViewInfo.subresourceRange.levelCount = 1;

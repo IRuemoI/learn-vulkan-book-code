@@ -500,7 +500,6 @@ void VulkanDrawable::createDescriptorSetLayout(bool useTexture) {
 
 // 创建流水线布局，注入流水线中
 void VulkanDrawable::createPipelineLayout() {
-    // 设置推送常量的范围
     const unsigned pushConstantRangeCount = 1;
     VkPushConstantRange pushConstantRanges[pushConstantRangeCount] = {};
     pushConstantRanges[0].stageFlags = VK_SHADER_STAGE_FRAGMENT_BIT;

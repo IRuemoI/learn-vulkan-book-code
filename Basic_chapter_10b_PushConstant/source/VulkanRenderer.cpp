@@ -52,7 +52,7 @@ void VulkanRenderer::initialize() {
     // 创建流水线状态管理对象
     createPipelineStateManagement();
 
-    // Build the push constants
+    // 构建推送常量
     createPushConstants();
 }
 
@@ -315,11 +315,7 @@ void VulkanRenderer::createDepthImage() {
     imgViewInfo.pNext = nullptr;
     imgViewInfo.image = VK_NULL_HANDLE;
     imgViewInfo.format = depthFormat;
-    //imgViewInfo.components = {VK_COMPONENT_SWIZZLE_IDENTITY};
-    imgViewInfo.components.r = VK_COMPONENT_SWIZZLE_R;// 设置R通道调和
-    imgViewInfo.components.g = VK_COMPONENT_SWIZZLE_G;// 设置G通道调和
-    imgViewInfo.components.b = VK_COMPONENT_SWIZZLE_B;// 设置B通道调和
-    imgViewInfo.components.a = VK_COMPONENT_SWIZZLE_A;// 设置A通道调和
+    imgViewInfo.components = {VK_COMPONENT_SWIZZLE_IDENTITY};
     imgViewInfo.subresourceRange.aspectMask = VK_IMAGE_ASPECT_DEPTH_BIT;
     imgViewInfo.subresourceRange.baseMipLevel = 0;
     imgViewInfo.subresourceRange.levelCount = 1;
@@ -531,14 +527,14 @@ void VulkanRenderer::createShaders() {
 
 #ifdef AUTO_COMPILE_GLSL_TO_SPV
     vertShaderCode = readFile("./../PushConstant.vert", &sizeVert);
-    fragShaderCode = readFile("./../PushConstant.frag", &sizeFrag);
+	fragShaderCode = readFile("./../PushConstant.frag", &sizeFrag);
 
-    shaderObj.buildShader((const char *) vertShaderCode, (const char *) fragShaderCode);
+	shaderObj.buildShader((const char*)vertShaderCode, (const char*)fragShaderCode);
 #else
     vertShaderCode = readFile("./../PushConstant-vert.spv", &sizeVert);
     fragShaderCode = readFile("./../PushConstant-frag.spv", &sizeFrag);
 
-    shaderObj.buildShaderModuleWithSPV((uint32_t *) vertShaderCode, sizeVert, (uint32_t *) fragShaderCode, sizeFrag);
+    shaderObj.buildShaderModuleWithSPV((uint32_t*)vertShaderCode, sizeVert, (uint32_t*)fragShaderCode, sizeFrag);
 #endif
 }
 
@@ -553,19 +549,20 @@ void VulkanRenderer::createDescriptors() {
     }
 }
 
-void VulkanRenderer::createPushConstants() {
+void VulkanRenderer::createPushConstants()
+{
     CommandBufferMgr::allocCommandBuffer(&deviceObj->device, cmdPool, &cmdPushConstant);
     CommandBufferMgr::beginCommandBuffer(cmdPushConstant);
 
     enum ColorFlag {
-        RED = 1,
-        GREEN = 2,
-        BLUE = 3,
+        RED			= 1,
+        GREEN		= 2,
+        BLUE		= 3,
         MIXED_COLOR = 4,
     };
 
-    float mixerValue = 0.5f;
-    unsigned constColorRGBFlag = MIXED_COLOR;
+    float mixerValue = 0.3f;
+    unsigned constColorRGBFlag = BLUE;
 
     // 创建推送常亮的数据，这里包含一个常数形式的颜色标记，以及针对非常亮颜色值的混合选项
     unsigned pushConstants[2] = {};
@@ -574,13 +571,13 @@ void VulkanRenderer::createPushConstants() {
 
     // 检查推送推送常量的大小是否超出了设备的最大推送常亮的大小
     int maxPushContantSize = getDevice()->gpuProps.limits.maxPushConstantsSize;
-    if (sizeof(pushConstants) > maxPushContantSize) {
+    if (sizeof(pushConstants)*2 > maxPushContantSize) {
         assert(0);
         printf("推送常量的数据比预期更大, 最大允许的大小为：%d", maxPushContantSize);
     }
 
     for (VulkanDrawable *drawableObj: drawableList) {
-        vkCmdPushConstants(cmdPushConstant, drawableObj->pipelineLayout, VK_SHADER_STAGE_FRAGMENT_BIT, 0, sizeof(pushConstants), pushConstants);
+        vkCmdPushConstants(cmdPushConstant, drawableObj->pipelineLayout, VK_SHADER_STAGE_FRAGMENT_BIT, 0, sizeof(unsigned) * 2, pushConstants);
     }
 
     CommandBufferMgr::endCommandBuffer(cmdPushConstant);

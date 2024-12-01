@@ -10,7 +10,7 @@ VulkanDescriptor::~VulkanDescriptor() {
 }
 
 void VulkanDescriptor::createDescriptor(bool useTexture) {
-    // Create the uniform buffer resource
+
     createDescriptorResources();
 
     // Create the descriptor pool and
