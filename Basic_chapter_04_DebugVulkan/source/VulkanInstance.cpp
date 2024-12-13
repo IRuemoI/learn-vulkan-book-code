@@ -23,11 +23,11 @@ VkResult VulkanInstance::createInstance(std::vector<const char *> &layers, std::
 
     // 设置需要启用层的名称列表
     instInfo.enabledLayerCount = (uint32_t) layers.size();
-    instInfo.ppEnabledLayerNames = layers.size() ? layers.data() : nullptr;
+    instInfo.ppEnabledLayerNames = !layers.empty() ? layers.data() : nullptr;
 
     // 设置需要启用的扩展列表
     instInfo.enabledExtensionCount = (uint32_t) extensionNames.size();
-    instInfo.ppEnabledExtensionNames = extensionNames.size() ? extensionNames.data() : nullptr;
+    instInfo.ppEnabledExtensionNames = !extensionNames.empty() ? extensionNames.data() : nullptr;
 
     VkResult result = vkCreateInstance(&instInfo, nullptr, &instance);
     assert(result == VK_SUCCESS);

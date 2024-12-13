@@ -64,7 +64,7 @@ VkResult VulkanLayerAndExtension::getDeviceExtensionProperties(VkPhysicalDevice 
     std::cout << "设备扩展" << std::endl;
     std::cout << "===================" << std::endl;
     VulkanApplication *appObj = VulkanApplication::GetInstance();
-    std::vector<LayerProperties> *instanceLayerProp = &VulkanApplication::GetInstance()->instanceObj.layerExtension->layerPropertyList;
+    std::vector<LayerProperties> *instanceLayerProp = &appObj->GetInstance()->instanceObj.layerExtension->layerPropertyList;
     for (auto globalLayerProp: *instanceLayerProp) {
         LayerProperties layerProps;
         layerProps.properties = globalLayerProp.properties;

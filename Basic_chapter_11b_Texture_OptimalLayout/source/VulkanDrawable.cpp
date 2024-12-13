@@ -335,7 +335,7 @@ void VulkanDrawable::recordCommandBuffer(int currentImage, VkCommandBuffer *cmdD
     clearValues[1].depthStencil.stencil = 0;
 
     // 定义VkRenderPassBeginInfo结构体
-    VkRenderPassBeginInfo renderPassBegin;
+    VkRenderPassBeginInfo renderPassBegin = {};
     renderPassBegin.sType = VK_STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO;
     renderPassBegin.pNext = nullptr;
     renderPassBegin.renderPass = rendererObj->renderPass;

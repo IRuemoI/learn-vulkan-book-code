@@ -427,9 +427,10 @@ void VulkanDrawable::render() {
     VkFence nullFence = VK_NULL_HANDLE;
 
     // 获取下一个可用的交换链图像索引
-    VkResult result = swapChainObj->fpAcquireNextImageKHR(deviceObj->device, swapChain,
-                                                          UINT64_MAX, presentCompleteSemaphore, VK_NULL_HANDLE, &currentColorImage);
-
+    VkResult result = swapChainObj->fpAcquireNextImageKHR(deviceObj->device, swapChain, UINT64_MAX, presentCompleteSemaphore, VK_NULL_HANDLE, &currentColorImage);
+    if (result != VK_SUCCESS) {
+      std::cout << "从交换链获取下一张图片出现问题:" << (VkResult) result << '\n';
+    }
     VkPipelineStageFlags submitPipelineStages = VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT;
 
     VkSubmitInfo submitInfo = {};

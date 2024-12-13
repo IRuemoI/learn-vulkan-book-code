@@ -8,10 +8,10 @@ extern std::vector<const char *> layerNames;
 extern std::vector<const char *> deviceExtensionNames;
 
 
-// 负责枚举实例层的应用程序构造函数。
+// 负责枚举实例层的应用程序构造函数
 VulkanApplication::VulkanApplication() {
     // 在应用程序启动时，枚举实例中的层
-    instanceObj.layerExtension.getInstanceLayerProperties();
+    instanceObj.layerExtension->getInstanceLayerProperties();
 
     deviceObj = nullptr;
 }
