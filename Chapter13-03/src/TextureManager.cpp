@@ -109,21 +109,21 @@ void convertImageLayout(VkCommandBuffer cmd, VkImage image, VkImageAspectFlags a
     vkCmdPipelineBarrier(cmd, src_stages, dest_stages, 0, 0, nullptr, 0, nullptr, 1, &image_memory_barrier);
 }
 std::vector<std::string> TextureManager::texNames = {
-        "../textures/1301_skycubemap_back.bntex",
-        "../textures/1301_skycubemap_down.bntex",
-        "../textures/1301_skycubemap_front.bntex",
-        "../textures/1301_skycubemap_right.bntex",
-        "../textures/1301_skycubemap_left.bntex",
-        "../textures/1301_skycubemap_up.bntex",
-        "../textures/1301_cube.bntexcube"};
-std::vector<std::string> TextureManager::texNamesForCubeMap = {"../textures/1301_cube.bntexcube"};
+        "../textures/1302_skycubemap_back.bntex",
+        "../textures/1302_skycubemap_down.bntex",
+        "../textures/1302_skycubemap_front.bntex",
+        "../textures/1302_skycubemap_right.bntex",
+        "../textures/1302_skycubemap_left.bntex",
+        "../textures/1302_skycubemap_up.bntex",
+        "../textures/1302_cube.bntexcube"};
+std::vector<std::string> TextureManager::texNamesForCubeMap = {"../textures/1302_cube.bntexcube"};
 std::vector<std::string> TextureManager::texNamesForSkyBox = {
-        "../textures/1301_skycubemap_back.bntex",
-        "../textures/1301_skycubemap_down.bntex",
-        "../textures/1301_skycubemap_front.bntex",
-        "../textures/1301_skycubemap_right.bntex",
-        "../textures/1301_skycubemap_left.bntex",
-        "../textures/1301_skycubemap_up.bntex"};
+        "../textures/1302_skycubemap_back.bntex",
+        "../textures/1302_skycubemap_down.bntex",
+        "../textures/1302_skycubemap_front.bntex",
+        "../textures/1302_skycubemap_right.bntex",
+        "../textures/1302_skycubemap_left.bntex",
+        "../textures/1302_skycubemap_up.bntex"};
 std::vector<VkSampler> TextureManager::samplerList;
 std::map<std::string, VkImage> TextureManager::textureImageList;
 std::map<std::string, VkDeviceMemory> TextureManager::textureMemoryList;

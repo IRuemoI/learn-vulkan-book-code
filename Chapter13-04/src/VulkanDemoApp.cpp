@@ -823,48 +823,48 @@ void VulkanDemoApp::drawObject() {
     MatrixState3D::translate(0, 0, SKY_BOX_HALF_EDGE);
     MatrixState3D::rotate(180, 0, 1, 0);
     texForDraw->drawSelf(cmdBuffer, sqsCT->pipelineLayout, sqsCT->pipeline,
-                         &(sqsCT->descSet[TextureManager::getVkDescriptorSetIndexForSkyBox("../textures/1301_skycubemap_front.bntex")]));
+                         &(sqsCT->descSet[TextureManager::getVkDescriptorSetIndexForSkyBox("../textures/1302_skycubemap_front.bntex")]));
     MatrixState3D::popMatrix();
 
     MatrixState3D::pushMatrix();
     MatrixState3D::translate(0, 0, -SKY_BOX_HALF_EDGE);
     texForDraw->drawSelf(cmdBuffer, sqsCT->pipelineLayout, sqsCT->pipeline,
-                         &(sqsCT->descSet[TextureManager::getVkDescriptorSetIndexForSkyBox("../textures/1301_skycubemap_back.bntex")]));
+                         &(sqsCT->descSet[TextureManager::getVkDescriptorSetIndexForSkyBox("../textures/1302_skycubemap_back.bntex")]));
     MatrixState3D::popMatrix();
 
     MatrixState3D::pushMatrix();
     MatrixState3D::translate(SKY_BOX_HALF_EDGE, 0, 0);
     MatrixState3D::rotate(90, 0, 1, 0);
     texForDraw->drawSelf(cmdBuffer, sqsCT->pipelineLayout, sqsCT->pipeline,
-                         &(sqsCT->descSet[TextureManager::getVkDescriptorSetIndexForSkyBox("../textures/1301_skycubemap_left.bntex")]));
+                         &(sqsCT->descSet[TextureManager::getVkDescriptorSetIndexForSkyBox("../textures/1302_skycubemap_left.bntex")]));
     MatrixState3D::popMatrix();
 
     MatrixState3D::pushMatrix();
     MatrixState3D::translate(-SKY_BOX_HALF_EDGE, 0, 0);
     MatrixState3D::rotate(-90, 0, 1, 0);
     texForDraw->drawSelf(cmdBuffer, sqsCT->pipelineLayout, sqsCT->pipeline,
-                         &(sqsCT->descSet[TextureManager::getVkDescriptorSetIndexForSkyBox("../textures/1301_skycubemap_right.bntex")]));
+                         &(sqsCT->descSet[TextureManager::getVkDescriptorSetIndexForSkyBox("../textures/1302_skycubemap_right.bntex")]));
     MatrixState3D::popMatrix();
 
     MatrixState3D::pushMatrix();
     MatrixState3D::translate(0, SKY_BOX_HALF_EDGE, 0);
     MatrixState3D::rotate(90, -1, 0, 0);
     texForDraw->drawSelf(cmdBuffer, sqsCT->pipelineLayout, sqsCT->pipeline,
-                         &(sqsCT->descSet[TextureManager::getVkDescriptorSetIndexForSkyBox("../textures/1301_skycubemap_up.bntex")]));
+                         &(sqsCT->descSet[TextureManager::getVkDescriptorSetIndexForSkyBox("../textures/1302_skycubemap_up.bntex")]));
     MatrixState3D::popMatrix();
 
     MatrixState3D::pushMatrix();
     MatrixState3D::translate(0, -SKY_BOX_HALF_EDGE, 0);
     MatrixState3D::rotate(90, 1, 0, 0);
     texForDraw->drawSelf(cmdBuffer, sqsCT->pipelineLayout, sqsCT->pipeline,
-                         &(sqsCT->descSet[TextureManager::getVkDescriptorSetIndexForSkyBox("../textures/1301_skycubemap_down.bntex")]));
+                         &(sqsCT->descSet[TextureManager::getVkDescriptorSetIndexForSkyBox("../textures/1302_skycubemap_down.bntex")]));
     MatrixState3D::popMatrix();
 
     MatrixState3D::pushMatrix();
     MatrixState3D::rotate(yangle, 0, 1, 0);
     MatrixState3D::scale(3, 3, 3);
     objdraw->drawSelf(cmdBuffer, sqsCube->pipelineLayout, sqsCube->pipeline,
-                      &(sqsCube->descSet[TextureManager::getVkDescriptorSetIndexForCubemap("../textures/1301_cube.bntexcube")]));
+                      &(sqsCube->descSet[TextureManager::getVkDescriptorSetIndexForCubemap("../textures/1302_cube.bntexcube")]));
     MatrixState3D::popMatrix();
 
     vkCmdEndRenderPass(cmdBuffer);// 结束渲染通道
