@@ -1,6 +1,5 @@
-#ifndef VULKANEXBASE_FPSUTIL_H
-#define VULKANEXBASE_FPSUTIL_H
-
+#pragma once
+#include <windows.h>
 
 class FPSUtil {
 public:
@@ -19,6 +18,3 @@ public:
     static void before();
     static void after(int dstFPS);
 };
-
-
-#endif

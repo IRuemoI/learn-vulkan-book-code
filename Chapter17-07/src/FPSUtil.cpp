@@ -1,9 +1,6 @@
 #include "FPSUtil.h"
-#include <chrono>
+#include <cstdio>
 #include <thread>
-#include <time.h>
-#include <winbase.h>
-#include <windows.h>
 
 int FPSUtil::FPSCount;
 long long FPSUtil::startTime;
