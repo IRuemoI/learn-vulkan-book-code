@@ -103,8 +103,8 @@ add_subdirectory(dependencies/glslang)
 #add_subdirectory(Basic_chapter_09c_Resizing)
 #add_subdirectory(Basic_chapter_10a_Uniforms_And_Descriptors)
 add_subdirectory(Basic_chapter_10b_PushConstant) # 黑屏
-#add_subdirectory(Basic_chapter_11a_Texture_LinearLayout)
-#add_subdirectory(Basic_chapter_11b_Texture_OptimalLayout)
+add_subdirectory(Basic_chapter_11a_Texture_LinearLayout)
+add_subdirectory(Basic_chapter_11b_Texture_OptimalLayout)
 
 # Vulkan开发实战详解的各个章节
 #add_subdirectory(Chapter01-01)
@@ -247,7 +247,7 @@ add_subdirectory(Basic_chapter_10b_PushConstant) # 黑屏
 #add_subdirectory(Chapter15-08)
 
 #add_subdirectory(Chapter16-01)
-#add_subdirectory(Chapter16-02) #未修复
+add_subdirectory(Chapter16-02) #未修复
 #add_subdirectory(Chapter16-03)
 #add_subdirectory(Chapter16-04)
 #add_subdirectory(Chapter16-05)
