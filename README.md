@@ -18,6 +18,8 @@
 * glm:复制自vulkanSDK中的include文件夹
 * glslang:在Github[仓库](https://github.com/KhronosGroup/glslang)选择与vulkanSDK版本匹配的1.3.290.0版本的分支并克隆到本项目的依赖文件夹内(在CMakeLists.txt中已经配置完毕)
 
+![环境配置](./Assets/环境配置.png)
+
 ## 注意事项
 
 * 《Vulkan学习指南(王锐译)》部分
@@ -94,6 +96,8 @@ f.close();
 
 ## 后记
 
-1. 关于glslang的一点小牢骚：为了让书中使用glslang将glsl编译成spir-v的代码可用。使用SDK中的头和库文件编译后一直报错找不到符号，折腾了三四天翻了几十篇博客才搞定依赖并解决glsl编译成spirV代码
+1. 为了让书中使用glslang将glsl编译成spir-v的代码可用。使用SDK中的头和库文件编译后一直报错找不到符号，折腾了三四天翻了几十篇博客才搞定依赖并解决glsl编译成spirV代码
 2. 报错`0xC0000374`:堆栈溢出（Stack Overflow）,可能是ObjObject::~ObjObject()中的`delete vdata;`而不是`delete[] vdata;`造成的
-   ![德莉莎](./Assets/德莉莎.jpg)
+3. 《实战详解》里这么多有价值的代码不能运行我真是醉了 (눈‸눈)
+
+![德莉莎](./Assets/德莉莎.jpg)
